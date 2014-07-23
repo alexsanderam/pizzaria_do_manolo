@@ -1,0 +1,139 @@
+package pizzariaDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dominio.EnumFormaDePagamento;
+import dominio.Pagamento;
+import dominio.Pedido;
+import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDePagamento;
+
+public class PagamentoDAOConcreto implements PagamentoDAO {
+	
+    private Connection conexao;
+    
+    
+    public PagamentoDAOConcreto() throws ExcecaoDAO {
+        conexao = criarConexao();
+    }
+     
+     
+    protected Connection criarConexao() throws ExcecaoDAO{
+        return ConnectionFactoryConcreto.obterInstancia().obterConexao();
+    }
+     
+
+	@Override
+	public void incluir(Pagamento pagamento) throws ExcecaoDAO,	ExcecaoDePagamento {
+	       if(conexao == null)
+	            throw new ExcecaoDAO("pagamento_dao.conexao_nao_estabelecida");
+	         
+	        String sql = "INSERT INTO pizzaria.Pagamento(id_pedido_fk, forma_de_pagamento, valor_recebido) values (?, ?, ?) RETURNING id;";
+	        PreparedStatement stmt;
+	        ResultSet rs;
+	         
+	        try {
+	            stmt = conexao.prepareStatement(sql);
+	             
+	            stmt.setLong(1, pagamento.obterPedido().obterId());
+	            stmt.setString(2, pagamento.obterFormaDePagamento().name());
+	            stmt.setFloat(3, pagamento.obterValorRecebido());
+	             
+	            rs = stmt.executeQuery();
+	             
+	            if (rs.next()){
+	                pagamento.definirId(rs.getLong("id"));
+	            }
+	             
+	        } catch (SQLException e) {
+	 
+	            throw new ExcecaoDAO("pagamento_dao.nao_foi_possivel_incluir_o_pagamento", e);
+	        }
+	}
+
+	@Override
+	public Pagamento buscar(Pedido pedido) throws ExcecaoDAO, ExcecaoDePagamento {
+        if(conexao == null)
+            throw new ExcecaoDAO("pagamento_dao.conexao_nao_estabelecida");
+         
+        Pagamento pagamento = null;
+        Long id_pedido = pedido.obterId();
+ 
+        String sql = "SELECT * FROM pizzaria.Pagamento WHERE id_pedido_fk = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id_pedido);
+             
+            rs = stmt.executeQuery();
+             
+            if (rs.next()){
+            	EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.valueOf(rs.getString("forma_de_pagamento"));
+            	Float valorRecebido = rs.getFloat("valor_recebido");
+            	
+                pagamento = Pagamento.novoPagamento(pedido, formaDePagamento, valorRecebido);
+                pagamento.definirId(rs.getLong("id"));
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pagamento_dao.nao_foi_possivel_localizar_o_pagamento", e);
+        }
+        
+        if(pagamento == null)
+        	throw new ExcecaoDAO("pagamento_dao.nao_foi_possivel_localizar_o_pagamento");
+         
+        return pagamento;
+	}
+
+	@Override
+	public Pagamento buscar(Long id) throws ExcecaoDAO, ExcecaoDePagamento {
+        if(conexao == null)
+            throw new ExcecaoDAO("pagamento_dao.conexao_nao_estabelecida");
+         
+        Pagamento pagamento = null;
+        Long id_pedido = pedido.obterId();
+ 
+        String sql = "SELECT * FROM pizzaria.Pagamento WHERE id_pedido_fk = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id_pedido);
+             
+            rs = stmt.executeQuery();
+             
+            if (rs.next()){
+            	EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.valueOf(rs.getString("forma_de_pagamento"));
+            	Float valorRecebido = rs.getFloat("valor_recebido");
+            	
+                pagamento = Pagamento.novoPagamento(pedido, formaDePagamento, valorRecebido);
+                pagamento.definirId(rs.getLong("id"));
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pagamento_dao.nao_foi_possivel_localizar_o_pagamento", e);
+        }
+        
+        if(pagamento == null)
+        	throw new ExcecaoDAO("pagamento_dao.nao_foi_possivel_localizar_o_pagamento");
+         
+        return pagamento;
+	}
+
+    @Override
+    public void encerrarConexao() throws ExcecaoDAO {
+        try {
+            this.conexao.close();
+        } catch (SQLException e) {
+            throw new ExcecaoDAO("pagamaneto_dao.nao_foi_possivel_encerrar_a_conexao");
+        }  
+    }
+}

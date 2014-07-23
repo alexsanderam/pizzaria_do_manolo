@@ -1,0 +1,10 @@
+package pizzariaDAO;
+
+import excecoes.ExcecaoDAO;
+
+public class PagamentoDAO {
+
+	public void incluir(Pagamento pagamento) throws ExcecaoDAO, ExcecaoDePagamento;
+	public void encerrarConexao() throws ExcecaoDAO;
+	
+}

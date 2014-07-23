@@ -1,0 +1,14 @@
+package pizzariaDAO;
+
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDePizza;
+
+public interface PedidoDAO {
+
+	public void incluir(Pedido pedido) throws ExcecaoDAO;
+	public Pedido buscar(Long id) throws ExcecaoDAO;
+	public void encerrarConexao() throws ExcecaoDAO;
+	
+}

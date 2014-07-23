@@ -1,10 +1,8 @@
 INDEX VERSION 1.127+/home/melo/Estudos Acadêmicos/UFRRJ - Ciência da Computação/8º Período/Computação III/workspace/pizzaria_do_manolo/.metadata/.plugins/org.eclipse.jdt.core
 742522455.index
-2804095349.index
 2841451250.index
 3872268105.index
 1250015947.index
-3322370110.index
 1928478871.index
 2315865697.index
 46282419.index

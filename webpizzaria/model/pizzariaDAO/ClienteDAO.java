@@ -9,6 +9,7 @@ public interface ClienteDAO {
 	
 	public void incluir(Cliente cliente) throws ExcecaoDAO, ExcecaoDeCliente;
 	public Cliente buscar(String telefone) throws ExcecaoDAO, ExcecaoDeCliente;
+	public Cliente buscar(Long id) throws ExcecaoDAO, ExcecaoDeCliente;
 	public void encerrarConexao() throws ExcecaoDAO;
 	
 }

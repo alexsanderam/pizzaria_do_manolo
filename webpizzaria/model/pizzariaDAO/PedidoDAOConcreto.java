@@ -2,10 +2,17 @@ package pizzariaDAO;
  
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
- 
+import java.sql.Timestamp;
+
+import dominio.Cliente;
+import dominio.Pagamento;
 import dominio.Pedido;
+import dominio.Pizza;
 import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDePedido;
  
 public class PedidoDAOConcreto implements PedidoDAO{
  
@@ -42,6 +49,60 @@ public class PedidoDAOConcreto implements PedidoDAO{
             throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_incluir_o_pedido", e);
         }
     }
+    
+	@Override
+	public Pedido buscar(Long id) throws ExcecaoDAO, ExcecaoDePedido {
+        if(conexao == null)
+            throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
+         
+        Pedido pedido = null;
+ 
+        String sql = "SELECT * FROM pizzaria.Pedido WHERE id = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id);
+             
+            rs = stmt.executeQuery();
+            
+            ClienteDAO clienteDAO = new ClienteDAOConcreto();
+            PagamentoDAO pagamentoDAO = new PagamentoDAOConcreto();
+             
+            if (rs.next()){
+            	Long id_cliente = rs.getLong("id_cliente_fk");
+            	Cliente cliente;
+				try {
+					cliente = clienteDAO.buscar(id_cliente);
+				} catch (ExcecaoDeCliente e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+            	
+            	Long id_pagamento = rs.getLong("id_pagamento_fk");
+            	Pagamento pagamento = pagamentoDAO.buscar(id_pagamento);
+            	
+            	Float valor = rs.getFloat("valor");
+            	Timestamp dataHora = rs.getTimestamp("data_hora");
+            	
+            	
+            	pedido = Pedido.novoPedido(cliente);
+            	pedido.definirDataHora(dataHora);
+            	pedido.definirPagamento(pagamento);
+            	pedido.definirId(id);
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido", e);
+        }
+        
+        if(pedido == null)
+        	throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido");
+         
+        return pedido;
+	}
      
     @Override
     public void encerrarConexao() throws ExcecaoDAO{

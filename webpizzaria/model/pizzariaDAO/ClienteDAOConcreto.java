@@ -28,16 +28,18 @@ public class ClienteDAOConcreto implements ClienteDAO{
         if(conexao == null)
             throw new ExcecaoDAO("cliete_dao.conexao_nao_estabelecida");
          
-        String sql = "INSERT INTO pizzaria.Cliente(telefone, nome, endereco) values (?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO pizzaria.Cliente(email, senha, nome, telefone, endereco) values (?, ?, ?, ?, ?) RETURNING id";
         PreparedStatement stmt;
         ResultSet rs;
          
         try {
             stmt = conexao.prepareStatement(sql);
              
-            stmt.setString(1, cliente.obterTelefone());
-            stmt.setString(2, cliente.obterNome());
-            stmt.setString(3, cliente.obterEndereco());
+            stmt.setString(1, cliente.obterEmail());
+            stmt.setString(2, cliente.obterSenha());
+            stmt.setString(3, cliente.obterNome());
+            stmt.setString(4, cliente.obterTelefone());
+            stmt.setString(5, cliente.obterEndereco());
  
             rs = stmt.executeQuery();
              
@@ -53,25 +55,71 @@ public class ClienteDAOConcreto implements ClienteDAO{
     }
      
      
-    public Cliente buscar(String telefone) throws ExcecaoDAO, ExcecaoDeCliente {
+    public Cliente buscar(String email) throws ExcecaoDAO, ExcecaoDeCliente {
          
         if(conexao == null)
             throw new ExcecaoDAO("cliete_dao.conexao_nao_estabelecida");
          
         Cliente cliente = null;
  
-        String sql = "SELECT * FROM pizzaria.Cliente WHERE telefone = ?";
+        String sql = "SELECT * FROM pizzaria.Cliente WHERE email = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
         try {
             stmt = conexao.prepareStatement(sql);           
-            stmt.setString(1, telefone);
+            stmt.setString(1, email);
              
             rs = stmt.executeQuery();
              
             if (rs.next()){
-                cliente = Cliente.criarCliente(rs.getString("telefone"), rs.getString("email"), rs.getString("senha"), rs.getString("nome"), rs.getString("endereco"));
+            	String telefone = rs.getString("telefone");
+            	String senha = rs.getString("senha");
+            	String nome = rs.getString("nome");
+            	String endereco = rs.getString("endereco");
+            	
+                cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+                cliente.definirId(rs.getLong("id"));
+            }
+             
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ExcecaoDAO("cliente_dao.nao_foi_possivel_localizar_o_cliente", e);
+        }
+        
+        if(cliente == null)
+        	throw new ExcecaoDAO("cliente_dao.nao_foi_possivel_localizar_o_cliente");
+        
+        
+        return cliente;
+    }
+    
+    
+    public Cliente buscar(Long id) throws ExcecaoDAO, ExcecaoDeCliente {
+        
+        if(conexao == null)
+            throw new ExcecaoDAO("cliete_dao.conexao_nao_estabelecida");
+         
+        Cliente cliente = null;
+ 
+        String sql = "SELECT * FROM pizzaria.Cliente WHERE id = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);           
+            stmt.setLong(1, id);
+             
+            rs = stmt.executeQuery();
+             
+            if (rs.next()){
+            	String telefone = rs.getString("telefone");
+            	String senha = rs.getString("senha");
+            	String nome = rs.getString("nome");
+            	String endereco = rs.getString("endereco");
+            	String email = rs.getString("email");
+            	
+                cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
                 cliente.definirId(rs.getLong("id"));
             }
              

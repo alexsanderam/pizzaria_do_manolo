@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.Throwable"/>
+<fullyQualifiedTypeName name="javax.swing.text.StyledEditorKit.ForegroundAction"/>
+<fullyQualifiedTypeName name="excecoes.ExcecaoDePagamento"/>
+<fullyQualifiedTypeName name="pizzariaDAO.PagamentoDAO"/>
+<fullyQualifiedTypeName name="dominio.EnumFormaDePagamento"/>
+<fullyQualifiedTypeName name="dominio.Pedido"/>
+<fullyQualifiedTypeName name="dominio.Pizza"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="pizzariaDAO.ItemPedidoDAO"/>
+<fullyQualifiedTypeName name="excecoes.ExcecaoDeItemPedido"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="pizzariaDAO.PedidoDAO"/>
+<fullyQualifiedTypeName name="dominio.ItemPedido"/>
+<fullyQualifiedTypeName name="excecoes.ExcecaoDePizza"/>
+<fullyQualifiedTypeName name="pizzariaDAO.ClienteDAOConcreto"/>
+<fullyQualifiedTypeName name="dominio.Cliente"/>
+<fullyQualifiedTypeName name="pizzariaDAO.PagamentoDAOConcreto"/>
+<fullyQualifiedTypeName name="dominio.Pagamento"/>
+<fullyQualifiedTypeName name="java.sql.Timestamp"/>
+<fullyQualifiedTypeName name="pizzariaDAO.PedidoDAOConcreto"/>
+<fullyQualifiedTypeName name="excecoes.ExcecaoDePedido"/>
+</qualifiedTypeNameHistroy>

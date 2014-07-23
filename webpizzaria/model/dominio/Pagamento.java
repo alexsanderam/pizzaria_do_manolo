@@ -5,7 +5,7 @@ import excecoes.ExcecaoDePagamento;
 
 public class Pagamento {
 
-	private Integer id;
+	private Long id;
 	private EnumFormaDePagamento formaDePagamento;
 	private Float valorRecebido;
 	
@@ -25,6 +25,7 @@ public class Pagamento {
 		validarValorRecebido(valorRecebido);
 	}
 	
+	
 	private static void validarFormaDePagamento(EnumFormaDePagamento formaDePagamento) throws ExcecaoDePagamento{
 		if(formaDePagamento == null)
 			throw new ExcecaoDePagamento("pagamento.forma_de_pagamento.invalida");
@@ -35,16 +36,17 @@ public class Pagamento {
 			throw new ExcecaoDePagamento("pagamento.valor_recebido.invalido");
 	}
 	
-	private static void validarId(Integer id) throws ExcecaoDePagamento{
+	private static void validarId(Long id) throws ExcecaoDePagamento{
 		if(id == null || id <= 0)
 			throw new ExcecaoDePagamento("pagamento.id.invalido");
 	}
 
-	public Integer obterId() {
+
+	public Long obterId() {
 		return id;
 	}
 
-	public void definirId(Integer id) throws ExcecaoDePagamento {
+	public void definirId(Long id) throws ExcecaoDePagamento {
 		validarId(id);
 		this.id = id;
 	}

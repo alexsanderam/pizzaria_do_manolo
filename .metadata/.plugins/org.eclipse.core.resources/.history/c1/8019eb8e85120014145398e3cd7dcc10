@@ -1,0 +1,100 @@
+package pizzariaDAO;
+ 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dominio.Cliente;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDAO;
+ 
+public class PedidoDAOConcreto implements PedidoDAO{
+ 
+    private Connection conexao = null;
+     
+    public PedidoDAOConcreto() throws ExcecaoDAO{
+        this.conexao = criarConexao();
+    }
+     
+     
+    protected Connection criarConexao() throws ExcecaoDAO{
+        return ConnectionFactoryConcreto.obterInstancia().obterConexao();
+    }
+     
+    @Override
+    public void incluir(Pedido pedido) throws ExcecaoDAO {
+         
+        if(conexao == null)
+            throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
+         
+        String sql = "INSERT INTO pizzaria.Pedido(id_cliente, id_pizza, data_hora, quantidade) values (?, ?, current_timestamp, ?)";
+        PreparedStatement stmt;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+ 
+            stmt.setLong(1, pedido.obterCliente().obterId());
+            stmt.setLong(2, pedido.obterPizza().obterId());
+            stmt.setInt(3, pedido.obterQuantidade());
+             
+            stmt.execute();
+             
+        } catch (Exception e) {
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_incluir_o_pedido", e);
+        }
+    }
+    
+	@Override
+	public Pedido buscar(Long id) throws ExcecaoDAO {
+        if(conexao == null)
+            throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
+         
+        Pedido pedido = null;
+ 
+        String sql = "SELECT * FROM pizzaria.Pedido WHERE id = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id);
+             
+            rs = stmt.executeQuery();
+            
+            ClienteDAO clienteDAO = new ClienteDAOConcreto();
+            PagamentoDAO pagamentoDAO = new PagamentoDAOConcreto();
+             
+            if (rs.next()){
+            	Long id_cliente = rs.getLong("id_cliente_fk");
+            	Cliente cliente = clienteDAO.buscar(id_cliente); 
+            	
+            	Long id_pagamento = rs.getLong("id_pagamento_fk");
+            	Pagamento pagamento = pagamentoDAO.buscar(id_pagamento);
+            	
+            	pedido = Pedido.novoPedido(cliente);
+            	pedido.definirId(id);
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza", e);
+        }
+        
+        if(pizza == null)
+        	throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza");
+         
+        return pizza;
+	}
+     
+    @Override
+    public void encerrarConexao() throws ExcecaoDAO{
+        try {
+            this.conexao.close();
+        } catch (SQLException e) {
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_encerrar_a_conexao");
+        }
+    }
+     
+}

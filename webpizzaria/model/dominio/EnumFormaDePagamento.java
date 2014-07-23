@@ -8,7 +8,8 @@ public enum EnumFormaDePagamento {
 	EnumFormaDePagamento (String valorOpcao){
 		valor = valorOpcao;
 	}
-	public String getValor(){
+	
+	public String obterValor(){
 		return valor;
 	}
 }

@@ -1,0 +1,5 @@
+package pizzariaDAO;
+
+public class PagamentoDAO {
+
+}

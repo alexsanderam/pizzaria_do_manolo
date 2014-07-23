@@ -1,0 +1,13 @@
+package pizzariaDAO;
+
+import dominio.Pedido;
+import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDePagamento;
+
+public interface ItemPedidoDAO {
+
+	public void incluir(ItemPedido itemPedido) throws ExcecaoDAO, ExcecaoDePagamento;
+	public Pagamento buscar(Pedido pedido) throws ExcecaoDAO, ExcecaoDePagamento;
+	public void encerrarConexao() throws ExcecaoDAO;	
+	
+}

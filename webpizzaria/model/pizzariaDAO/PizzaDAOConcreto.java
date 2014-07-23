@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
- 
+
 import dominio.Pizza;
 import excecoes.ExcecaoDAO;
 import excecoes.ExcecaoDePizza;
@@ -72,7 +72,10 @@ public class PizzaDAOConcreto implements PizzaDAO{
             rs = stmt.executeQuery();
              
             if (rs.next()){
-                pizza = Pizza.criarPizza(rs.getString("nome"),rs.getString("ingredientes"), rs.getFloat("preco"));
+            	String ingredientes = rs.getString("ingredientes");
+            	Float preco = rs.getFloat("preco");
+            	
+                pizza = Pizza.criarPizza(nome, ingredientes, preco);
                 pizza.definirId(rs.getLong("id"));
             }
              
@@ -86,6 +89,43 @@ public class PizzaDAOConcreto implements PizzaDAO{
          
         return pizza;
     }
+    
+	@Override
+	public Pizza buscar(Long id) throws ExcecaoDAO, ExcecaoDePizza {
+        if(conexao == null)
+            throw new ExcecaoDAO("pizza_dao.conexao_nao_estabelecida");
+         
+        Pizza pizza = null;
+ 
+        String sql = "SELECT * FROM pizzaria.Pizza WHERE id = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id);
+             
+            rs = stmt.executeQuery();
+             
+            if (rs.next()){
+            	String nome = rs.getString("nome");
+            	String ingredientes = rs.getString("ingredientes");
+            	Float preco = rs.getFloat("preco");
+            	
+                pizza = Pizza.criarPizza(nome, ingredientes, preco);
+                pizza.definirId(rs.getLong("id"));
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza", e);
+        }
+        
+        if(pizza == null)
+        	throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza");
+         
+        return pizza;
+	}
      
  
     @Override
@@ -94,8 +134,7 @@ public class PizzaDAOConcreto implements PizzaDAO{
             this.conexao.close();
         } catch (SQLException e) {
             throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_encerrar_a_conexao");
-        }
-         
+        }  
     }
  
 }

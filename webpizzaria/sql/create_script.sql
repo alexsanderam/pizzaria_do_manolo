@@ -45,7 +45,7 @@ CREATE TYPE webpizzaria.FormaDePagamento AS ENUM(
 CREATE TABLE webpizzaria.Pagamento(
 	id SERIAL,
 	forma_de_pagamento webpizzaria.FormaDePagamento NOT NULL,
-	valor_do_troco FLOAT,
+	valor_recebido FLOAT,
 
 	CONSTRAINT pagamento_pkey PRIMARY KEY(id)
 );
@@ -54,7 +54,7 @@ CREATE TABLE webpizzaria.Pagamento(
 CREATE TABLE webpizzaria.Pedido(
 	id SERIAL,
 	id_cliente_fk INTEGER NOT NULL,
-	id_pagamento_fk INTEGER NOT NULL,
+	id_pagamento_fk INTEGER,
 	valor FLOAT NOT NULL,
 	data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 

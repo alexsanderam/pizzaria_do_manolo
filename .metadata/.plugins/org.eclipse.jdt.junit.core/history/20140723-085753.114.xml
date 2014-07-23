@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CadastrarPizzaTest" project="pizzaria" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="funcional.CadastrarPizzaTest" time="0.759">
-    <testcase name="testCadastrarPizzaPrecoInvalido" classname="funcional.CadastrarPizzaTest" time="0.494"/>
-    <testcase name="testCadastrarPizzaNomeInvalido" classname="funcional.CadastrarPizzaTest" time="0.037"/>
-    <testcase name="testCadastrarPizza" classname="funcional.CadastrarPizzaTest" time="0.187"/>
-    <testcase name="testCadastrarPizzaIngredientesInvalido" classname="funcional.CadastrarPizzaTest" time="0.041"/>
-  </testsuite>
-</testrun>
