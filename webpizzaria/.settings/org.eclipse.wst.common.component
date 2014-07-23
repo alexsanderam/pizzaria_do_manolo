@@ -6,6 +6,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/model"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/view"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/servlets"/>
         <property name="context-root" value="webpizzaria"/>
         <property name="java-output-path" value="/webpizzaria/build/classes"/>
     </wb-module>
