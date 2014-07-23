@@ -14,7 +14,7 @@ public class ClienteVO {
 		this.telefone = telefone;
 		this.nome = nome;
 		this.endereco = endereco;
-		this.email = email;
+		this.setEmail(email);
 	}
 	
 

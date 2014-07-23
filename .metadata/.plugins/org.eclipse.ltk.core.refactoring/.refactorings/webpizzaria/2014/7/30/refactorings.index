@@ -2,3 +2,4 @@
 1406119612657	Rename type 'ItemDePedido'
 1406129117267	Delete element
 1406130514428	Rename type 'ItemPedidoConcreto'
+1406147579138	Encapsulate field 'email'

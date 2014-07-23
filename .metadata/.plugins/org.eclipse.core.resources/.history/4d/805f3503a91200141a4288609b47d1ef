@@ -19,8 +19,8 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 	
-	public Boolean realizarAutenticacao(String senha){
-		return this.senha.equals(senha);
+	public void realizarAutenticacao(String senha){
+		return this.senha == senha;
 	}
 	
 	public static Cliente criarCliente(String telefone, String nome, String email, String senha, String endereco) throws ExcecaoDeCliente{

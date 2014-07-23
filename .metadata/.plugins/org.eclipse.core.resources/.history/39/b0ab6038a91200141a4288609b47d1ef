@@ -67,8 +67,5 @@ public class ControladorDominio {
 		return Pagamento.novoPagamento(formaDePagamento, valorRecebido);
 	}
 	
-	public Boolean realizarAutenticacao(Cliente cliente, String senha){
-		return cliente.realizarAutenticacao(senha);
-	}
 	
 }

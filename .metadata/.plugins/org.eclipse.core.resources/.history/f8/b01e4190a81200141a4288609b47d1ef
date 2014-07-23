@@ -16,7 +16,6 @@ public class ClienteVO {
 		this.endereco = endereco;
 		this.email = email;
 	}
-	
 
 	public Long obterId() {
 		return id;
@@ -48,16 +47,6 @@ public class ClienteVO {
 	
 	public void definirEndereco(String endereco) {
 		this.endereco = endereco;
-	}
-
-
-	public String obterEmail() {
-		return email;
-	}
-
-
-	public void definirEmail(String email) {
-		this.email = email;
 	}
 	
 }
