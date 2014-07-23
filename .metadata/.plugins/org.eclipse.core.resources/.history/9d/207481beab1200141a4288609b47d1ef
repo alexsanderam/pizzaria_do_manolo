@@ -1,0 +1,58 @@
+package vo;
+
+import java.sql.Timestamp;
+import java.util.Collection;
+
+public class PedidoVO {
+
+	private ClienteVO clienteVO;
+	private Collection<ItemPedidoVO> itensDoPedido;
+	private Timestamp dataHora;
+	
+	
+	public PedidoVO(){
+		
+	}
+	
+	
+	public PedidoVO(ClienteVO clienteVO, Collection<ItemPedidoVO> itensDoPedido, ) {
+		this.
+		this.dataHora = null;
+	}
+	
+
+	public String obterTelefoneDoCliente() {
+		return telefoneDoCliente;
+	}
+	
+	public void definirTelefoneDoCliente(String telefoneDoCliente) {
+		this.telefoneDoCliente = telefoneDoCliente;
+	}
+	
+	public String obterNomeDaPizza() {
+		return nomeDaPizza;
+	}
+	
+	public void definirNomeDaPizza(String nomeDaPizza) {
+		this.nomeDaPizza = nomeDaPizza;
+	}
+	
+	public Integer obterQuantidade() {
+		return quantidade;
+	}
+	
+	public void definirQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+	
+	public Timestamp obterDataHora() {
+		return dataHora;
+	}
+	
+	public void definirDataHora(Timestamp dataHora) {
+		this.dataHora = dataHora;
+	}
+	
+	
+	
+}

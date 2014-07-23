@@ -20,22 +20,31 @@ public class PedidoVO {
 		this.itensDoPedido = itensDoPedido;
 	}
 	
-	public ClienteVO obterClienteVO() {
-		return clienteVO;
-	}
 
-	public void definirClienteVO(ClienteVO clienteVO) {
-		this.clienteVO = clienteVO;
+	public String obterTelefoneDoCliente() {
+		return telefoneDoCliente;
 	}
-
-	public Collection<ItemPedidoVO> obterItensDoPedido() {
-		return itensDoPedido;
+	
+	public void definirTelefoneDoCliente(String telefoneDoCliente) {
+		this.telefoneDoCliente = telefoneDoCliente;
 	}
-
-	public void definirItensDoPedido(Collection<ItemPedidoVO> itensDoPedido) {
-		this.itensDoPedido = itensDoPedido;
+	
+	public String obterNomeDaPizza() {
+		return nomeDaPizza;
 	}
-
+	
+	public void definirNomeDaPizza(String nomeDaPizza) {
+		this.nomeDaPizza = nomeDaPizza;
+	}
+	
+	public Integer obterQuantidade() {
+		return quantidade;
+	}
+	
+	public void definirQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+	
 	public Timestamp obterDataHora() {
 		return dataHora;
 	}
@@ -43,5 +52,7 @@ public class PedidoVO {
 	public void definirDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
-
+	
+	
+	
 }

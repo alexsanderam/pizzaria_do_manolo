@@ -1,0 +1,13 @@
+package vo;
+
+import dominio.EnumFormaDePagamento;
+
+public class PagamentoVO {
+
+	private Long id;
+	private EnumFormaDePagamento formaDePagamento;
+	private Float valorRecebido;
+	
+	
+	
+}

@@ -7,9 +7,6 @@ public class PizzaVO {
 	private String ingredientes;
 	private Float preco;
 	
-	public PizzaVO(){
-		
-	}
 	
 	public PizzaVO(Long id, String nomePizza, String ingredientes, Float preco) {
 		this.id = id;

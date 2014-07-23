@@ -20,22 +20,8 @@ public class PedidoVO {
 		this.itensDoPedido = itensDoPedido;
 	}
 	
-	public ClienteVO obterClienteVO() {
-		return clienteVO;
-	}
 
-	public void definirClienteVO(ClienteVO clienteVO) {
-		this.clienteVO = clienteVO;
-	}
-
-	public Collection<ItemPedidoVO> obterItensDoPedido() {
-		return itensDoPedido;
-	}
-
-	public void definirItensDoPedido(Collection<ItemPedidoVO> itensDoPedido) {
-		this.itensDoPedido = itensDoPedido;
-	}
-
+	
 	public Timestamp obterDataHora() {
 		return dataHora;
 	}
@@ -43,5 +29,7 @@ public class PedidoVO {
 	public void definirDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
-
+	
+	
+	
 }

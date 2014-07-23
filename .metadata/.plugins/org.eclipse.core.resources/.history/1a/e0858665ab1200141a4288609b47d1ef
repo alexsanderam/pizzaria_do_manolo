@@ -1,0 +1,18 @@
+package vo;
+
+public class ItemPedidoVO {
+
+	private PizzaVO pizza;
+	private Integer quantidade;
+	
+	public ItemPedidoVO(){
+		
+	}
+	
+	public ItemPedidoVO(PizzaVO pizza, Integer quantidade){
+		
+	}
+	
+	
+	
+}
