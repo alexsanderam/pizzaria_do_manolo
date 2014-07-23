@@ -91,7 +91,7 @@ public class ControlePizzaria {
 	private Pizza obterPizzaPeloNome(String nome) throws ExcecaoDAO, ExcecaoDePizza{
 		Pizza pizza;
 
-		pizza = MantenedorDeRegistros.obterInstancia().obterPizzaPorNome(nome);
+		pizza = MantenedorDeRegistros.obterInstancia().obterPizzaPeloNome(nome);
 	
 		return pizza;
 	}

@@ -28,8 +28,6 @@
 	<classpathentry kind="lib" path="lib/jasper-el.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="lib/postgresql-9.2-1004.jdbc41.jar"/>
-	<classpathentry kind="lib" path="lib/postgresql-9.3-1101.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-api.jar"/>
 	<classpathentry kind="lib" path="lib/tomcat-coyote.jar"/>
