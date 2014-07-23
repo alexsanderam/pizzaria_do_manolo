@@ -1,5 +1,6 @@
 package pizzaria;
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,22 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controlador.MantenedorDeRegistros;
+import vo.ClienteVO;
 import dominio.Cliente;
-import excecoes.ExcecaoDAO;
-import excecoes.ExcecaoDeCliente;
 
 /**
- * Servlet implementation class ServletLogin
+ * Servlet implementation class Home
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Home")
+public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public HomeServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -39,22 +39,19 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
+		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
 		
-		try {
-			Cliente cliente = MantenedorDeRegistros.obterInstancia().obterClientePeloEmail(email);
-			cliente.realizarAutenticacao(senha);
-			request.getSession().setAttribute("cliente", cliente);
-	        response.sendRedirect("/logado.jsp");
-	        
-		} catch (ExcecaoDAO | ExcecaoDeCliente e) {
-			request.setAttribute("falhaNaAutenticacao", true);
-			request.setAttribute("mensagem", e.getMessage());
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-	        rd.forward(request, response);
-		}
-	
+		ClienteVO clienteVO = new ClienteVO();
+		clienteVO.setEmail(cliente.obterEmail());
+		clienteVO.setEndereco(cliente.obterEndereco());
+		clienteVO.setId(cliente.obterId());
+		clienteVO.setTelefone(cliente.obterTelefone());
+		clienteVO.setNome(cliente.obterNome());
+		
+		request.setAttribute("cliente", clienteVO);
+		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
+        rd.forward(request, response);
 	}
 
 }

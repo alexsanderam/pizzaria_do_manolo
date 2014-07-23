@@ -90,7 +90,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
          
         Pedido pedido = null;
  
-        String sql = "SELECT * FROM pizzaria.Pedido WHERE id = ?";
+        String sql = "SELECT id_cliente_fk, id_pagamento_fk, data_hora  FROM webpizzaria.Pedido WHERE id = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -196,7 +196,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
 		
 		Long id_cliente = cliente.obterId();
 		
-        String sql = "SELECT * FROM pizzaria.Pedido WHERE id_cliente_fk = ? ORDERBY data_hora DESC";
+        String sql = "SELECT id, id_pagamento_fk, data_hora FROM webpizzaria.Pedido WHERE id_cliente_fk = ? ORDERBY data_hora DESC";
         PreparedStatement stmt;
         ResultSet rs;
         

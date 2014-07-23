@@ -60,7 +60,7 @@ public class PagamentoDAOConcreto implements PagamentoDAO {
          
         Pagamento pagamento = null;
  
-        String sql = "SELECT * FROM pizzaria.Pagamento WHERE id = ?";
+        String sql = "SELECT forma_de_pagamento, valor_recebido FROM webpizzaria.Pagamento WHERE id = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -76,7 +76,7 @@ public class PagamentoDAOConcreto implements PagamentoDAO {
             	Float valorRecebido = rs.getFloat("valor_recebido");
             	
                 pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
-                pagamento.definirId(rs.getLong("id"));
+                pagamento.definirId(id);
             }
              
         } catch (SQLException e) {

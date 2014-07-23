@@ -61,7 +61,7 @@ public class PizzaDAOConcreto implements PizzaDAO{
          
         Pizza pizza = null;
  
-        String sql = "SELECT * FROM pizzaria.Pizza WHERE nome = ?";
+        String sql = "SELECT ingredientes, preco, id FROM webpizzaria.Pizza WHERE nome = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -97,7 +97,7 @@ public class PizzaDAOConcreto implements PizzaDAO{
          
         Pizza pizza = null;
  
-        String sql = "SELECT * FROM pizzaria.Pizza WHERE id = ?";
+        String sql = "SELECT nome, ingredientes, preco  FROM webpizzaria.Pizza WHERE id = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -113,7 +113,7 @@ public class PizzaDAOConcreto implements PizzaDAO{
             	Float preco = rs.getFloat("preco");
             	
                 pizza = Pizza.criarPizza(nome, ingredientes, preco);
-                pizza.definirId(rs.getLong("id"));
+                pizza.definirId(id);
             }
              
         } catch (SQLException e) {
