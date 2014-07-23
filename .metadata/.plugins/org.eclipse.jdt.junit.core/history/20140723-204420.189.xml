@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PagamentoTest" project="webpizzaria" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.PagamentoTest" time="0.0">
+    <testcase name="testDefinirValorRecebido" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testDefinirFormaDePagamentoInvalida" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testDefinirValorRecebidoInvalido" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testNovoPagamentoFormaDePagamentoInvalida" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testDefinirFormaDePagamento" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testCalcularTroco" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testNovoPagamentoValorRecebidoInvalido" classname="unitarios.PagamentoTest" time="0.0"/>
+    <testcase name="testNovoPagamento" classname="unitarios.PagamentoTest" time="0.0"/>
+  </testsuite>
+</testrun>

@@ -1,9 +1,9 @@
 package funcional;
 
+import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import dominio.Pizza;
 import excecoes.ExcecaoDAO;
 import excecoes.ExcecaoDePizza;
 
-public class CadastrarPizzaTest extends TestCase{
+public class CadastrarPizzaTest{
 	
     private String nome = "Frango";
     private String ingredientes = "Molho, mussarela, frango e orégano";
@@ -31,25 +31,20 @@ public class CadastrarPizzaTest extends TestCase{
 	    assertEquals(1, mantenedor.contarRegistros("pizzaria.Pizza"));
 	}
 	
-	@Test
+	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaNomeInvalido() throws ExcecaoDePizza, ExcecaoDAO {
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
 	    
 	    String nome = "";
 	    
 	    Pizza pizza = null;
-	    
-	    try {
-	    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
-	    	mantenedor.incluirPizza(pizza);
-	    } catch (Exception e) {
-	    	assertEquals(ExcecaoDePizza.class, e.getClass());
-	    }
-	    
+
+    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
+    	mantenedor.incluirPizza(pizza);	    
 	}
 
 
-	@Test
+	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaIngredientesInvalido() throws ExcecaoDePizza, ExcecaoDAO {
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
 
@@ -57,31 +52,21 @@ public class CadastrarPizzaTest extends TestCase{
 
 	    Pizza pizza = null;
 	    
-	    try {
-	    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
-	    	mantenedor.incluirPizza(pizza);
-	    } catch (Exception e) {
-	    	assertEquals(ExcecaoDePizza.class, e.getClass());
-	    }
-	    
+    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
+    	mantenedor.incluirPizza(pizza);
 	}
 	
 	
-	@Test
+	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaPrecoInvalido() throws ExcecaoDePizza, ExcecaoDAO {
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
 	    
 	    Float preco = (float) -1.0;
 	    
 	    Pizza pizza = null;
-	    
-	    try {
-	    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
-	    	mantenedor.incluirPizza(pizza);
-	    } catch (Exception e) {
-	    	assertEquals(ExcecaoDePizza.class, e.getClass());
-	    }
-	    
+
+    	pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
+    	mantenedor.incluirPizza(pizza);
 	}
 	
 

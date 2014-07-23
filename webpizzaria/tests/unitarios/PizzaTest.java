@@ -1,0 +1,149 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import dominio.Pizza;
+import excecoes.ExcecaoDePizza;
+
+public class PizzaTest {
+	
+	private String nomePizza = "Qwui";
+	private String ingredientes = "Lam zassar";
+	private Float preco = 250f;
+
+	@Test
+	public void testCriarPizza(){
+
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+			assertNotNull(pizza);
+			
+			/*Validacao dos dados*/
+			assertEquals(nomePizza, pizza.obterNomePizza());
+			assertEquals(ingredientes, pizza.obterIngredientes());
+			assertEquals(preco, pizza.obterPreco());
+			
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testCriarPizzaNomeInvalido() throws ExcecaoDePizza{
+		String nomePizza = "";
+
+		Pizza.criarPizza(nomePizza, ingredientes, preco);
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testCriarPizzaIngredienteInvalido() throws ExcecaoDePizza{
+		String ingredientes = "";
+
+		Pizza.criarPizza(nomePizza, ingredientes, preco);
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testCriarPizzaPrecoInvalido() throws ExcecaoDePizza{
+		Float preco = -1f;
+
+		Pizza.criarPizza(nomePizza, ingredientes, preco);
+	}
+	
+	
+	@Test
+	public void testDefinirNome(){
+		String nomePizza;
+
+		try {
+			Pizza pizza = Pizza.criarPizza(this.nomePizza, ingredientes, preco);
+			nomePizza = "Qwuil";
+			pizza.definirNomePizza(nomePizza);
+			assertEquals(nomePizza, pizza.obterNomePizza());
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testDefinirNomeInvalido() throws ExcecaoDePizza{
+		String nomePizza;
+		
+		Pizza pizza = Pizza.criarPizza(this.nomePizza, ingredientes, preco);
+		nomePizza = "";
+		pizza.definirNomePizza(nomePizza);	
+	}
+	
+	@Test
+	public void testDefinirIngredientes(){
+		String ingredientes;
+	
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, this.ingredientes, preco);
+			ingredientes = "AS as  oas";
+			pizza.definirIngredientes(ingredientes);
+			assertEquals(ingredientes, pizza.obterIngredientes());
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testDefinirIngredientesInvalidos() throws ExcecaoDePizza{
+		String ingredientes;
+		
+		Pizza pizza = Pizza.criarPizza(nomePizza, this.ingredientes, preco);
+		ingredientes = null;
+		pizza.definirIngredientes(ingredientes);	
+	}
+	
+	@Test
+	public void testDefinirPreco(){
+		Float preco;
+		
+	
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, this.preco);
+			preco = 290f;
+			pizza.definirPreco(preco);
+			assertEquals(preco, pizza.obterPreco());
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testDefinirPrecoInvalido() throws ExcecaoDePizza{
+		Float preco;
+		
+		Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, this.preco);
+		preco = -290f;
+		pizza.definirPreco(preco);
+		assertEquals(preco, pizza.obterPreco());
+	}
+	
+	@Test
+	public void testDefinirId(){
+		Long id = null;
+		
+	
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+			id = 1l;
+			pizza.definirId(id);
+			assertEquals(id, pizza.obterId());
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test(expected = ExcecaoDePizza.class)
+	public void testDefinirIdInvalido() throws ExcecaoDePizza{
+		Long id = null;
+		
+		Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+		id = -1l;
+		pizza.definirId(id);	
+	}
+}

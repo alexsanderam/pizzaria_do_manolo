@@ -1,9 +1,9 @@
 package funcional;
 
+import static org.junit.Assert.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import excecoes.ExcecaoDeCliente;
 import excecoes.ExcecaoDePedido;
 import excecoes.ExcecaoDePizza;
 
-public class CadastrarPedidoTest extends TestCase{
+public class CadastrarPedidoTest{
 	private String nomePizza = "Frango";
     private String ingredientes = "Molho, mussarela, frango e orégano";
     private Float preco = (float) 21.0;
@@ -45,7 +45,7 @@ public class CadastrarPedidoTest extends TestCase{
 	}
 
 	
-	@Test
+	@Test(expected = ExcecaoDAO.class)
 	public void testCadastrarPedidoPizzaNaoExistente() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDAO, ExcecaoDePedido{  
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
 
@@ -57,15 +57,10 @@ public class CadastrarPedidoTest extends TestCase{
 	    mantenedor.incluirCliente(cliente);
 	    
 	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
-	    try {
-	    	mantenedor.incluirPedido(pedido);
-	    } catch (Exception e) {
-	    	assertEquals(ExcecaoDAO.class, e.getClass());
-	    }
-	    
+	    mantenedor.incluirPedido(pedido);
 	}
 	
-	@Test
+	@Test(expected = ExcecaoDAO.class)
 	public void testCadastrarPedidoClienteNaoExistente() throws ExcecaoDePedido, ExcecaoDePizza, ExcecaoDAO, ExcecaoDeCliente {  
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
 
@@ -78,12 +73,8 @@ public class CadastrarPedidoTest extends TestCase{
 	    /*Cliente nao foi incluido na base de dados*/
 	    
 	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
-	    
-	    try {
-	    	mantenedor.incluirPedido(pedido);
-	    } catch (Exception e) {
-	    	assertEquals(ExcecaoDAO.class, e.getClass());
-	    }
+
+	    mantenedor.incluirPedido(pedido);
 	}
 	
 	

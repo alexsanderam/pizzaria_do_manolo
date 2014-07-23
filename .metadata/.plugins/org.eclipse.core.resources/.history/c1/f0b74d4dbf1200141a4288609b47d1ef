@@ -1,0 +1,132 @@
+package dominio;
+
+import excecoes.ExcecaoDeCliente;
+
+public class Cliente {
+	private Long id;
+	private String telefone;
+	private String email;
+	private String senha;
+	private String nome;
+	private String endereco;
+	
+	private Cliente(String telefone, String email, String senha, String nome, String endereco){
+		this.id = null;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.nome = nome;
+		this.endereco = endereco;
+	}
+	
+	public void realizarAutenticacao(String senha) throws ExcecaoDeCliente{
+		Boolean senhaCorreta = this.senha.equals(senha);
+		
+		if(senhaCorreta == false)
+			throw new ExcecaoDeCliente("cliente.realizar_autenticacao.senha_invalida");
+	}
+	
+	public static Cliente criarCliente(String telefone, String nome, String email, String senha, String endereco) throws ExcecaoDeCliente{
+		validarDados(telefone, email, senha, nome, endereco);
+		return new Cliente(telefone, email, senha, nome, endereco);
+	}
+	
+	private static void validarDados(String telefone, String email, String senha, String nome, String endereco) throws ExcecaoDeCliente{
+		validarNome(nome);
+		validarTelefone(telefone);
+		validarEmail(email);
+		validarSenha(senha);
+		validarEndereco(endereco);
+	}
+	
+	private static void validarTelefone(String telefone) throws ExcecaoDeCliente{
+		if((telefone == null) || (telefone.isEmpty()))
+			throw new ExcecaoDeCliente("cliente.telefone.vazio");		
+	}
+	
+	private static void validarNome(String nome) throws ExcecaoDeCliente{
+		if((nome == null) || (nome.isEmpty()))
+			throw new ExcecaoDeCliente("cliente.nome.vazio");		
+	}
+	
+	private static void validarEmail(String email) throws ExcecaoDeCliente{
+		if((email == null) || (email.isEmpty()))
+			throw new ExcecaoDeCliente("cliente.email.vazio");
+		
+		String[] split = email.split("@");
+		if ((split.length != 2 || split[1].length() <= 0))
+			throw new ExcecaoDeCliente("cliente.email.invalido");
+	}
+	
+	private static void validarSenha(String senha) throws ExcecaoDeCliente{
+		if((senha == null) || (senha.isEmpty()))
+			throw new ExcecaoDeCliente("cliente.senha.vazio");
+		
+		if(senha.length() < 4)
+			throw new ExcecaoDeCliente("cliente.senha.curta");	
+	}
+	
+	private static void validarEndereco(String endereco) throws ExcecaoDeCliente{
+		if((endereco == null) || (endereco.isEmpty()))
+			throw new ExcecaoDeCliente("cliente.endereco.vazio");		
+	}
+	
+	private static void validarId(Long id) throws ExcecaoDeCliente{
+		if((id == null) || (id <= 0))
+			throw new ExcecaoDeCliente("cliente.identificador.invalido");				
+	}
+	
+	public void definirTelefone(String telefone){
+		validarTelefone(telefone);
+		this.telefone = telefone;
+	}
+	
+	public void definirNome(String nome) throws ExcecaoDeCliente{
+		validarNome(nome);
+		this.nome = nome;
+	}
+	
+	public void definirEndereco(String endereco) throws ExcecaoDeCliente{
+		validarEndereco(endereco);
+		this.endereco = endereco;
+	}
+	
+	public void definirId(Long id) throws ExcecaoDeCliente{
+		validarId(id);
+		this.id = id;
+	}
+	
+	public void definirEmail(String email) throws ExcecaoDeCliente{
+		validarEmail(email);
+		this.email = email;
+	}
+	
+	public void definirSenha(String senha) throws ExcecaoDeCliente{
+		validarSenha(senha);
+		this.senha = senha;
+	}
+	
+	public Long obterId(){
+		return this.id;
+	}
+	
+	public String obterTelefone(){
+		return this.telefone;
+	}
+	
+	public String obterEmail(){
+		return this.email;
+	}
+	
+	public String obterSenha(){
+		return this.senha;
+	}
+	
+	public String obterNome(){
+		return this.nome;
+	}
+	
+	public String obterEndereco(){
+		return this.endereco;
+	}
+}

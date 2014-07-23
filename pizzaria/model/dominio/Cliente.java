@@ -47,7 +47,8 @@ public class Cliente {
 			throw new ExcecaoDeCliente("cliente.identificador.invalido");				
 	}
 	
-	public void definirTelefone(String telefone){
+	public void definirTelefone(String telefone) throws ExcecaoDeCliente{
+		validarTelefone(telefone);
 		this.telefone = telefone;
 	}
 	

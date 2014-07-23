@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PizzaTest" project="webpizzaria" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.PizzaTest" time="0.0">
+    <testcase name="testCriarPizza" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testCriarPizzaNomeInvalidos" classname="unitarios.PizzaTest" time="0.0"/>
+  </testsuite>
+</testrun>

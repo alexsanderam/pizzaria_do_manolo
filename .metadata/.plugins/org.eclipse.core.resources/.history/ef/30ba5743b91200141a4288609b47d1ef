@@ -1,0 +1,46 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import dominio.Pizza;
+import excecoes.ExcecaoDePizza;
+
+public class PizzaTest {
+
+	@Test
+	public void testCriarPizza(){
+		String nomePizza = "Qwui";
+		String ingredientes = "Lam zassar";
+		Float preco = 250f;
+		
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+			assertNotNull(pizza);
+			
+			/*Validacao dos dados*/
+			assertEquals(nomePizza, pizza.obterNomePizza());
+			assertEquals(ingredientes, pizza.obterIngredientes());
+			assertEquals(preco, pizza.obterPreco());
+			
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testCriarPizzaNomeInvalidos(){
+		String nomePizza = "";
+		String ingredientes = "Lam zassar";
+		Float preco = 250f;
+		
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePizza.class, e.getClass());
+		}
+	}
+	
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PizzaTest" project="webpizzaria" tests="12" started="12" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.PizzaTest" time="0.0">
+    <testcase name="testCriarPizzaIngredienteInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirNome" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirPrecoInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testCriarPizza" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirId" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirIngredientesInvalidos" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirIdInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testCriarPizzaPrecoInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirNomeInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testCriarPizzaNomeInvalido" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirPreco" classname="unitarios.PizzaTest" time="0.0"/>
+    <testcase name="testDefinirIngredientes" classname="unitarios.PizzaTest" time="0.0"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,17 @@
+package unitarios;
+
+import org.junit.Test;
+
+import dominio.EnumFormaDePagamento;
+
+public class PagamentoTest {
+	
+	@Test
+	public void testNovoPagamento(){
+		EnumFormaDePagamento formaDePagamento;
+		Float valorRecebido;
+		
+		
+	}
+
+}

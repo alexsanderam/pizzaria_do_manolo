@@ -1,0 +1,31 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import dominio.EnumFormaDePagamento;
+import dominio.Pagamento;
+import excecoes.ExcecaoDePagamento;
+
+public class PagamentoTest {
+	
+	@Test
+	public void testNovoPagamento(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			assertNotNull(pagamento);
+			
+			/*Validacao dos valores*/
+			assertEquals(formaDePagamento, pagamento.obterFormaDePagamento());
+			assertEquals(valorRecebido, )
+		} catch (ExcecaoDePagamento e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}

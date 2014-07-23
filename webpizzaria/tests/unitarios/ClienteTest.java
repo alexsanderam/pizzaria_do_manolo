@@ -8,15 +8,16 @@ import dominio.Cliente;
 import excecoes.ExcecaoDeCliente;
 
 public class ClienteTest {
-	
+
+	private String telefone = "2652 7700";
+	private String email = "oi@oi.com";
+	private String senha = "1234";
+	private String nome = "Joao da Silva";
+	private String endereco = "Avenida Nilo Pecanha";
 
 	@Test
 	public void testCriarCliente(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+
 		
 		try {
 			Cliente cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
@@ -35,94 +36,44 @@ public class ClienteTest {
 		}
 	}
 	
-	@Test
-	public void testCriarClienteTelefoneInvalido(){
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testCriarClienteTelefoneInvalido() throws ExcecaoDeCliente{
 		String telefone = "";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
-		
-		try {
-			Cliente.criarCliente(telefone, nome, email, senha, endereco);
 
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+		Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
-	@Test
-	public void testCriarClienteEmailInvalido(){
-		String telefone = "2652 7700";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testCriarClienteEmailInvalido() throws ExcecaoDeCliente{
 		String email = "";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
-		
-		try {
-			Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+
+		Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
-	@Test
-	public void testCriarClienteSenhaInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testCriarClienteSenhaInvalido() throws ExcecaoDeCliente{
 		String senha = "123";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
 		
-		try {
-			Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+		Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
-	@Test
-	public void testCriarClienteNomeInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testCriarClienteNomeInvalido() throws ExcecaoDeCliente{
+
 		String nome = null;
-		String endereco = "Avenida Nilo Pecanha";
-		
-		try {
-			Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+
+		Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
-	@Test
-	public void testCriarClienteEnderecoInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testCriarClienteEnderecoInvalido() throws ExcecaoDeCliente{
 		String endereco = "";
 		
-		try {
-			Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+		Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
 	@Test
 	public void testRealizarAutenticacaoSenhaCorreta(){
-		
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
 		
 		try {
 			Cliente cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
@@ -134,15 +85,9 @@ public class ClienteTest {
 	}
 	
 	
-	@Test
-	public void testRealizarAutenticacaoSenhaIncorreta(){
-		
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
-		
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testRealizarAutenticacaoSenhaIncorreta() throws ExcecaoDeCliente{
+	
 		Cliente cliente = null;
 		
 		try {
@@ -151,26 +96,19 @@ public class ClienteTest {
 			e.printStackTrace();
 		}
 		
-		try {
-			cliente.realizarAutenticacao("12345");
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+		cliente.realizarAutenticacao("12345");
 	}
 	
 	
 	@Test
 	public void testDefinirTelefone(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+		
+		String telefone;
 		
 		Cliente cliente = null;
 		
 		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+			cliente = Cliente.criarCliente(this.telefone, nome, email, senha, endereco);
 			telefone = "2653 7700";
 			cliente.definirTelefone(telefone);
 			assertEquals(telefone, cliente.obterTelefone());
@@ -180,39 +118,25 @@ public class ClienteTest {
 		}
 	}
 	
-	@Test
-	public void testDefinirTelefoneInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
-		
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirTelefoneInvalido() throws ExcecaoDeCliente{
+
+		String telefone;
 		Cliente cliente = null;
 		
-		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			telefone = "";
-			cliente.definirTelefone(telefone);
-			assertEquals(telefone, cliente.obterTelefone());
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+		cliente = Cliente.criarCliente(this.telefone, nome, email, senha, endereco);
+		telefone = "";
+		cliente.definirTelefone(telefone);
 	}
 	
 	@Test
-	public void testDefinirEmail(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
-		
+	public void testDefinirEmail(){		
 		Cliente cliente = null;
 		
+		String email;
+		
 		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+			cliente = Cliente.criarCliente(telefone, nome, this.email, senha, endereco);
 			email = "oi@gmail.com";
 			cliente.definirEmail(email);
 			assertEquals(email, cliente.obterEmail());
@@ -222,40 +146,26 @@ public class ClienteTest {
 		}
 	}
 	
-	@Test
-	public void testDefinirEmailInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirEmailInvalido() throws ExcecaoDeCliente{
+		String email;
 		
 		Cliente cliente = null;
-		
-		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			email = "";
-			cliente.definirEmail(email);
-			assertEquals(email, cliente.obterEmail());
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+
+		cliente = Cliente.criarCliente(telefone, nome, this.email, senha, endereco);
+		email = "";
+		cliente.definirEmail(email);
 	}
 	
 	
 	@Test
 	public void testDefinirSenha(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+		String senha;
 		
 		Cliente cliente = null;
 		
 		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+			cliente = Cliente.criarCliente(telefone, nome, email, this.senha, endereco);
 			senha = "123456";
 			cliente.definirSenha(senha);
 			assertEquals(senha, cliente.obterSenha());
@@ -265,39 +175,25 @@ public class ClienteTest {
 		}
 	}
 	
-	@Test
-	public void testDefinirSenhaInvalida(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirSenhaInvalida() throws ExcecaoDeCliente{
+		String senha;
 		
 		Cliente cliente = null;
-		
-		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			senha = "12";
-			cliente.definirSenha(senha);
-			assertEquals(senha, cliente.obterSenha());
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+
+		cliente = Cliente.criarCliente(telefone, nome, email, this.senha, endereco);
+		senha = "12";
+		cliente.definirSenha(senha);
 	}
 	
 	@Test
 	public void testDefinirNome(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+		String nome;
 		
 		Cliente cliente = null;
 		
 		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+			cliente = Cliente.criarCliente(telefone, this.nome, email, senha, endereco);
 			nome = "Jose da Silva";
 			cliente.definirNome(nome);
 			assertEquals(nome, cliente.obterNome());
@@ -307,39 +203,25 @@ public class ClienteTest {
 		}
 	}
 	
-	@Test
-	public void testDefinirNomeInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirNomeInvalido() throws ExcecaoDeCliente{
+		String nome;
 		
 		Cliente cliente = null;
-		
-		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			nome = "";
-			cliente.definirNome(nome);
-			assertEquals(nome, cliente.obterNome());
-			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
-		}
+
+		cliente = Cliente.criarCliente(telefone, this.nome, email, senha, endereco);
+		nome = "";
+		cliente.definirNome(nome);
 	}
 	
 	@Test
 	public void testDefinirEndereco(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+		String endereco;
 		
 		Cliente cliente = null;
 		
 		try {
-			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+			cliente = Cliente.criarCliente(telefone, nome, email, senha, this.endereco);
 			endereco = "Av. Nilo Pecanha";
 			cliente.definirEndereco(endereco);
 			assertEquals(endereco, cliente.obterEndereco());
@@ -349,24 +231,42 @@ public class ClienteTest {
 		}
 	}
 	
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirEnderecoInvalido() throws ExcecaoDeCliente{
+		String endereco;
+		
+		Cliente cliente = null;
+
+		cliente = Cliente.criarCliente(telefone, nome, email, senha, this.endereco);
+		endereco = null;
+		cliente.definirNome(endereco);
+	}
+	
 	@Test
-	public void testDefinirEnderecoInvalido(){
-		String telefone = "2652 7700";
-		String email = "oi@oi.com";
-		String senha = "1234";
-		String nome = "Joao da Silva";
-		String endereco = "Avenida Nilo Pecanha";
+	public void testDefinirId(){
+		Long id = null;
 		
 		Cliente cliente = null;
 		
 		try {
 			cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
-			endereco = null;
-			cliente.definirNome(endereco);
-			assertEquals(endereco, cliente.obterEndereco());
+			id = 1l;
+			cliente.definirId(id);
+			assertEquals(id, cliente.obterId());
 			
-		} catch (Exception e) {
-			assertEquals(ExcecaoDeCliente.class, e.getClass());
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
 		}
+	}
+	
+	@Test(expected = ExcecaoDeCliente.class)
+	public void testDefinirIdInvalido() throws ExcecaoDeCliente{
+		Long id = null;
+		
+		Cliente cliente = null;
+
+		cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+		id = 0l;
+		cliente.definirId(id);
 	}
 }

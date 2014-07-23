@@ -1,0 +1,12 @@
+package unitarios;
+
+public class PizzaTest {
+
+	@Test
+	public void testCriarPizza(){
+		String nomePizza;
+		String ingredientes;
+		Float preco;
+	}
+	
+}

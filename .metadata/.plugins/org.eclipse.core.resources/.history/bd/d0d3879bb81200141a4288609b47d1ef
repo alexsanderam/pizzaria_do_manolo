@@ -1,0 +1,18 @@
+package unitarios;
+
+import org.junit.Test;
+
+import dominio.Pizza;
+
+public class PizzaTest {
+
+	@Test
+	public void testCriarPizza(){
+		String nomePizza;
+		String ingredientes;
+		Float preco;
+		
+		Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+	}
+	
+}

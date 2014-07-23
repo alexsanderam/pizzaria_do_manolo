@@ -52,17 +52,20 @@ public class Pizza {
 			throw new ExcecaoDePizza("pizza.identificador.invalido");				
 	}
 		
-	public void definirNomePizza(String nomePizza) {
+	public void definirNomePizza(String nomePizza) throws ExcecaoDePizza {
+		validarNomePizza(nomePizza);
 		this.nomePizza = nomePizza;
 	}
 
 
-	public void definirIngredientes(String ingredientes) {
+	public void definirIngredientes(String ingredientes) throws ExcecaoDePizza {
+		validarIngredientes(ingredientes);
 		this.ingredientes = ingredientes;
 	}
 
 
-	public void definirPreco(Float preco) {
+	public void definirPreco(Float preco) throws ExcecaoDePizza {
+		validarPreco(preco);
 		this.preco = preco;
 	}
 	

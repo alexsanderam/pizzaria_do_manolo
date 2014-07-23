@@ -73,6 +73,11 @@ public class Pagamento {
 		if(formaDePagamento != EnumFormaDePagamento.DINHEIRO_COM_TROCO)
 			throw new ExcecaoDePagamento("pedido.calcular_troco.forma_de_pagamento_nao_possibilita_troco");
 		
-		return valorTotal - valorRecebido;
+		Float valorDoTroco = valorRecebido - valorTotal;
+		
+		if(valorDoTroco < 0)
+			throw new ExcecaoDePagamento("pedido.calcular_troco.valor_do_troco_invalido");
+		
+		return valorDoTroco;
 	}
 }

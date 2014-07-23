@@ -1,0 +1,10 @@
+package unitarios;
+
+public class PagamentoTest {
+	
+	@Test
+	public void testNovoPagamento(){
+		
+	}
+
+}

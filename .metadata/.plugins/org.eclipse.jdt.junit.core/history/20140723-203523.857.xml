@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CadastrarPedidoTest" project="pizzaria" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="funcional.CadastrarPedidoTest" time="1.472">
+    <testcase name="testCadastrarPedidoPizzaNaoExistente" classname="funcional.CadastrarPedidoTest" time="0.495"/>
+    <testcase name="testCadastrarPedidoClienteNaoExistente" classname="funcional.CadastrarPedidoTest" time="0.553"/>
+    <testcase name="testCadastrarPedido" classname="funcional.CadastrarPedidoTest" time="0.424"/>
+  </testsuite>
+</testrun>

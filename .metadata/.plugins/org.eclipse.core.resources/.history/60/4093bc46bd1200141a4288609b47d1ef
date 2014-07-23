@@ -1,0 +1,113 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import dominio.EnumFormaDePagamento;
+import dominio.Pagamento;
+import excecoes.ExcecaoDePagamento;
+
+public class PagamentoTest {
+	
+	@Test
+	public void testNovoPagamento(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			assertNotNull(pagamento);
+			
+			/*Validacao dos valores*/
+			assertEquals(formaDePagamento, pagamento.obterFormaDePagamento());
+			assertEquals(valorRecebido, pagamento.obterValorRecebido());
+		} catch (ExcecaoDePagamento e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	@Test
+	public void testNovoPagamentoFormaDePagamentoInvalida(){
+		EnumFormaDePagamento formaDePagamento = null;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePagamento.class, e.getClass());
+		}	
+	}
+	
+	@Test
+	public void testNovoPagamentoValorRecebidoInvalido(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = -200f;
+		
+		try {
+			Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePagamento.class, e.getClass());
+		}	
+	}
+	
+	@Test
+	public void testDefinirFormaDePagamento(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			formaDePagamento = EnumFormaDePagamento.CARTAO_DE_DEBITO;
+			pagamento.definirFormaDePagamento(formaDePagamento);
+			assertEquals(formaDePagamento, pagamento.obterFormaDePagamento());
+		} catch (ExcecaoDePagamento e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	@Test
+	public void testDefinirFormaDePagamentoInvalida(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			formaDePagamento = null;
+			pagamento.definirFormaDePagamento(formaDePagamento);
+			assertEquals(formaDePagamento, pagamento.obterFormaDePagamento());
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePagamento.class, e.getClass());
+		}		
+	}
+	
+	@Test
+	public void testDefinirValorRecebido(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			valorRecebido = -1f;
+			pagamento.definirValorRecebido(valorRecebido);
+			assertEquals(valorRecebido, pagamento.obterValorRecebido());
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePagamento.class, e.getClass());
+		}	
+	}
+	
+	@Test
+	public void testDefinirValorRecebidoInvalido(){
+		EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.CARTAO_DE_CREDITO;
+		Float valorRecebido = 200f;
+		
+		try {
+			Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			valorRecebido = -1f;
+			pagamento.definirValorRecebido(valorRecebido);
+			assertEquals(valorRecebido, pagamento.obterValorRecebido());
+		} catch (Exception e) {
+			assertEquals(ExcecaoDePagamento.class, e.getClass());
+		}		
+	}
+}

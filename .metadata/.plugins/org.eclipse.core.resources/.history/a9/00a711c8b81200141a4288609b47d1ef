@@ -1,0 +1,23 @@
+package unitarios;
+
+import org.junit.Test;
+
+import dominio.Pizza;
+import excecoes.ExcecaoDePizza;
+
+public class PizzaTest {
+
+	@Test
+	public void testCriarPizza(){
+		String nomePizza = "Qwui";
+		String ingredientes = "Lam zassar";
+		Float preco = 250f;
+		
+		try {
+			Pizza pizza = Pizza.criarPizza(nomePizza, ingredientes, preco);
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
