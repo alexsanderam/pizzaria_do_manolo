@@ -18,13 +18,13 @@ import excecoes.ExcecaoDeCliente;
  * Servlet implementation class ServletLogin
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public Login() {
+    public LoginServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -46,7 +46,8 @@ public class Login extends HttpServlet {
 			Cliente cliente = MantenedorDeRegistros.obterInstancia().obterClientePeloEmail(email);
 			cliente.realizarAutenticacao(senha);
 			request.getSession().setAttribute("cliente", cliente);
-	        RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+			
+	        RequestDispatcher rd = getServletContext().getRequestDispatcher("/Home");
 	        rd.forward(request, response);
 	        
 		} catch (ExcecaoDAO | ExcecaoDeCliente e) {

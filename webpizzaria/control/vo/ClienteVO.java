@@ -18,6 +18,11 @@ public class ClienteVO {
 	}
 	
 
+	public ClienteVO() {
+		
+	}
+
+
 	public Long getId() {
 		return id;
 	}
