@@ -127,7 +127,7 @@ public class ControlePizzaria {
 		
 		try {
 			
-			pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, null, quantidade);
+			pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, quantidade);
 			MantenedorDeRegistros.obterInstancia().incluirPedido(pedido);
 			
 		} catch (ExcecaoDePedido | ExcecaoDAO e) {

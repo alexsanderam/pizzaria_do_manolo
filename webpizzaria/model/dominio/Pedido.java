@@ -1,27 +1,29 @@
 package dominio;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import excecoes.ExcecaoDePedido;
 
 public class Pedido {
 
+	private Integer id;
 	private Cliente cliente;
-	private Pizza pizza;
-	private Integer quantidade;
 	private Timestamp dataHora;
+	private Collection<ItemPedido> itens;
 	
-	private Pedido(Cliente cliente, Pizza pizza, Integer quantidade){
+	private Pedido(Cliente cliente, Float valor){
+		this.id = null;
 		this.cliente = cliente;
-		this.pizza = pizza;
-		this.quantidade = quantidade;
 		this.dataHora = null;
+		this.itens = new ArrayList<ItemPedido>();
 	}
 	
-	public static Pedido novoPedido(Cliente cliente, Pizza pizza, Timestamp dataHora, Integer quantidade) throws ExcecaoDePedido{
-		validarDados(cliente, pizza, quantidade);
+	public static Pedido novoPedido(Cliente cliente) throws ExcecaoDePedido{
+		validarDados(cliente);
 		
-		return new Pedido(cliente, pizza, quantidade);
+		return new Pedido(cliente);
 	}
 	
 	private static void validarDados(Cliente cliente, Pizza pizza, Integer quantidade) throws ExcecaoDePedido{

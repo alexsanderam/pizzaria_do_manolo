@@ -1,0 +1,25 @@
+package dominio;
+
+public class ItemPedido {
+
+	private Pedido pedido;
+	private Pizza pizza;
+	Integer quantidade;
+	
+	private ItemPedido(Pedido pedido, Pizza pizza, Integer quantidade){
+		this.pedido = pedido;
+		this.pizza = pizza;
+		this.quantidade = quantidade;
+	}
+	
+	public ItemPedido criarItemPedido(Pedido pedido, Pizza pizza, Integer quantidade){
+		validarDados(pedido, pizza, quantidade);
+		return new ItemPedido(pedido, pizza, quantidade);
+	}
+	
+	private void validarDados(Pedido pedido, Pizza pizza, Integer quantidade){
+		
+	}
+	
+	
+}

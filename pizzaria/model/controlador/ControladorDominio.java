@@ -1,7 +1,5 @@
 package controlador;
 
-import java.sql.Timestamp;
-
 import dominio.Cliente;
 import dominio.Pedido;
 import dominio.Pizza;
@@ -32,7 +30,7 @@ public class ControladorDominio {
 		return Pizza.criarPizza(nomePizza, ingredientes, preco);
 	}
 	
-	public Pedido novoPedido(Cliente cliente, Pizza pizza, Timestamp dataHora, Integer quantidade) throws ExcecaoDePedido{
-		return Pedido.novoPedido(cliente, pizza, dataHora, quantidade);
+	public Pedido novoPedido(Cliente cliente, Pizza pizza, Integer quantidade) throws ExcecaoDePedido{
+		return Pedido.novoPedido(cliente, pizza, quantidade);
 	}	
 }

@@ -1,0 +1,15 @@
+package excecoes;
+
+public class ExcecaoDeItemPedido extends Exception {
+
+	private static final long serialVersionUID = -3966234155182347684L;
+	
+	public ExcecaoDeItemPedido(String key){
+		super(key);
+	}
+	
+	public ExcecaoDeItemPedido(String key, Throwable causa){
+		super(key, causa);
+	}
+
+}

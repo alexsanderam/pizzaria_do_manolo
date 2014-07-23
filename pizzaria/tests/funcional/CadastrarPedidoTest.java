@@ -38,7 +38,7 @@ public class CadastrarPedidoTest extends TestCase{
 	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, nomeCliente, endereco);
 	    mantenedor.incluirCliente(cliente);
 	    
-	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, null, 1);
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
 	    mantenedor.incluirPedido(pedido);
 	    
 	    assertEquals(1, mantenedor.contarRegistros("pizzaria.Pedido"));
@@ -56,7 +56,7 @@ public class CadastrarPedidoTest extends TestCase{
 	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, nomeCliente, endereco);
 	    mantenedor.incluirCliente(cliente);
 	    
-	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, null, 1);
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
 	    try {
 	    	mantenedor.incluirPedido(pedido);
 	    } catch (Exception e) {
@@ -77,7 +77,7 @@ public class CadastrarPedidoTest extends TestCase{
 	    
 	    /*Cliente nao foi incluido na base de dados*/
 	    
-	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, null, 1);
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
 	    
 	    try {
 	    	mantenedor.incluirPedido(pedido);

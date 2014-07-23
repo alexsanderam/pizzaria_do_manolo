@@ -1,0 +1,34 @@
+package dominio;
+
+import excecoes.ExcecaoDePedido;
+
+public class ItemPedido {
+
+	private Pedido pedido;
+	private Pizza pizza;
+	Integer quantidade;
+	
+	private ItemPedido(Pedido pedido, Pizza pizza, Integer quantidade){
+		this.pedido = pedido;
+		this.pizza = pizza;
+		this.quantidade = quantidade;
+	}
+	
+	public ItemPedido criarItemPedido(Pedido pedido, Pizza pizza, Integer quantidade){
+		validarDados(pedido, pizza, quantidade);
+		return new ItemPedido(pedido, pizza, quantidade);
+	}
+	
+	private void validarDados(Pedido pedido, Pizza pizza, Integer quantidade){
+		validarPedido(pedido);
+		validarPizza(pizza);
+		validarQuantidade(quantidade);
+	}
+	
+	private static void validarPedido(Pedido pedido) throws ExcecaoDeItemPedido{
+		if(pedido == null)
+			throw new ExcecaoDePedido("itempedido.pedido.invalido");
+	}
+	
+	
+}

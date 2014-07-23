@@ -18,7 +18,7 @@ public class Pedido {
 		this.dataHora = null;
 	}
 	
-	public static Pedido novoPedido(Cliente cliente, Pizza pizza, Timestamp dataHora, Integer quantidade) throws ExcecaoDePedido{
+	public static Pedido novoPedido(Cliente cliente, Pizza pizza, Integer quantidade) throws ExcecaoDePedido{
 		validarDados(cliente, pizza, quantidade);
 		
 		return new Pedido(cliente, pizza, quantidade);
