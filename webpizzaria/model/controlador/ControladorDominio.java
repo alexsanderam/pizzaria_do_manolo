@@ -63,9 +63,12 @@ public class ControladorDominio {
 		return pedido.obterValorDeTroco();
 	}
 	
-	public Pagamento novoPagamento(Pedido pedido, EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
-		return Pagamento.novoPagamento(pedido, formaDePagamento, valorRecebido);
+	public Pagamento novoPagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
+		return Pagamento.novoPagamento(formaDePagamento, valorRecebido);
 	}
 	
+	public Boolean realizarAutenticacao(Cliente cliente, String senha){
+		return cliente.realizarAutenticacao(senha);
+	}
 	
 }

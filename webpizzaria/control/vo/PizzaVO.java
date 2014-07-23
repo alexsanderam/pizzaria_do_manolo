@@ -9,7 +9,6 @@ public class PizzaVO {
 	
 	
 	public PizzaVO(Long id, String nomePizza, String ingredientes, Float preco) {
-		super();
 		this.id = id;
 		this.nomePizza = nomePizza;
 		this.ingredientes = ingredientes;

@@ -1,0 +1,79 @@
+package controlador;
+
+import pizzariaDAO.ClienteDAO;
+import pizzariaDAO.ClienteDAOConcreto;
+import pizzariaDAO.PedidoDAO;
+import pizzariaDAO.PedidoDAOConcreto;
+import pizzariaDAO.PizzaDAO;
+import pizzariaDAO.PizzaDAOConcreto;
+import dominio.Cliente;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDePizza;
+
+public class MantenedorDeRegistros {
+	
+	private static MantenedorDeRegistros instancia;
+
+	public static MantenedorDeRegistros obterInstancia(){
+		if(instancia == null)
+			return new MantenedorDeRegistros();
+		
+		return instancia;
+	}
+	
+	protected ClienteDAO criarClienteDAO() throws ExcecaoDAO{
+		return new ClienteDAOConcreto();
+	}
+	
+	protected PizzaDAO criarPizzaDAO() throws ExcecaoDAO{
+		return new PizzaDAOConcreto();
+	}
+	
+	protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO{
+		return new PedidoDAOConcreto();
+	}
+
+	
+	public void incluirCliente(Cliente cliente) throws ExcecaoDAO, ExcecaoDeCliente{
+		ClienteDAO clienteDAO = criarClienteDAO();
+		clienteDAO.incluir(cliente);
+		clienteDAO.encerrarConexao();
+	}
+	
+	public Cliente obterClientePeloEmail(String email) throws ExcecaoDAO, ExcecaoDeCliente{
+		ClienteDAO clienteDAO = criarClienteDAO();
+		Cliente cliente = clienteDAO.buscar(email);
+		clienteDAO.encerrarConexao();
+		return cliente;
+	}
+	
+	public Pizza obterPizzaPeloNome(String nome) throws ExcecaoDAO, ExcecaoDePizza{
+		PizzaDAO pizzaDAO = criarPizzaDAO();
+		Pizza pizza = pizzaDAO.buscar(nome);
+		pizzaDAO.encerrarConexao();
+		return pizza;
+	}
+	
+	public Pizza obterPizzaPeloIdentificador(Long id) throws ExcecaoDAO, ExcecaoDePizza{
+		PizzaDAO pizzaDAO = criarPizzaDAO();
+		Pizza pizza = pizzaDAO.buscar(id);
+		pizzaDAO.encerrarConexao();
+		return pizza;
+	}
+
+	public void incluirPizza(Pizza pizza) throws ExcecaoDAO, ExcecaoDePizza{
+		PizzaDAO pizzaDAO = criarPizzaDAO();
+		pizzaDAO.incluir(pizza);
+		pizzaDAO.encerrarConexao();
+	}
+	
+	public void incluirPedido(Pedido pedido) throws ExcecaoDAO{
+		PedidoDAO pedidoDAO  = criarPedidoDAO();
+		pedidoDAO.incluir(pedido);
+		pedidoDAO.encerrarConexao();
+	}
+
+}
