@@ -1,0 +1,9 @@
+package excecoes;
+
+public class ExcecaoDePagamento extends Exception {
+
+	private static final long serialVersionUID = 6706560683733928682L;
+	
+	
+
+}

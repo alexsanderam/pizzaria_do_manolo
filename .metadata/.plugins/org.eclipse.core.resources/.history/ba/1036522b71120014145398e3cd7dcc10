@@ -1,0 +1,127 @@
+package dominio;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePedido;
+
+public class Pedido {
+
+	private Long id;
+	private Cliente cliente;
+	private Timestamp dataHora;
+	private Collection<ItemPedido> itens;
+	private Pagamento pagamento;
+	private Float valor;
+	
+	private Pedido(Cliente cliente){
+		this.id = null;
+		this.cliente = cliente;
+		this.dataHora = null;
+		this.itens = new ArrayList<ItemPedido>();
+		this.valor = 0f; 
+	}
+	
+	public static Pedido novoPedido(Cliente cliente) throws ExcecaoDePedido{
+		validarDados(cliente);
+		
+		return new Pedido(cliente);
+	}
+	
+	public void incluirPizza(Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+		ItemPedido novoItem = ItemPedido.criarItemPedido(this, pizza, quantidade);
+		adicionarNovoItem(novoItem);
+	}
+	
+	public void removerPizza(Pizza pizza) throws ExcecaoDePedido{
+		Long idPizzaBuscada = pizza.obterId();
+		Boolean pizzaLocalizada = false;
+		
+		for (Iterator<ItemPedido> iterator = itens.iterator(); iterator.hasNext() && pizzaLocalizada == false;) {
+			ItemPedido itemPedido = (ItemPedido) iterator.next();
+			
+			Long idPizzaDoItem = itemPedido.obterPizza().obterId();
+				
+			if(idPizzaBuscada.equals(idPizzaDoItem)){
+				this.itens.remove(itemPedido);
+				pizzaLocalizada = true;
+			}	
+		}
+		
+		if(pizzaLocalizada == false)
+			throw new ExcecaoDePedido("pedido.remover_item.pizza_nao_localizada");
+	}
+	
+	private void adicionarNovoItem(ItemPedido itemPedido){
+		this.itens.add(itemPedido);
+		this.valor += itemPedido.obterSubtotal();
+	}
+	
+	private void removerItem(ItemPedido itemPedido){
+		
+	}
+	
+	public Float obterValorTotal(){
+		return this.valor;
+	}
+	
+	/*private void calcularValorTotal(){
+		Float valorTotal = 0f;
+		
+		for (ItemPedido itemPedido : itens) {
+			valorTotal += itemPedido.obterSubtotal();
+		}
+		
+		this.valor = valorTotal;
+	}*/
+	
+	private static void validarDados(Cliente cliente) throws ExcecaoDePedido{
+		validarCliente(cliente);
+	}
+	
+	private static void validarCliente(Cliente cliente) throws ExcecaoDePedido{
+		if(cliente == null)
+			throw new ExcecaoDePedido("pedido.cliente.invalido");
+	}
+	
+	private static void validarDataHora(Timestamp dataHora) throws ExcecaoDePedido{
+		if(dataHora == null)
+			throw new ExcecaoDePedido("pedido.data_hora.invalida");
+	}
+	
+	private static void validarId(Long id) throws ExcecaoDePedido{
+		if(id == null || id <= 0)
+			throw new ExcecaoDePedido("pedido.id.invalido");
+	}
+		
+	public Long obterId(){
+		return this.id;
+	}
+	
+	public void definirId(Long id) throws ExcecaoDePedido{
+		validarId(id);
+		this.id = id;
+	}
+
+	public Cliente obterCliente() {
+		return cliente;
+	}
+
+	public void definirCliente(Cliente cliente) throws ExcecaoDePedido {
+		validarCliente(cliente);
+		this.cliente = cliente;
+	}
+
+	public Timestamp obterDataHora() {
+		return this.dataHora;
+	}
+	
+	public void definirDataHora(Timestamp dataHora) throws ExcecaoDePedido{
+		validarDataHora(dataHora);
+		this.dataHora = dataHora;
+	}
+
+}

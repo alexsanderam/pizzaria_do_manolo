@@ -1,0 +1,13 @@
+package dominio;
+
+public class Pagamento {
+
+	private Integer id;
+	private EnumFormaDePagamento formaDePagamento;
+	private Float valorRecebido;
+	
+	public Pagamento(){
+		
+	}
+	
+}

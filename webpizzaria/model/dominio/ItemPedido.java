@@ -14,7 +14,7 @@ public class ItemPedido {
 		this.quantidade = quantidade;
 	}
 	
-	public ItemPedido criarItemPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+	public static ItemPedido criarItemPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
 		validarDados(pedido, pizza, quantidade);
 		return new ItemPedido(pedido, pizza, quantidade);
 	}
@@ -36,7 +36,7 @@ public class ItemPedido {
 		return valorPizza * this.quantidade;
 	}
 		
-	private void validarDados(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+	private static void validarDados(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
 		validarPedido(pedido);
 		validarPizza(pizza);
 		validarQuantidade(quantidade);

@@ -1,0 +1,19 @@
+package dominio;
+
+public class Pagamento {
+
+	private Integer id;
+	private EnumFormaDePagamento formaDePagamento;
+	private Float valorRecebido;
+	
+	private Pagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido){
+		this.formaDePagamento = formaDePagamento;
+		this.valorRecebido = valorRecebido;
+		this.id = null;
+	}
+	
+	public Pagamento novoPagamento(){
+		
+	}
+	
+}

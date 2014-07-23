@@ -1,0 +1,30 @@
+package dominio;
+
+import excecoes.ExcecaoDePagamento;
+
+
+public class Pagamento {
+
+	private Integer id;
+	private EnumFormaDePagamento formaDePagamento;
+	private Float valorRecebido;
+	
+	private Pagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido){
+		this.formaDePagamento = formaDePagamento;
+		this.valorRecebido = valorRecebido;
+		this.id = null;
+	}
+	
+	public Pagamento novoPagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido){
+		validarDados(formaDePagamento, valorRecebido);
+		return new Pagamento(formaDePagamento, valorRecebido);
+	}
+	
+	private static void validarDados(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
+		validarFormaDePagamento(formaDePagamento);
+		validarValorRecebido(valorRecebido);
+	}
+	
+	
+	
+}
