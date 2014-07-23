@@ -18,35 +18,35 @@ public class PizzaVO {
 		this.preco = preco;
 	}
 	
-	public Long getId() {
+	public Long obterId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void definirId(Long id) {
 		this.id = id;
 	}
 	
-	public String getNomePizza() {
+	public String obterNomePizza() {
 		return nomePizza;
 	}
 	
-	public void setNomePizza(String nomePizza) {
+	public void definirNomePizza(String nomePizza) {
 		this.nomePizza = nomePizza;
 	}
 	
-	public String getIngredientes() {
+	public String obterIngredientes() {
 		return ingredientes;
 	}
 	
-	public void setIngredientes(String ingredientes) {
+	public void definirIngredientes(String ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 	
-	public Float getPreco() {
+	public Float obterPreco() {
 		return preco;
 	}
 	
-	public void setPreco(Float preco) {
+	public void definirPreco(Float preco) {
 		this.preco = preco;
 	}
 	

@@ -20,27 +20,27 @@ public class PedidoVO {
 		this.itensDoPedido = itensDoPedido;
 	}
 	
-	public ClienteVO getClienteVO() {
+	public ClienteVO obterClienteVO() {
 		return clienteVO;
 	}
 
-	public void setClienteVO(ClienteVO clienteVO) {
+	public void definirClienteVO(ClienteVO clienteVO) {
 		this.clienteVO = clienteVO;
 	}
 
-	public Collection<ItemPedidoVO> getItensDoPedido() {
+	public Collection<ItemPedidoVO> obterItensDoPedido() {
 		return itensDoPedido;
 	}
 
-	public void setItensDoPedido(Collection<ItemPedidoVO> itensDoPedido) {
+	public void definirItensDoPedido(Collection<ItemPedidoVO> itensDoPedido) {
 		this.itensDoPedido = itensDoPedido;
 	}
 
-	public Timestamp getDataHora() {
+	public Timestamp obterDataHora() {
 		return dataHora;
 	}
 	
-	public void setDataHora(Timestamp dataHora) {
+	public void definirDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
 

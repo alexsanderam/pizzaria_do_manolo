@@ -1,0 +1,5 @@
+INDEX VERSION 1.127
+/home/alexsander/Desktop/Comp 3/workspace/pizzaria_do_manolo/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/904297516.index
+/webpizzaria/src
+/home/alexsander/Desktop/Comp 3/workspace/pizzaria_do_manolo/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/775663089.index
+/webpizzaria/src

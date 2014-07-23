@@ -14,19 +14,19 @@ public class ItemPedidoVO {
 		this.quantidade = quantidade;
 	}
 
-	public PizzaVO getPizza() {
+	public PizzaVO obterPizza() {
 		return pizza;
 	}
 
-	public void setPizza(PizzaVO pizza) {
+	public void definirPizza(PizzaVO pizza) {
 		this.pizza = pizza;
 	}
 
-	public Integer getQuantidade() {
+	public Integer obterQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void definirQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 	
