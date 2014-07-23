@@ -1,0 +1,9 @@
+package unitarios;
+
+import dominio.Cliente;
+
+public class ClienteTest {
+
+	public static Cliente testCriarCliente
+	
+}

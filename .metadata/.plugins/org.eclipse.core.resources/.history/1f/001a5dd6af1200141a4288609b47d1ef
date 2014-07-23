@@ -1,0 +1,14 @@
+package unitarios;
+
+import org.junit.Test;
+
+import dominio.Cliente;
+
+public class ClienteTest {
+
+	@Test
+	public void testCriarCliente(){
+		
+	}
+	
+}

@@ -1,0 +1,21 @@
+package unitarios;
+
+import org.junit.Test;
+
+import dominio.Cliente;
+
+public class ClienteTest {
+
+	@Test
+	public void testCriarCliente(){
+		String telefone = "2652 7700";
+		String email = "oi@oi.com";
+		String senha = "123";
+		String nome = "Joao da Silva";
+		String endereco = "Avenida Nilo Pecanha";
+		
+		Cliente cliente = Cliente.criarCliente(telefone, nome, email, senha, endereco);
+		
+	}
+	
+}
