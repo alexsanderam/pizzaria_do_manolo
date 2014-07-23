@@ -108,15 +108,15 @@ public class CadastrarPedidoTest extends TestCase{
 		sql.append("CONSTRAINT pizza_pkey PRIMARY KEY(id));");
 		
 		sql.append("CREATE TABLE pizzaria.Pedido(");
-		sql.append("id_cliente INTEGER NOT NULL,");
-		sql.append("id_pizza INTEGER NOT NULL,");
+		sql.append("id_cliente_fk INTEGER NOT NULL,");
+		sql.append("id_pizza_fk INTEGER NOT NULL,");
 		sql.append("data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,");
 		sql.append("quantidade INTEGER,");
-		sql.append("CONSTRAINT pk PRIMARY KEY (id_cliente, id_pizza, data_hora),");
-		sql.append("CONSTRAINT fk_cardapio FOREIGN KEY (id_pizza)");
+		sql.append("CONSTRAINT pk PRIMARY KEY (id_cliente_fk, id_pizza_fk, data_hora),");
+		sql.append("CONSTRAINT fk_cardapio FOREIGN KEY (id_pizza_fk)");
 		sql.append("REFERENCES pizzaria.pizza (id)");
 		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION,");
-		sql.append("CONSTRAINT fk_cliente FOREIGN KEY (id_cliente)");
+		sql.append("CONSTRAINT fk_cliente FOREIGN KEY (id_cliente_fk)");
 		sql.append("REFERENCES pizzaria.cliente (id)");		
 		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION);");
 		

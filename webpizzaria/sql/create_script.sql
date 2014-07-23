@@ -53,31 +53,31 @@ CREATE TABLE webpizzaria.Pagamento(
 
 CREATE TABLE webpizzaria.Pedido(
 	id SERIAL,
-	id_cliente INTEGER NOT NULL,
-	id_pagamento INTEGER NOT NULL,
+	id_cliente_fk INTEGER NOT NULL,
+	id_pagamento_fk INTEGER NOT NULL,
 	valor FLOAT NOT NULL,
 	data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 
 	CONSTRAINT pedido_pkey PRIMARY KEY(id),
-	CONSTRAINT pedido_unique UNIQUE (id_cliente, data_hora),
+	CONSTRAINT pedido_unique UNIQUE (id_cliente_fk, data_hora),
 
-	CONSTRAINT fk_cliente FOREIGN KEY (id_cliente)
+	CONSTRAINT fk_cliente FOREIGN KEY (id_cliente_fk)
 	REFERENCES webpizzaria.cliente (id),
 
-	CONSTRAINT fk_pagamento FOREIGN KEY (id_pagamento)
+	CONSTRAINT fk_pagamento FOREIGN KEY (id_pagamento_fk)
 	REFERENCES webpizzaria.pagamento (id)
 );
 
 CREATE TABLE webpizzaria.ItemPedido(
-	id_pedido INTEGER NOT NULL,
-	id_pizza INTEGER NOT NULL,
+	id_pedido_fk INTEGER NOT NULL,
+	id_pizza_fk INTEGER NOT NULL,
 	quantidade INTEGER NOT NULL,
 
-	CONSTRAINT item_pedido_pkey PRIMARY KEY(id_pedido, id_pizza),
+	CONSTRAINT item_pedido_pkey PRIMARY KEY(id_pedido_fk, id_pizza_fk),
 
-	CONSTRAINT fk_pedido FOREIGN KEY (id_pedido)
+	CONSTRAINT fk_pedido FOREIGN KEY (id_pedido_fk)
 	REFERENCES webpizzaria.pedido (id),
 
-	CONSTRAINT fk_pizza FOREIGN KEY (id_pizza)
+	CONSTRAINT fk_pizza FOREIGN KEY (id_pizza_fk)
 	REFERENCES webpizzaria.pizza (id)	
 );

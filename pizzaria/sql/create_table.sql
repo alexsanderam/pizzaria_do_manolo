@@ -1,6 +1,5 @@
-﻿
-﻿DROP TABLE IF EXISTS pizzaria.Cliente CASCADE;
-DROP TABLE IF EXISTS pizzaria.Pizza CASCADE;
+﻿DROP TABLE IF EXISTS pizzaria.Pizza CASCADE;
+DROP TABLE IF EXISTS pizzaria.Cliente CASCADE;
 DROP TABLE IF EXISTS pizzaria.Pedido CASCADE;
 DROP SCHEMA IF EXISTS pizzaria CASCADE;
 
@@ -27,16 +26,16 @@ CREATE TABLE pizzaria.Pizza(
 );
 
 CREATE TABLE pizzaria.Pedido(
-	id_cliente INTEGER NOT NULL,
-	id_pizza INTEGER NOT NULL,
+	id_cliente_fk INTEGER NOT NULL,
+	id_pizza_fk INTEGER NOT NULL,
 	data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 	quantidade INTEGER,
 	
-	CONSTRAINT pk PRIMARY KEY (id_cliente, id_pizza, data_hora),
-	CONSTRAINT fk_cardapio FOREIGN KEY (id_pizza)
+	CONSTRAINT pk PRIMARY KEY (id_cliente_fk, id_pizza_fk, data_hora),
+	CONSTRAINT fk_pizza FOREIGN KEY (id_pizza_fk)
 	REFERENCES pizzaria.pizza (id)
 	ON UPDATE NO ACTION ON DELETE NO ACTION,
-	CONSTRAINT fk_cliente FOREIGN KEY (id_cliente)
+	CONSTRAINT fk_cliente FOREIGN KEY (id_cliente_fk)
 	REFERENCES pizzaria.cliente (id)
 	
 	ON UPDATE NO ACTION ON DELETE NO ACTION

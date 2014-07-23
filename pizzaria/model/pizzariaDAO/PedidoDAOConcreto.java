@@ -26,7 +26,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
         if(conexao == null)
             throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
          
-        String sql = "INSERT INTO pizzaria.Pedido(id_cliente, id_pizza, data_hora, quantidade) values (?, ?, current_timestamp, ?)";
+        String sql = "INSERT INTO pizzaria.Pedido(id_cliente_fk, id_pizza_fk, data_hora, quantidade) values (?, ?, current_timestamp, ?)";
         PreparedStatement stmt;
          
         try {

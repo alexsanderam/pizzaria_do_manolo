@@ -46,9 +46,6 @@ public class CadastrarPizzaTest extends TestCase{
 	    	assertEquals(ExcecaoDePizza.class, e.getClass());
 	    }
 	    
-	    
-	    
-	    
 	}
 
 
