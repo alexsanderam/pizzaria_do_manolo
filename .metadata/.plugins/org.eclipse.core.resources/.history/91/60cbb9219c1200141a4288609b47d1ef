@@ -1,0 +1,137 @@
+package pizzariaDAO;
+ 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Collection;
+
+import dominio.Cliente;
+import dominio.ItemPedido;
+import dominio.Pagamento;
+import dominio.Pedido;
+import excecoes.ExcecaoDAO;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePagamento;
+import excecoes.ExcecaoDePedido;
+import excecoes.ExcecaoDePizza;
+ 
+public class PedidoDAOConcreto implements PedidoDAO{
+ 
+    private Connection conexao = null;
+     
+    public PedidoDAOConcreto() throws ExcecaoDAO{
+        this.conexao = criarConexao();
+    }
+     
+     
+    protected Connection criarConexao() throws ExcecaoDAO{
+        return ConnectionFactoryConcreto.obterInstancia().obterConexao();
+    }
+     
+    @Override
+    public void incluir(Pedido pedido) throws ExcecaoDAO {
+         
+        if(conexao == null)
+            throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
+         
+        String sql = "INSERT INTO pizzaria.Pedido(id_cliente_fk, id_pagamento_fk, data_hora) values (?, ?, current_timestamp)";
+        PreparedStatement stmt;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            
+            Long id_cliente = pedido.obterCliente().obterId();
+            stmt.setLong(1, id_cliente);
+            
+            Long id_p = pedido.obterCliente().obterId();
+            stmt.setLong(1, id_cliente);          
+             
+            stmt.execute();
+             
+        } catch (Exception e) {
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_incluir_o_pedido", e);
+        }
+    }
+    
+	@Override
+	public Pedido buscar(Long id) throws ExcecaoDAO, ExcecaoDePedido {
+        if(conexao == null)
+            throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
+         
+        Pedido pedido = null;
+ 
+        String sql = "SELECT * FROM pizzaria.Pedido WHERE id = ?";
+        PreparedStatement stmt;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);
+            stmt.setLong(1, id);
+             
+            rs = stmt.executeQuery();
+            
+            ClienteDAO clienteDAO = new ClienteDAOConcreto();
+            PagamentoDAO pagamentoDAO = new PagamentoDAOConcreto();
+            ItemPedidoDAO itemPedidDAO = new ItemPedidoDAOConcreto();
+             
+            if (rs.next()){
+            	Long id_cliente = rs.getLong("id_cliente_fk");
+            	Cliente cliente = null;
+				
+            	try {
+					cliente = clienteDAO.buscar(id_cliente);
+				} catch (ExcecaoDeCliente e) {
+					throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido", e);
+				}
+            	
+            	Long id_pagamento = rs.getLong("id_pagamento_fk");
+            	Pagamento pagamento = null;
+            	
+				try {
+					pagamento = pagamentoDAO.buscar(id_pagamento);
+				} catch (ExcecaoDePagamento e) {
+					throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido", e);
+				}
+				
+				Timestamp dataHora = rs.getTimestamp("data_hora");
+            	
+            	pedido = Pedido.novoPedido(cliente);
+            	pedido.definirDataHora(dataHora);
+            	pedido.definirPagamento(pagamento);
+            	pedido.definirId(id);
+            	
+            	Collection<ItemPedido> itensDoPedido;
+            	
+				try {
+					itensDoPedido = itemPedidDAO.buscarTodosDoPedido(pedido);
+					pedido.definirItens(itensDoPedido);
+					
+				} catch (ExcecaoDeItemPedido | ExcecaoDePizza e) {
+					throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido", e);
+				}	
+            }
+             
+        } catch (SQLException e) {
+ 
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido", e);
+        }
+        
+        if(pedido == null)
+        	throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_localizar_o_pedido");
+         
+        return pedido;
+	}
+     
+    @Override
+    public void encerrarConexao() throws ExcecaoDAO{
+        try {
+            this.conexao.close();
+        } catch (SQLException e) {
+            throw new ExcecaoDAO("pedido_dao.nao_foi_possivel_encerrar_a_conexao");
+        }
+    }
+     
+}

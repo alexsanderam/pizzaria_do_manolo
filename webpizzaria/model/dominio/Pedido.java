@@ -143,12 +143,26 @@ public class Pedido {
 		this.dataHora = dataHora;
 	}
 	
+	public void definirItens(Collection<ItemPedido> itensDoPedido){
+		for (ItemPedido itemPedido : itensDoPedido) {
+			adicionarNovoItem(itemPedido);
+		}
+	}
+	
+	public Collection<ItemPedido> obterItens(){
+		return itens;
+	}
+	
 	/*public Boolean pedidoFechado(){
 		Boolean pedidoPossuiPagamento = this.pagamento != null;
 		
 		//subentedemos que se o pedido possui um pagamento, entao ele esta fechado
 		return pedidoPossuiPagamento;
 	}*/
+	
+	public Pagamento obterPagamento(){
+		return pagamento;
+	}
 	
 	public EnumFormaDePagamento obterFormaDePagamento() throws ExcecaoDePedido{
 		if(pagamento == null)

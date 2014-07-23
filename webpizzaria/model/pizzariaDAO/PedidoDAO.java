@@ -1,5 +1,8 @@
 package pizzariaDAO;
 
+import java.util.Collection;
+
+import dominio.Cliente;
 import dominio.Pedido;
 import excecoes.ExcecaoDAO;
 import excecoes.ExcecaoDePedido;
@@ -8,6 +11,7 @@ public interface PedidoDAO {
 
 	public void incluir(Pedido pedido) throws ExcecaoDAO;
 	public Pedido buscar(Long id) throws ExcecaoDAO, ExcecaoDePedido;
+	public Collection<Pedido> buscarTodosPedidosDoCliente(Cliente cliente) throws ExcecaoDAO, ExcecaoDePedido;
 	public void encerrarConexao() throws ExcecaoDAO;
 	
 }

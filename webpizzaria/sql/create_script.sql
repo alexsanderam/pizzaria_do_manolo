@@ -54,8 +54,7 @@ CREATE TABLE webpizzaria.Pagamento(
 CREATE TABLE webpizzaria.Pedido(
 	id SERIAL,
 	id_cliente_fk INTEGER NOT NULL,
-	id_pagamento_fk INTEGER,
-	valor FLOAT NOT NULL,
+	id_pagamento_fk INTEGER NOT NULL,
 	data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,
 
 	CONSTRAINT pedido_pkey PRIMARY KEY(id),

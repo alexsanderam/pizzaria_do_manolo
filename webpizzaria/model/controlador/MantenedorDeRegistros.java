@@ -1,16 +1,23 @@
 package controlador;
 
+import java.util.Collection;
+
 import pizzariaDAO.ClienteDAO;
 import pizzariaDAO.ClienteDAOConcreto;
+import pizzariaDAO.PagamentoDAO;
+import pizzariaDAO.PagamentoDAOConcreto;
 import pizzariaDAO.PedidoDAO;
 import pizzariaDAO.PedidoDAOConcreto;
 import pizzariaDAO.PizzaDAO;
 import pizzariaDAO.PizzaDAOConcreto;
 import dominio.Cliente;
+import dominio.Pagamento;
 import dominio.Pedido;
 import dominio.Pizza;
 import excecoes.ExcecaoDAO;
 import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDePagamento;
+import excecoes.ExcecaoDePedido;
 import excecoes.ExcecaoDePizza;
 
 public class MantenedorDeRegistros {
@@ -36,6 +43,10 @@ public class MantenedorDeRegistros {
 		return new PedidoDAOConcreto();
 	}
 
+	protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO{
+		return new PagamentoDAOConcreto();
+	}
+	
 	
 	public void incluirCliente(Cliente cliente) throws ExcecaoDAO, ExcecaoDeCliente{
 		ClienteDAO clienteDAO = criarClienteDAO();
@@ -43,16 +54,30 @@ public class MantenedorDeRegistros {
 		clienteDAO.encerrarConexao();
 	}
 	
-	public Cliente obterClientePorTelefone(String telefone) throws ExcecaoDAO, ExcecaoDeCliente{
+	public Cliente obterClientePeloEmail(String email) throws ExcecaoDAO, ExcecaoDeCliente{
 		ClienteDAO clienteDAO = criarClienteDAO();
-		Cliente cliente = clienteDAO.buscar(telefone);
+		Cliente cliente = clienteDAO.buscar(email);
 		clienteDAO.encerrarConexao();
 		return cliente;
 	}
 	
-	public Pizza obterPizzaPorNome(String nome) throws ExcecaoDAO, ExcecaoDePizza{
+	public Cliente obterClientePeloIdentificador(Long id) throws ExcecaoDAO, ExcecaoDeCliente{
+		ClienteDAO clienteDAO = criarClienteDAO();
+		Cliente cliente = clienteDAO.buscar(id);
+		clienteDAO.encerrarConexao();
+		return cliente;
+	}
+	
+	public Pizza obterPizzaPeloNome(String nome) throws ExcecaoDAO, ExcecaoDePizza{
 		PizzaDAO pizzaDAO = criarPizzaDAO();
 		Pizza pizza = pizzaDAO.buscar(nome);
+		pizzaDAO.encerrarConexao();
+		return pizza;
+	}
+	
+	public Pizza obterPizzaPeloIdentificador(Long id) throws ExcecaoDAO, ExcecaoDePizza{
+		PizzaDAO pizzaDAO = criarPizzaDAO();
+		Pizza pizza = pizzaDAO.buscar(id);
 		pizzaDAO.encerrarConexao();
 		return pizza;
 	}
@@ -63,10 +88,24 @@ public class MantenedorDeRegistros {
 		pizzaDAO.encerrarConexao();
 	}
 	
-	public void incluirPedido(Pedido pedido) throws ExcecaoDAO{
+	public void incluirPedido(Pedido pedido, Pagamento pagamento) throws ExcecaoDAO, ExcecaoDePagamento, ExcecaoDePedido{
 		PedidoDAO pedidoDAO  = criarPedidoDAO();
+		PagamentoDAO pagamentoDAO = criarPagamentoDAO();
+		pagamentoDAO.incluir(pagamento);
 		pedidoDAO.incluir(pedido);
 		pedidoDAO.encerrarConexao();
+		
+		/*Associa o pagamento ao pedido*/
+		pedido.definirPagamento(pagamento);
 	}
 
+	public Collection<Pedido> obterTodosPedidosDoClienteDescendentemente(Cliente cliente) throws ExcecaoDAO, ExcecaoDePedido{
+		Collection<Pedido> pedidos = null;
+			
+		PedidoDAO pedidoDAO  = criarPedidoDAO();
+		pedidos = pedidoDAO.buscarTodosPedidosDoCliente(cliente);
+		pedidoDAO.encerrarConexao();
+		
+		return pedidos;
+	}
 }
