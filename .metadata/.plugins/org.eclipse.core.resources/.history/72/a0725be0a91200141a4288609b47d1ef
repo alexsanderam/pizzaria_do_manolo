@@ -19,11 +19,8 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 	
-	public void realizarAutenticacao(String senha) throws ExcecaoDeCliente{
-		Boolean senhaCorreta = this.senha.equals(senha);
-		
-		if(senhaCorreta == false)
-			throw new ExcecaoDeCliente("cliente.realizar_autenticacao.senha_invalida");
+	public Boolean realizarAutenticacao(String senha){
+		return this.senha.equals(senha);
 	}
 	
 	public static Cliente criarCliente(String telefone, String nome, String email, String senha, String endereco) throws ExcecaoDeCliente{

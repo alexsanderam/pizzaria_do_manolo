@@ -67,8 +67,8 @@ public class ControladorDominio {
 		return Pagamento.novoPagamento(formaDePagamento, valorRecebido);
 	}
 	
-	public void realizarAutenticacao(Cliente cliente, String senha) throws ExcecaoDeCliente{
-		cliente.realizarAutenticacao(senha);
+	public Boolean realizarAutenticacao(Cliente cliente, String senha){
+		return cliente.realizarAutenticacao(senha);
 	}
 	
 }
