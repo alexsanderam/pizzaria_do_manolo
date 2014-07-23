@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePagamento;
 import excecoes.ExcecaoDePedido;
 
 public class Pedido {
@@ -142,11 +143,25 @@ public class Pedido {
 		this.dataHora = dataHora;
 	}
 	
-	public Boolean pedidoFechado(){
+	/*public Boolean pedidoFechado(){
 		Boolean pedidoPossuiPagamento = this.pagamento != null;
 		
-		/*subentedemos que se o pedido possui um pagamento, entao ele esta fechado*/
+		//subentedemos que se o pedido possui um pagamento, entao ele esta fechado
 		return pedidoPossuiPagamento;
+	}*/
+	
+	public EnumFormaDePagamento obterFormaDePagamento() throws ExcecaoDePedido{
+		if(pagamento == null)
+			throw new ExcecaoDePedido("pedido.obter_forma_de_pagamento.pagamento_nao_realizado");
+		
+		return pagamento.obterFormaDePagamento();
+	}
+	
+	public Float obterValorDeTroco() throws ExcecaoDePedido, ExcecaoDePagamento{
+		if(pagamento == null)
+			throw new ExcecaoDePedido("pedido.obter_valor_de_troco.pagamento_nao_realizado");
+		
+		return pagamento.calcularTroco(valor);
 	}
 
 }

@@ -2,9 +2,13 @@ package controlador;
 
 
 import dominio.Cliente;
+import dominio.EnumFormaDePagamento;
+import dominio.Pagamento;
 import dominio.Pedido;
 import dominio.Pizza;
 import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePagamento;
 import excecoes.ExcecaoDePedido;
 import excecoes.ExcecaoDePizza;
 
@@ -33,5 +37,35 @@ public class ControladorDominio {
 	
 	public Pedido novoPedido(Cliente cliente) throws ExcecaoDePedido{
 		return Pedido.novoPedido(cliente);
-	}	
+	}
+	
+	public void incluirPizzaAoPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido {
+		pedido.incluirPizza(pizza, quantidade);
+	}
+	
+	public void removerPizzaDoPedido(Pedido pedido, Pizza pizza) throws ExcecaoDeItemPedido, ExcecaoDePedido {
+		pedido.removerPizza(pizza);
+	}
+	
+	public void realizarPagamentoDoPedido(Pedido pedido, Pagamento pagamento) throws ExcecaoDePedido {
+		pedido.definirPagamento(pagamento);
+	}
+	
+	public Float obterValorTotalDoPedido(Pedido pedido){
+		return pedido.obterValorTotal();
+	}
+	
+	public EnumFormaDePagamento obterFormaDePagamentoDoPedido(Pedido pedido) throws ExcecaoDePedido{
+		return pedido.obterFormaDePagamento();
+	}
+	
+	public Float obterValorDeTrocoDoPedido(Pedido pedido) throws ExcecaoDePedido, ExcecaoDePagamento{
+		return pedido.obterValorDeTroco();
+	}
+	
+	public Pagamento novoPagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
+		return Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+	}
+	
+	
 }

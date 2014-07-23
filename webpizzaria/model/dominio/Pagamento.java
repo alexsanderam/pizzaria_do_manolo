@@ -15,7 +15,7 @@ public class Pagamento {
 		this.id = null;
 	}
 	
-	public Pagamento novoPagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
+	public static Pagamento novoPagamento(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
 		validarDados(formaDePagamento, valorRecebido);
 		return new Pagamento(formaDePagamento, valorRecebido);
 	}
@@ -65,5 +65,12 @@ public class Pagamento {
 	public void definirValorRecebido(Float valorRecebido) throws ExcecaoDePagamento {
 		validarValorRecebido(valorRecebido);
 		this.valorRecebido = valorRecebido;
-	}	
+	}
+	
+	public Float calcularTroco(Float valorTotal) throws ExcecaoDePagamento{
+		if(formaDePagamento != EnumFormaDePagamento.DINHEIRO_COM_TROCO)
+			throw new ExcecaoDePagamento("pedido.calcular_troco.forma_de_pagamento_nao_possibilita_troco");
+		
+		return valorTotal - valorRecebido;
+	}
 }
