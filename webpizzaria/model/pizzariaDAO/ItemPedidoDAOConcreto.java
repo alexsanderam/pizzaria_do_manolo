@@ -60,7 +60,7 @@ public class ItemPedidoDAOConcreto implements ItemPedidoDAO{
 	        Long id_pedido = pedido.obterId();
 	        Long id_pizza = pizza.obterId();
 	 
-	        String sql = "SELECT * FROM pizzaria.ItemPedido WHERE id_pedido_fk = ? AND id_pizza_fk = ?";
+	        String sql = "SELECT quantidade FROM webpizzaria.ItemPedido WHERE id_pedido_fk = ? AND id_pizza_fk = ?";
 	        PreparedStatement stmt;
 	        ResultSet rs;
 	         
@@ -95,7 +95,7 @@ public class ItemPedidoDAOConcreto implements ItemPedidoDAO{
 	        Collection<ItemPedido> itensDoPedido = null;
 	        Long id_pedido = pedido.obterId();
 	 
-	        String sql = "SELECT * FROM pizzaria.ItemPedido WHERE id_pedido_fk = ?";
+	        String sql = "SELECT id_pizza_fk, quantidade FROM webpizzaria.ItemPedido WHERE id_pedido_fk = ?";
 	        PreparedStatement stmt;
 	        ResultSet rs;
 	         

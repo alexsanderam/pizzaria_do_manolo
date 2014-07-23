@@ -28,7 +28,7 @@ public class ClienteDAOConcreto implements ClienteDAO{
         if(conexao == null)
             throw new ExcecaoDAO("cliete_dao.conexao_nao_estabelecida");
          
-        String sql = "INSERT INTO pizzaria.Cliente(email, senha, nome, telefone, endereco) values (?, ?, ?, ?, ?) RETURNING id";
+        String sql = "INSERT INTO webpizzaria.Cliente(email, senha, nome, telefone, endereco) values (?, ?, ?, ?, ?) RETURNING id";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -62,7 +62,7 @@ public class ClienteDAOConcreto implements ClienteDAO{
          
         Cliente cliente = null;
  
-        String sql = "SELECT * FROM pizzaria.Cliente WHERE email = ?";
+        String sql = "SELECT id, telefone, nome, email, senha, endereco FROM webpizzaria.Cliente WHERE email = ?";
         PreparedStatement stmt;
         ResultSet rs;
          
@@ -102,7 +102,7 @@ public class ClienteDAOConcreto implements ClienteDAO{
          
         Cliente cliente = null;
  
-        String sql = "SELECT * FROM pizzaria.Cliente WHERE id = ?";
+        String sql = "SELECT * FROM webpizzaria.Cliente WHERE id = ?";
         PreparedStatement stmt;
         ResultSet rs;
          

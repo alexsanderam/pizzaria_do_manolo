@@ -46,7 +46,8 @@ public class Login extends HttpServlet {
 			Cliente cliente = MantenedorDeRegistros.obterInstancia().obterClientePeloEmail(email);
 			cliente.realizarAutenticacao(senha);
 			request.getSession().setAttribute("cliente", cliente);
-	        response.sendRedirect("/logado.jsp");
+	        RequestDispatcher rd = getServletContext().getRequestDispatcher("/home.jsp");
+	        rd.forward(request, response);
 	        
 		} catch (ExcecaoDAO | ExcecaoDeCliente e) {
 			request.setAttribute("falhaNaAutenticacao", true);
