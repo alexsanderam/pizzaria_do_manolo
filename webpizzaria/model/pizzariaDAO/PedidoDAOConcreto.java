@@ -205,6 +205,9 @@ public class PedidoDAOConcreto implements PedidoDAO{
         if(conexao == null)
             throw new ExcecaoDAO("pedido_dao.conexao_nao_estabelecida");
         
+        if(cliente == null)
+        	throw new ExcecaoDAO("pedido_dao.cliente_invalido");
+        
 		Collection<Pedido> pedidos = null;
 		
 		Long id_cliente = cliente.obterId();

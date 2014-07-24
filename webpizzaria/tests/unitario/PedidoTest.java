@@ -113,6 +113,7 @@ public class PedidoTest {
 		inicializarDados();
 		
 		Pizza pizza = Pizza.criarPizza("Bacon3", "Muito bacon", 30f);
+		pizza.definirId(1l);
 		
 		try {
 			Pedido pedido = Pedido.novoPedido(cliente);
@@ -354,7 +355,9 @@ public class PedidoTest {
 			pedido = Pedido.novoPedido(cliente);
 			
 			try {
-				Pizza pizza = Pizza.criarPizza("Bacon4", "Muito muito muito bacon", 30f);
+				Pizza pizza = Pizza.criarPizza("Bacon4", "Muito muito muito muito bacon", 30f);
+				pizza.definirId(1l);
+				
 				pedido.incluirPizza(pizza, 2);
 				Float total = 60f;
 				
@@ -380,6 +383,7 @@ public class PedidoTest {
 			
 			try {
 				Pizza pizza = Pizza.criarPizza("Bacon4", "Muito muito muito bacon", 30f);
+				pizza.definirId(1l);
 				EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.DINHEIRO_COM_TROCO;
 				
 				Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, 70f);
