@@ -1,5 +1,6 @@
 package pizzariaDAO;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import excecoes.ExcecaoDePizza;
 
 public class ItemPedidoDAOConcreto implements ItemPedidoDAO{
 	
-	private Connection conexao;
+	protected Connection conexao;
     
     public ItemPedidoDAOConcreto() throws ExcecaoDAO {
         conexao = criarConexao();
@@ -42,7 +43,9 @@ public class ItemPedidoDAOConcreto implements ItemPedidoDAO{
 	            stmt.setLong(1, itemPedido.obterPedido().obterId());
 	            stmt.setLong(2, itemPedido.obterPizza().obterId());
 	            stmt.setInt(3, itemPedido.obterQuantidade());
-	             	             
+	            
+	            stmt.execute();
+
 	        } catch (SQLException e) {
 	 
 	            throw new ExcecaoDAO("itempedido_dao.nao_foi_possivel_incluir_o_item_do_pedido", e);

@@ -18,7 +18,7 @@ import excecoes.ExcecaoDePizza;
  
 public class PedidoDAOConcreto implements PedidoDAO{
  
-    private Connection conexao = null;
+    protected Connection conexao = null;
      
     public PedidoDAOConcreto() throws ExcecaoDAO{
         this.conexao = criarConexao();
@@ -69,7 +69,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
     	Collection<ItemPedido> itensDoPedido = pedido.obterItens();
     	try {
     		
-			ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAOConcreto();
+			ItemPedidoDAO itemPedidoDAO = criarItemPedidoDAO();
 			
 	        for (ItemPedido itemPedido : itensDoPedido) {
 	        	itemPedidoDAO.incluir(itemPedido);
@@ -83,6 +83,18 @@ public class PedidoDAOConcreto implements PedidoDAO{
     }
     
     
+	protected ItemPedidoDAO criarItemPedidoDAO() throws ExcecaoDAO {
+		return new ItemPedidoDAOConcreto();
+	}
+
+	protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {
+		return new ClienteDAOConcreto();
+	}
+	
+	protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO {
+		return new PagamentoDAOConcreto();
+	}
+
 	@Override
 	public Pedido buscar(Long id) throws ExcecaoDAO, ExcecaoDePedido {
         if(conexao == null)
@@ -100,7 +112,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
              
             rs = stmt.executeQuery();
             
-            ClienteDAO clienteDAO = new ClienteDAOConcreto();
+            ClienteDAO clienteDAO = criarClienteDAO();
              
             if (rs.next()){
             	Long id_cliente = rs.getLong("id_cliente_fk");
@@ -140,7 +152,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
     	Collection<ItemPedido> itensDoPedido;
     	
 		try {
-	        ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAOConcreto();
+	        ItemPedidoDAO itemPedidoDAO = criarItemPedidoDAO();
 			itensDoPedido = itemPedidoDAO.buscarTodosDoPedido(pedido);
 			
 			itemPedidoDAO.encerrarConexao();
@@ -156,7 +168,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
 		
 		Pagamento pagamento = null;
         
-		PagamentoDAO pagamentoDAO = new PagamentoDAOConcreto();
+		PagamentoDAO pagamentoDAO = criarPagamentoDAO();
 		
 		try {
 			pagamento = pagamentoDAO.buscar(id_pagamento);
@@ -173,7 +185,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
 		
 		Cliente cliente = null;
         
-		ClienteDAO clienteDAO = new ClienteDAOConcreto();
+		ClienteDAO clienteDAO = criarClienteDAO();
 		
 		try {
 			cliente = clienteDAO.buscar(id_cliente);

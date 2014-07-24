@@ -11,7 +11,7 @@ import excecoes.ExcecaoDeCliente;
  
 public class ClienteDAOConcreto implements ClienteDAO{
      
-    private Connection conexao = null;
+    protected Connection conexao = null;
      
      
     public ClienteDAOConcreto() throws ExcecaoDAO{

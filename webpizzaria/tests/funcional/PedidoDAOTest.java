@@ -159,9 +159,9 @@ public class PedidoDAOTest{
 	    Long id = 1l;
 	    
 	    Pedido pedidoLocalizado = mantenedor.obterPedidoPorIdentificador(id);
-	    
-	    assertEquals(pedido, pedidoLocalizado);
-
+	    assertEquals(pedido.obterId(), pedidoLocalizado.obterId());
+	    assertEquals(pedido.obterItens().size(), pedidoLocalizado.obterItens().size());
+	    assertEquals(pedido.obterDataHora(), pedidoLocalizado.obterDataHora());
 	}
 	
 	

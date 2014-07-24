@@ -13,7 +13,7 @@ import excecoes.ExcecaoDePizza;
  
 public class PizzaDAOConcreto implements PizzaDAO{
      
-    private Connection conexao;
+    protected Connection conexao;
      
      
     public PizzaDAOConcreto() throws ExcecaoDAO {

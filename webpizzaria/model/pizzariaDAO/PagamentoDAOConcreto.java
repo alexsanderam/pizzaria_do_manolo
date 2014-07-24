@@ -12,7 +12,7 @@ import excecoes.ExcecaoDePagamento;
 
 public class PagamentoDAOConcreto implements PagamentoDAO {
 	
-    private Connection conexao;
+    protected Connection conexao;
     
     
     public PagamentoDAOConcreto() throws ExcecaoDAO {

@@ -24,7 +24,7 @@ protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {
 	class MockClienteDAO extends ClienteDAOConcreto {
 
 		public MockClienteDAO() throws ExcecaoDAO {
-			super();
+			this.conexao = criarConexao();
 		}
 
 		@Override
@@ -47,7 +47,7 @@ protected PizzaDAO criarPizzaDAO() throws ExcecaoDAO {
 	class MockPizzaDAO extends PizzaDAOConcreto {
 
 		public MockPizzaDAO() throws ExcecaoDAO {
-			super();
+			this.conexao = criarConexao();
 		}
 
 		@Override
@@ -70,7 +70,7 @@ protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
 	class MockPedidoDAO extends PedidoDAOConcreto {
 
 		public MockPedidoDAO() throws ExcecaoDAO {
-			super();
+			this.conexao = criarConexao();
 		}
 
 		@Override
@@ -83,6 +83,24 @@ protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
 			
 			return null;
 		}
+		
+		@Override
+		protected ItemPedidoDAO criarItemPedidoDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarItemPedidoDAO();
+		}
+		
+		@Override
+		protected ClienteDAO criarClienteDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarClienteDAO();
+		}
+		
+		@Override
+		protected PagamentoDAO criarPagamentoDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarPagamentoDAO();
+		}
 	}
 	
 	return new MockPedidoDAO();
@@ -93,7 +111,7 @@ protected ItemPedidoDAO criarItemPedidoDAO() throws ExcecaoDAO {
 	class MockItemPedidoDAO extends ItemPedidoDAOConcreto {
 
 		public MockItemPedidoDAO() throws ExcecaoDAO {
-			super();
+			this.conexao = criarConexao();
 		}
 
 		@Override
@@ -116,7 +134,7 @@ protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO {
 	class MockPagamentoDAO extends PagamentoDAOConcreto {
 
 		public MockPagamentoDAO() throws ExcecaoDAO {
-			super();
+			this.conexao = criarConexao();
 		}
 
 		@Override
@@ -129,6 +147,7 @@ protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO {
 			return null;
 		}
 	}
+	
 	return new MockPagamentoDAO();
 }
 
