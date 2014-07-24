@@ -166,6 +166,27 @@ public class PedidoDAOTest{
 	    assertEquals(pedido.obterPagamento().obterId(), pedidoLocalizado.obterPagamento().obterId());
 	}
 	
+	@Test(expected = ExcecaoDAO.class)
+	public void testBuscarPedidoPeloIdInvalidos() throws Exception{
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
+	    mantenedor.incluirCliente(cliente);
+	    
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, valorRecebido);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    Long id = 2l;
+	    
+	    mantenedor.obterPedidoPorIdentificador(id);
+	}
+	
 	@Test
 	public void testBuscarTodosPedidosDoCliente() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDePagamento, ExcecaoDeItemPedido, ExcecaoDePedido, ExcecaoDAO{
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
@@ -194,6 +215,34 @@ public class PedidoDAOTest{
 	    Collection<Pedido> pedidosDoCliente = mantenedor.obterTodosPedidosDoClienteDescendentemente(cliente);
 	    
 	    assertEquals(quantidadeDePedidos, pedidosDoCliente.size());
+	}
+	
+	@Test
+	public void testBuscarTodosPedidosDoClienteSemPedido() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDePagamento, ExcecaoDeItemPedido, ExcecaoDePedido, ExcecaoDAO{
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
+	    mantenedor.incluirCliente(cliente);
+	        
+	    int quantidadeDePedidos = 0;
+	    Collection<Pedido> pedidosDoCliente = mantenedor.obterTodosPedidosDoClienteDescendentemente(cliente);
+	    
+	    assertEquals(quantidadeDePedidos, pedidosDoCliente.size());
+	}
+	
+	@Test(expected = ExcecaoDAO.class)
+	public void testBuscarTodosPedidosDeClienteInvalido() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDePagamento, ExcecaoDeItemPedido, ExcecaoDePedido, ExcecaoDAO{
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Cliente cliente = null;
+
+	    mantenedor.obterTodosPedidosDoClienteDescendentemente(cliente);
 	}
 	
 	@Before
