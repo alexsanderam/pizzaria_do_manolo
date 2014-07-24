@@ -21,7 +21,6 @@ INDEX VERSION 1.127+/home/alexsander/Desktop/Comp 3/workspace/pizzaria_do_manolo
 1932949083.index
 599860922.index
 1214452025.index
-1928478871.index
 1848940308.index
 3888198363.index
 2766327661.index
