@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import pizzariaDAO.ConnectionFactory;
 import excecoes.ExcecaoDAO;
  
-public class MockConnectionFactory implements ConnectionFactory{
+public class ConnectionFactoryTest implements ConnectionFactory{
      
-    private static MockConnectionFactory instancia;
+    private static ConnectionFactoryTest instancia;
      
-    public static MockConnectionFactory obterInstancia(){
+    public static ConnectionFactoryTest obterInstancia(){
         if(instancia == null)
-            return new MockConnectionFactory();
+            return new ConnectionFactoryTest();
          
         return instancia;
     }

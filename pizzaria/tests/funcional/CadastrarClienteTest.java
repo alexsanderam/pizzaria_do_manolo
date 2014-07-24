@@ -78,7 +78,7 @@ public class CadastrarClienteTest{
 		sql.append("CONSTRAINT telefone_unique UNIQUE (telefone));");
 		
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());
@@ -98,7 +98,7 @@ public class CadastrarClienteTest{
 		sql.append("DROP SCHEMA IF EXISTS pizzaria;");
 
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());

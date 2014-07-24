@@ -91,7 +91,7 @@ public class CadastrarPizzaTest{
 		sql.append("CONSTRAINT pizza_pkey PRIMARY KEY(id));");
 		
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());
@@ -111,7 +111,7 @@ public class CadastrarPizzaTest{
 		sql.append("DROP SCHEMA IF EXISTS pizzaria;");
 
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());

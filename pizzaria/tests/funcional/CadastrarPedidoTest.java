@@ -112,7 +112,7 @@ public class CadastrarPedidoTest{
 		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION);");
 		
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());
@@ -134,7 +134,7 @@ public class CadastrarPedidoTest{
 		sql.append("DROP SCHEMA IF EXISTS pizzaria;");
 
 		try {
-			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+			Connection conexao = ConnectionFactoryTest.obterInstancia().obterConexao();
 			PreparedStatement stmt;
 			
 			stmt = conexao.prepareStatement(sql.toString());
