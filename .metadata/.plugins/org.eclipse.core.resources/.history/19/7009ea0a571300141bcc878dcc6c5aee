@@ -7,8 +7,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	ManterPizzaTest.class,
-	ManterClienteTest.class,
+	PizzaDAOTest.class,
+	ClienteTest.class,
 	ManterPedidoTest.class
 })
 public class PizzariaTestSuite {

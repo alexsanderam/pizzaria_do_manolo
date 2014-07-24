@@ -1,0 +1,169 @@
+package funcional;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import pizzariaDAO.ClienteDAO;
+import pizzariaDAO.ClienteDAOConcreto;
+import pizzariaDAO.ItemPedidoDAO;
+import pizzariaDAO.ItemPedidoDAOConcreto;
+import pizzariaDAO.PagamentoDAO;
+import pizzariaDAO.PagamentoDAOConcreto;
+import pizzariaDAO.PedidoDAO;
+import pizzariaDAO.PedidoDAOConcreto;
+import pizzariaDAO.PizzaDAO;
+import pizzariaDAO.PizzaDAOConcreto;
+import controlador.MantenedorDeRegistros;
+import excecoes.ExcecaoDAO;
+
+class MockMantenedorDeRegistroTest extends MantenedorDeRegistros {
+	    	
+@Override
+protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {
+	class MockClienteDAO extends ClienteDAOConcreto {
+
+		public MockClienteDAO() throws ExcecaoDAO {
+			this.conexao = criarConexao();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactoryTest.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockClienteDAO();
+}
+
+@Override
+protected PizzaDAO criarPizzaDAO() throws ExcecaoDAO {
+	class MockPizzaDAO extends PizzaDAOConcreto {
+
+		public MockPizzaDAO() throws ExcecaoDAO {
+			this.conexao = criarConexao();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactoryTest.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockPizzaDAO();
+}
+
+@Override
+protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
+	class MockPedidoDAO extends PedidoDAOConcreto {
+
+		public MockPedidoDAO() throws ExcecaoDAO {
+			this.conexao = criarConexao();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactoryTest.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		@Override
+		protected ItemPedidoDAO criarItemPedidoDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarItemPedidoDAO();
+		}
+		
+		@Override
+		protected ClienteDAO criarClienteDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarClienteDAO();
+		}
+		
+		@Override
+		protected PagamentoDAO criarPagamentoDAO () throws ExcecaoDAO {
+			MockMantenedorDeRegistro mantenedor = new MockMantenedorDeRegistro();
+			return mantenedor.criarPagamentoDAO();
+		}
+	}
+	
+	return new MockPedidoDAO();
+}
+
+@Override
+protected ItemPedidoDAO criarItemPedidoDAO() throws ExcecaoDAO {
+	class MockItemPedidoDAO extends ItemPedidoDAOConcreto {
+
+		public MockItemPedidoDAO() throws ExcecaoDAO {
+			this.conexao = criarConexao();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactoryTest.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockItemPedidoDAO();
+}
+
+@Override
+protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO {
+	class MockPagamentoDAO extends PagamentoDAOConcreto {
+
+		public MockPagamentoDAO() throws ExcecaoDAO {
+			this.conexao = criarConexao();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactoryTest.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		
+			return null;
+		}
+	}
+	
+	return new MockPagamentoDAO();
+}
+
+public int contarRegistros(String nomeTabela){
+	try {
+		Connection conexao = MockConnectionFactoryTest.obterInstancia().obterConexao();
+		PreparedStatement stmt = conexao.prepareStatement("select count(*) from " + nomeTabela);
+			
+		    ResultSet rs = stmt.executeQuery();
+		    if (rs.next()){
+		    	return rs.getInt(1);
+		    }
+		} catch (ExcecaoDAO | SQLException e1) {
+			e1.printStackTrace();
+		} 		
+	    
+	    return Integer.valueOf(-1);
+	}
+}
