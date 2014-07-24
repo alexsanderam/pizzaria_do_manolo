@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import dominio.Cliente;
@@ -208,7 +209,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
 		
 		Long id_cliente = cliente.obterId();
 		
-        String sql = "SELECT id, id_pagamento_fk, data_hora FROM webpizzaria.Pedido WHERE id_cliente_fk = ? ORDERBY data_hora DESC";
+        String sql = "SELECT id, id_pagamento_fk, data_hora FROM webpizzaria.Pedido WHERE id_cliente_fk = ? ORDER BY data_hora DESC";
         PreparedStatement stmt;
         ResultSet rs;
         
@@ -218,6 +219,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
             
             rs = stmt.executeQuery();
             
+            pedidos = new ArrayList<Pedido>();
         	Pedido pedido = null;
             
             while(rs.next()){
@@ -238,6 +240,7 @@ public class PedidoDAOConcreto implements PedidoDAO{
             	Collection<ItemPedido> itensDoPedido = recuperarItensDoPedido(pedido);
     			pedido.definirItens(itensDoPedido);
             	
+    			pedidos.add(pedido);
             }
         }             
         catch (SQLException e) { 

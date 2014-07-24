@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Collection;
 
 import org.junit.After;
 import org.junit.Before;
@@ -160,10 +161,40 @@ public class PedidoDAOTest{
 	    
 	    Pedido pedidoLocalizado = mantenedor.obterPedidoPorIdentificador(id);
 	    assertEquals(pedido.obterId(), pedidoLocalizado.obterId());
-	    assertEquals(pedido.obterItens().size(), pedidoLocalizado.obterItens().size());
-	    assertEquals(pedido.obterDataHora(), pedidoLocalizado.obterDataHora());
+	    assertEquals(pedido.obterQuantidadeTotalDeItens(), pedidoLocalizado.obterQuantidadeTotalDeItens());
+	    assertEquals(pedido.obterCliente().obterId(), pedidoLocalizado.obterCliente().obterId());
+	    assertEquals(pedido.obterPagamento().obterId(), pedidoLocalizado.obterPagamento().obterId());
 	}
 	
+	@Test
+	public void testBuscarTodosPedidosDoCliente() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDePagamento, ExcecaoDeItemPedido, ExcecaoDePedido, ExcecaoDAO{
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
+	    mantenedor.incluirCliente(cliente);
+	    
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, valorRecebido);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 5);
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 1);
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    int quantidadeDePedidos = 3;
+	    Collection<Pedido> pedidosDoCliente = mantenedor.obterTodosPedidosDoClienteDescendentemente(cliente);
+	    
+	    assertEquals(quantidadeDePedidos, pedidosDoCliente.size());
+	}
 	
 	@Before
 	public void setUp(){
