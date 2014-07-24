@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <style rel="stylesheet" type="text/css">
 .conteudo-div {
@@ -22,9 +23,37 @@
 	right: 0;
 	top: 0;
 	margin: 20px;
-	width: 30%; 
+	width: 30%;
 }
 
+#historico-pedidos {
+	display: table;
+}
+
+.pedido {
+	display: table;
+	margin: 10px;
+}
+
+.pedido-data {
+	font-size: 16px;
+	font-decoration: bold;
+	align: left;
+	display: table-caption;
+}
+
+.pedido-item {
+	display: table-row;
+	font-size: 12px;
+}
+
+.nome-pizza {
+	display: table-cell;
+}
+
+.quantidade-pizza {
+	display: table-cell;
+}
 
 #dados-cliente {
 	border: 1px;
@@ -35,7 +64,7 @@
 
 #dados-cliente #nome {
 	font-size: 22px;
-	margin: 5px; 
+	margin: 5px;
 }
 
 #dados-cliente .atributo {
@@ -58,21 +87,43 @@
 <body>
 	<div class=conteudo-div>
 		<div class="esquerda">
-			
 
-		</div>
-		<div class="direita">
-			<div id="dados-cliente">
-				<div id="nome"><c:out value="${cliente.nome }" /></div>
-				<div class="atributo"><c:out value="${cliente.email }" /></div>
-				<div class="atributo"><c:out value="${cliente.telefone }" /></div>
-				<div class="atributo"><c:out value="${cliente.endereco }" /></div>
-			</div>
-
+			<h2>Histórico de Pedidos</h2>
 			<div id="historico-pedido">
-				<h2>Histórico de Pedidos</h2>
+					<c:forEach items="${pedidos}" var="pedido">
+						<div class="pedido">
+							<div class="pedido-data">
+								<fmt:formatDate value="${pedido.dataHora.time}" pattern="dd/MM/yyyy" />
+							</div>
+							<c:forEach items="${pedido.itensDoPedido}" var="itemPedido">
+								<div class="pedido-pizza">
+									<div class="nome-pizza">
+										<c:out value="${itemPedido.pizza.nomePizza}"></c:out>
+									</div>
+									<div class="quantidade-pizza">
+										<c:out value="${itemPedido.quantidade}"></c:out>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</c:forEach>
+			</div>
+			<div class="direita">
+				<div id="dados-cliente">
+					<div id="nome">
+						<c:out value="${cliente.nome }" />
+					</div>
+					<div class="atributo">
+						<c:out value="${cliente.email }" />
+					</div>
+					<div class="atributo">
+						<c:out value="${cliente.telefone }" />
+					</div>
+					<div class="atributo">
+						<c:out value="${cliente.endereco }" />
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
