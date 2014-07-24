@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import dominio.Pizza;
 import excecoes.ExcecaoDAO;
@@ -125,6 +127,44 @@ public class PizzaDAOConcreto implements PizzaDAO{
         	throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza");
          
         return pizza;
+	}
+	
+	@Override
+	public Collection<Pizza> buscar() throws ExcecaoDAO {
+		if(conexao == null)
+            throw new ExcecaoDAO("pizza_dao.conexao_nao_estabelecida");
+         
+        Pizza pizza = null;
+        Collection<Pizza> pizzas = new ArrayList<Pizza>();
+ 
+        String sql = "SELECT id, nome, ingredientes, preco  FROM webpizzaria.Pizza";
+        PreparedStatement stmt = null;
+        ResultSet rs;
+         
+        try {
+            stmt = conexao.prepareStatement(sql);   
+            rs = stmt.executeQuery();
+             
+            while (rs.next()){
+            	Long id = rs.getLong("id");
+            	String nome = rs.getString("nome");
+            	String ingredientes = rs.getString("ingredientes");
+            	Float preco = rs.getFloat("preco");
+            	
+                pizza = Pizza.criarPizza(nome, ingredientes, preco);
+                pizza.definirId(id);
+                pizzas.add(pizza);
+            }
+             
+        } catch (SQLException | ExcecaoDePizza e) {
+ 
+            throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza", e);
+        }
+        
+        if(pizza == null)
+        	throw new ExcecaoDAO("pizza_dao.nao_foi_possivel_localizar_a_pizza");
+         
+        return pizzas;
 	}
      
  

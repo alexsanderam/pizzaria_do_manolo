@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		} catch (ExcecaoDAO | ExcecaoDeCliente e) {
 			request.setAttribute("falhaNaAutenticacao", true);
 			request.setAttribute("mensagem", e.getMessage());
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/Index");
 	        rd.forward(request, response);
 		}
 	

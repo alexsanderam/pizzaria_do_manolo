@@ -81,6 +81,13 @@ public class MantenedorDeRegistros {
 		pizzaDAO.encerrarConexao();
 		return pizza;
 	}
+	
+	public Collection<Pizza> obterTodasAsPizzas() throws ExcecaoDAO, ExcecaoDePizza{
+		PizzaDAO pizzaDAO = criarPizzaDAO();
+		Collection<Pizza> pizzas = pizzaDAO.buscar();
+		pizzaDAO.encerrarConexao();
+		return pizzas;
+	}
 
 	public void incluirPizza(Pizza pizza) throws ExcecaoDAO, ExcecaoDePizza{
 		PizzaDAO pizzaDAO = criarPizzaDAO();

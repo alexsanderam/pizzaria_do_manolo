@@ -2,17 +2,14 @@ package pizzaria;
 
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import vo.ClienteVO;
 import dominio.Cliente;
-
 /**
  * Servlet implementation class Home
  */
@@ -38,9 +35,17 @@ public class HomeServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		ClienteVO cliente = recuperarClienteLogado(request, response);
+		request.setAttribute("cliente", cliente);		
 		
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
+        rd.forward(request, response);
+	}
+
+	
+	private ClienteVO recuperarClienteLogado(HttpServletRequest request, HttpServletResponse response) {
+		Cliente cliente = (Cliente) request.getSession().getAttribute("cliente");
 		ClienteVO clienteVO = new ClienteVO();
 		clienteVO.setEmail(cliente.obterEmail());
 		clienteVO.setEndereco(cliente.obterEndereco());
@@ -48,10 +53,7 @@ public class HomeServlet extends HttpServlet {
 		clienteVO.setTelefone(cliente.obterTelefone());
 		clienteVO.setNome(cliente.obterNome());
 		
-		request.setAttribute("cliente", clienteVO);
-		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
-        rd.forward(request, response);
+		return clienteVO;
 	}
 
 }
