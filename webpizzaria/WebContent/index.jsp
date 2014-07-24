@@ -4,8 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style rel="stylesheet" type="text/css">
-span.erro {
+.erro {
 	color: red;
+	display: table-caption;
+	font-size: 12px;
 }
 
 .conteudo-div {
@@ -55,37 +57,22 @@ span.erro {
 	font-weight: bolder;
 }
 
-#login {
+#form-login {
 	border: 1px;
 	border-style: solid;
 	padding: 10px;
 	display: table;
 }
 
-#login .field {
-	align: right;
-	display: inline;
-}
-
-#login .label {
-	align: left;
-	display: inline;
-	width: 100px;
-}
-
 .form-line {
-	display: block;
+	display: table-row;
 }
 
-#cadastro {
-	display: inline;
-	align: left;
+.form-cell {
+    float:left;
+	display: table-cell;
 }
 
-#realizar-login {
-	display: inline;
-	align: right;
-}
 </style>
 
 
@@ -123,31 +110,30 @@ span.erro {
 		</div>
 		<div class="direita">
 			<table>
-				<div id="login">
+				<div id="form-login">
 					<form method="post" action="Login">
 						<div class="form-line">
-							<div class="label">Email</div>
-							<div class="field">
+							<div class="label form-cell">Email</div>
+							<div class="field form-cell">
 								<input type="text" name="email" />
 							</div>
 						</div>
 						<div class="form-line">
-							<div class="label">Senha</div>
-							<div class="field">
+							<div class="label form-cell">Senha</div>
+							<div class="field form-cell">
 								<input type="password" name="senha" />
 							</div>
 						</div>
 						<div class="form-line">
 							<c:if test="${falhaNaAutenticacao}">
-								<span class="erro"> <c:out value="${mensagem}" />
-								</span>
+								<div class="erro"><c:out value="${mensagem}" /></div>
 							</c:if>
 						</div>
 						<div class="form-line">
-							<div id="cadastro">
+							<div id="cadastro" class="form-cell">
 								<a href="cadastro.jsp">Cadastre-se</a>
 							</div>
-							<div id="realizar-login">
+							<div id="realizar-login" class="form-cell">
 								<input type="submit" value="Login" />
 							</div>
 						</div>

@@ -1,4 +1,4 @@
-﻿INSERT INTO webpizzaria.pizza(nome, ingredientes, preco) VALUES('Alho e Óleo', 'Molho, mussarela, alho e óleo, orégano', 20) RETURNING id;
+INSERT INTO webpizzaria.pizza(nome, ingredientes, preco) VALUES('Alho e Óleo', 'Molho, mussarela, alho e óleo, orégano', 20) RETURNING id;
 INSERT INTO webpizzaria.pizza(nome, ingredientes, preco) VALUES('Alicci', 'Molho, mussarela, alicci e orégano', 20) RETURNING id;
 INSERT INTO webpizzaria.pizza(nome, ingredientes, preco) VALUES('Americana', 'molho, mussarela, bacon, milho, ovos e orégano', 21) RETURNING id;
 INSERT INTO webpizzaria.pizza(nome, ingredientes, preco) VALUES('Atum', 'Molho, mussarela, atum e orégano', 22) RETURNING id;
