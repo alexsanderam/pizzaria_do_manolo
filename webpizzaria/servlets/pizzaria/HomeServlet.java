@@ -68,6 +68,7 @@ public class HomeServlet extends HttpServlet {
 				PedidoVO pedidoVO = new PedidoVO();
 				pedidoVO.setItensDoPedido(recuperarItensPedido(pedido));
 				pedidoVO.setDataHora(pedido.obterDataHora());
+				pedidosVO.add(pedidoVO);
 			}
 		} catch (ExcecaoDAO | ExcecaoDePedido e) {
 			// TODO Auto-generated catch block

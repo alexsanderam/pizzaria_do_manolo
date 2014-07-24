@@ -35,6 +35,10 @@
 	margin: 10px;
 }
 
+.pedido-cabecalho {
+	display: table-row;
+}
+
 .pedido-data {
 	font-size: 16px;
 	font-decoration: bold;
@@ -90,40 +94,45 @@
 
 			<h2>Histórico de Pedidos</h2>
 			<div id="historico-pedido">
-					<c:forEach items="${pedidos}" var="pedido">
-						<div class="pedido">
+				<c:forEach items="${pedidos}" var="pedido">
+					<div class="pedido">
+						<div class="pedido-cabecalho">
 							<div class="pedido-data">
-								<fmt:formatDate value="${pedido.dataHora.time}" pattern="dd/MM/yyyy" />
+								<fmt:formatDate value="${pedido.dataHora}"
+									pattern="dd/MM/yyyy HH:mm:ss" />
 							</div>
-							<c:forEach items="${pedido.itensDoPedido}" var="itemPedido">
-								<div class="pedido-pizza">
-									<div class="nome-pizza">
-										<c:out value="${itemPedido.pizza.nomePizza}"></c:out>
-									</div>
-									<div class="quantidade-pizza">
-										<c:out value="${itemPedido.quantidade}"></c:out>
-									</div>
-								</div>
-							</c:forEach>
 						</div>
-					</c:forEach>
+
+						<c:forEach items="${pedido.itensDoPedido}" var="itemPedido">
+							<div class="pedido-pizza">
+								<div class="nome-pizza">
+									<c:out value="${itemPedido.pizza.nomePizza}"></c:out>
+								</div>
+								<div class="quantidade-pizza">
+									<c:out value="${itemPedido.quantidade}"></c:out>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</c:forEach>
 			</div>
-			<div class="direita">
-				<div id="dados-cliente">
-					<div id="nome">
-						<c:out value="${cliente.nome }" />
-					</div>
-					<div class="atributo">
-						<c:out value="${cliente.email }" />
-					</div>
-					<div class="atributo">
-						<c:out value="${cliente.telefone }" />
-					</div>
-					<div class="atributo">
-						<c:out value="${cliente.endereco }" />
-					</div>
+		</div>
+		<div class="direita">
+			<div id="dados-cliente">
+				<div id="nome">
+					<c:out value="${cliente.nome }" />
+				</div>
+				<div class="atributo">
+					<c:out value="${cliente.email }" />
+				</div>
+				<div class="atributo">
+					<c:out value="${cliente.telefone }" />
+				</div>
+				<div class="atributo">
+					<c:out value="${cliente.endereco }" />
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
