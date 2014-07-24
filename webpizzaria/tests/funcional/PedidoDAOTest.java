@@ -17,6 +17,8 @@ import dominio.Pedido;
 import dominio.Pizza;
 import excecoes.ExcecaoDAO;
 import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePagamento;
 import excecoes.ExcecaoDePedido;
 import excecoes.ExcecaoDePizza;
 
@@ -63,39 +65,103 @@ public class PedidoDAOTest{
 	    mantenedor.incluirPedido(pedido, pagamento);
 	    
 	    assertEquals(1, mantenedor.contarRegistros("webpizzaria.Pedido"));
-	}
-
+	}	
 	
-	@Test(expected = ExcecaoDAO.class)
-	public void testCadastrarPedidoPizzaNaoExistente() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDAO, ExcecaoDePedido{  
+	@Test(expected = ExcecaoDePedido.class)
+	public void testIncluirPedidoPizzaInvalida() throws Exception {  
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
-
+	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
 	    
-	    /*Pizza nao foi incluida na base de dados*/
-    
-	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, nomeCliente, endereco);
+	    Pizza pizza2 = ControladorDominio.obterInstancia().novaPizza(nomePizza2, ingredientes2, preco2);
+	    mantenedor.incluirPizza(pizza2);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
 	    mantenedor.incluirCliente(cliente);
 	    
-	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
-	    mantenedor.incluirPedido(pedido);
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, valorRecebido);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+	    pedido.incluirPizza(pizza2, 5);
+	    
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    assertEquals(1, mantenedor.contarRegistros("webpizzaria.Pedido"));
 	}
 	
+	
 	@Test(expected = ExcecaoDAO.class)
-	public void testCadastrarPedidoClienteNaoExistente() throws ExcecaoDePedido, ExcecaoDePizza, ExcecaoDAO, ExcecaoDeCliente {  
+	public void testIncluirPedidoClienteInvalido() throws Exception {  
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
-
 	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
 	    mantenedor.incluirPizza(pizza);
 	    
-	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, nomeCliente, endereco);
+	    Pizza pizza2 = ControladorDominio.obterInstancia().novaPizza(nomePizza2, ingredientes2, preco2);
+	    mantenedor.incluirPizza(pizza2);
 	    
-	    /*Cliente nao foi incluido na base de dados*/
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
 	    
-	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente, pizza, 1);
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, valorRecebido);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+	    pedido.incluirPizza(pizza2, 5);
+	    
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    assertEquals(1, mantenedor.contarRegistros("webpizzaria.Pedido"));
+	}
+	
 
-	    mantenedor.incluirPedido(pedido);
+	@Test(expected = ExcecaoDePedido.class)
+	public void testIncluirPedidoPagamentoInvalido() throws Exception {  
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Pizza pizza2 = ControladorDominio.obterInstancia().novaPizza(nomePizza2, ingredientes2, preco2);
+	    mantenedor.incluirPizza(pizza2);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
+	    mantenedor.incluirCliente(cliente);
+	    
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, 10f);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+	    pedido.incluirPizza(pizza2, 5);
+	    
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    
+	    assertEquals(1, mantenedor.contarRegistros("webpizzaria.Pedido"));
+	}
+	
+	
+	@Test
+	public void testBuscarPedidoPeloId() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDePagamento, ExcecaoDeItemPedido, ExcecaoDePedido, ExcecaoDAO{
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    
+	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, email, senha, nome, endereco);
+	    mantenedor.incluirCliente(cliente);
+	    
+	    Pagamento pagamento = ControladorDominio.obterInstancia().novoPagamento(formaDePagamento, valorRecebido);
+	    
+	    Pedido pedido = ControladorDominio.obterInstancia().novoPedido(cliente);
+	    pedido.incluirPizza(pizza, 2);
+
+	    mantenedor.incluirPedido(pedido, pagamento);
+	    Long id = 1l;
+	    
+	    Pedido pedidoLocalizado = mantenedor.obterPedidoPorIdentificador(id);
+	    
+	    assertEquals(pedido, pedidoLocalizado);
+
 	}
 	
 	
@@ -122,6 +188,13 @@ public class PedidoDAOTest{
 		sql.append("preco FLOAT NOT NULL,");
 		sql.append("CONSTRAINT pizza_pkey PRIMARY KEY(id));");
 		
+		sql.append("CREATE TYPE webpizzaria.FormaDePagamento AS ENUM(");
+		sql.append("'DINHEIRO_SEM_TROCO',");
+		sql.append("'DINHEIRO_COM_TROCO',");
+		sql.append("'CARTAO_DE_CREDITO',");
+		sql.append("'CARTAO_DE_DEBITO'");
+		sql.append(");");
+		
 		sql.append("CREATE TABLE webpizzaria.pagamento(");
 		sql.append("id serial NOT NULL,");
 		sql.append("forma_de_pagamento webpizzaria.formadepagamento NOT NULL,");
@@ -135,24 +208,20 @@ public class PedidoDAOTest{
 		sql.append("data_hora TIMESTAMP WITHOUT TIME ZONE NOT NULL,");
 		sql.append("CONSTRAINT pedido_pkey PRIMARY KEY (id),");
 		sql.append("CONSTRAINT fk_cliente FOREIGN KEY (id_cliente_fk)");
-		sql.append("REFERENCES webpizzaria.cliente (id) MATCH SIMPLE");
-		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION,");
+		sql.append("REFERENCES webpizzaria.cliente (id) MATCH SIMPLE,");
 		sql.append("CONSTRAINT fk_pagamento FOREIGN KEY (id_pagamento_fk)");
-		sql.append("REFERENCES webpizzaria.pagamento (id) MATCH SIMPLE");
-		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION,");
+		sql.append("REFERENCES webpizzaria.pagamento (id) MATCH SIMPLE,");
 		sql.append("CONSTRAINT pedido_unique UNIQUE (id_cliente_fk, data_hora));");
 		  
-		sql.append("CREATE TABLE webpizzaria.itempedido)");
+		sql.append("CREATE TABLE webpizzaria.itempedido(");
 		sql.append("id_pedido_fk integer NOT NULL,");
 		sql.append("id_pizza_fk integer NOT NULL,");
 		sql.append("quantidade integer NOT NULL,");
 		sql.append("CONSTRAINT item_pedido_pkey PRIMARY KEY (id_pedido_fk, id_pizza_fk),");
 		sql.append("CONSTRAINT fk_pedido FOREIGN KEY (id_pedido_fk)");
-		sql.append("REFERENCES webpizzaria.pedido (id) MATCH SIMPLE");
-		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION,");
+		sql.append("REFERENCES webpizzaria.pedido (id) MATCH SIMPLE,");
 		sql.append("CONSTRAINT fk_pizza FOREIGN KEY (id_pizza_fk)");
-		sql.append("REFERENCES webpizzaria.pizza (id) MATCH SIMPLE");
-		sql.append("ON UPDATE NO ACTION ON DELETE NO ACTION);");
+		sql.append("REFERENCES webpizzaria.pizza (id) MATCH SIMPLE);");
 		
 		try {
 			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
@@ -171,12 +240,13 @@ public class PedidoDAOTest{
 	public void tearDown(){
 		StringBuilder sql = new StringBuilder();
 		
-		sql.append("DROP TABLE IF EXISTS webpizzaria.ItemPedido ON CASCADE;");
-		sql.append("DROP TABLE IF EXISTS webpizzaria.Pedido ON CASCADE;");
-		sql.append("DROP TABLE IF EXISTS webpizzaria.Pagamento ON CASCADE;");
-		sql.append("DROP TABLE IF EXISTS webpizzaria.Cliente ON CASCADE;");
-		sql.append("DROP TABLE IF EXISTS webpizzaria.Pizza ON CASCADE;");
-		sql.append("DROP SCHEMA IF EXISTS webpizzaria ON CASCADE;");
+		sql.append("DROP TABLE IF EXISTS webpizzaria.ItemPedido;");
+		sql.append("DROP TABLE IF EXISTS webpizzaria.Pedido;");
+		sql.append("DROP TABLE IF EXISTS webpizzaria.Pagamento;");
+		sql.append("DROP TYPE IF EXISTS webpizzaria.FormaDePagamento;");
+		sql.append("DROP TABLE IF EXISTS webpizzaria.Cliente;");
+		sql.append("DROP TABLE IF EXISTS webpizzaria.Pizza;");
+		sql.append("DROP SCHEMA IF EXISTS webpizzaria;");
 
 		try {
 			Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();

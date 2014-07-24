@@ -1,0 +1,65 @@
+package dominio;
+
+import excecoes.ExcecaoDeItemPedido;
+
+public class ItemPedido {
+
+	private Pedido pedido;
+	private Pizza pizza;
+	Integer quantidade;
+	
+	private ItemPedido(Pedido pedido, Pizza pizza, Integer quantidade){
+		this.pedido = pedido;
+		this.pizza = pizza;
+		this.quantidade = quantidade;
+	}
+	
+	public static ItemPedido criarItemPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+		validarDados(pedido, pizza, quantidade);
+		return new ItemPedido(pedido, pizza, quantidade);
+	}
+	
+	public Pedido obterPedido(){
+		return this.pedido;
+	}
+	
+	public Pizza obterPizza(){
+		return this.pizza;
+	}
+	
+	public Integer obterQuantidade(){
+		return this.quantidade;
+	}
+
+	public Float obterSubtotal(){
+		Float valorPizza = this.pizza.obterPreco();
+		return valorPizza * this.quantidade;
+	}
+	
+	public void definirIdDoPedido(){
+		
+	}
+		
+	private static void validarDados(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+		validarPedido(pedido);
+		validarPizza(pizza);
+		validarQuantidade(quantidade);
+	}
+	
+	private static void validarPedido(Pedido pedido) throws ExcecaoDeItemPedido{
+		if(pedido == null)
+			throw new ExcecaoDeItemPedido("itempedido.pedido.invalido");
+	}
+	
+	private static void validarPizza(Pizza pizza) throws ExcecaoDeItemPedido{
+		if(pizza == null)
+			throw new ExcecaoDeItemPedido("itempedido.pizza.invalida");
+	}
+	
+	private static void validarQuantidade(Integer quantidade) throws ExcecaoDeItemPedido{
+		if(quantidade == null || quantidade < 1)
+			throw new ExcecaoDeItemPedido("itempedido.quantidade.invalida");
+	}
+	
+	
+}

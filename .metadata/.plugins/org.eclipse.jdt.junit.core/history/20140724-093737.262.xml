@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PedidoDAOTest (1)" project="webpizzaria" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="funcional.PedidoDAOTest" time="2.083">
+    <testcase name="testIncluirPedido" classname="funcional.PedidoDAOTest" time="0.817"/>
+    <testcase name="testIncluirPedidoClienteInvalido" classname="funcional.PedidoDAOTest" time="0.609"/>
+    <testcase name="testIncluirPedidoPizzaInvalida" classname="funcional.PedidoDAOTest" time="0.657"/>
+  </testsuite>
+</testrun>

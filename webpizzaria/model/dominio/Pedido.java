@@ -59,6 +59,9 @@ public class Pedido {
 	}
 	
 	private void validarPizzaComoUnicaNoPedido(Pizza pizza) throws ExcecaoDePedido{
+		if(pizza.obterId() == null)
+			throw new ExcecaoDePedido("pedido.incluir_pizza.pizza_invalida");
+
 		for (ItemPedido itemPedido : itens) {
 			Pizza pizzaDoItem = itemPedido.obterPizza();
 			

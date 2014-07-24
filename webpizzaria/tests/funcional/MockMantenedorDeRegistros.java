@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import pizzariaDAO.ClienteDAO;
 import pizzariaDAO.ClienteDAOConcreto;
+import pizzariaDAO.ItemPedidoDAO;
+import pizzariaDAO.ItemPedidoDAOConcreto;
 import pizzariaDAO.PagamentoDAO;
 import pizzariaDAO.PagamentoDAOConcreto;
 import pizzariaDAO.PedidoDAO;
@@ -84,6 +86,29 @@ protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
 	}
 	
 	return new MockPedidoDAO();
+}
+
+@Override
+protected ItemPedidoDAO criarItemPedidoDAO() throws ExcecaoDAO {
+	class MockItemPedidoDAO extends ItemPedidoDAOConcreto {
+
+		public MockItemPedidoDAO() throws ExcecaoDAO {
+			super();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactory.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockItemPedidoDAO();
 }
 
 @Override
