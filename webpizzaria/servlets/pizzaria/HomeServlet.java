@@ -54,6 +54,15 @@ public class HomeServlet extends HttpServlet {
 		Collection<PedidoVO> pedidos = recuperarHistoricoDePedidos(request, response);
 		request.setAttribute("pedidos", pedidos);
 		
+		PedidoVO novoPedido = (PedidoVO) request.getSession().getAttribute("novoPedido");
+		
+		if (novoPedido == null) {
+			novoPedido = new PedidoVO();
+			novoPedido.setClienteVO(recuperarClienteLogado(request, response));
+			novoPedido.setItensDoPedido(new ArrayList<ItemPedidoVO>());
+			request.getSession().setAttribute("novoPedido", novoPedido);
+		}
+		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/home.jsp");
         rd.forward(request, response);
 	}

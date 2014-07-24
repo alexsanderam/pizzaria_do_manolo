@@ -17,3 +17,4 @@
 1406222549063	Rename type 'PizzaDAOTest'
 1406222559721	Rename type 'MockConnectionFactory'
 1406222569445	Rename compilation unit 'MockMantenedorDeRegistros.java'
+1406225870355	Move 'home.css' to 'WEB-INF'

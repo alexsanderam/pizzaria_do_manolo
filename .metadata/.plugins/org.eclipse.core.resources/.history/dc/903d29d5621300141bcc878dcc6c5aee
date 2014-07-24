@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="pizza.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Adicionar Item ao Pedido</title>
+</head>
+<body>
+<div class=conteudo-div>
+		
+			<div id="cardapio">
+				<h2>Cardápio</h2>
+
+				<div id="itens-cardapio">
+					<c:forEach items="${pizzas}" var="pizza">
+						<div class="pizza">
+							<div class="pizza-nome">
+								<c:out value="${pizza.nomePizza}" />
+							</div>
+							<div class="pizza-preco">
+								R$
+								<c:out value="${pizza.preco}" />
+							</div>
+							<div class="pizza-ingredientes">
+								<c:out value="${pizza.ingredientes }" />
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+
+		
+		</div>
+</body>
+</html>

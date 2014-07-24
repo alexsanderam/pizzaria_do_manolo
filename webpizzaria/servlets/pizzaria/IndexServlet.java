@@ -52,7 +52,7 @@ public class IndexServlet extends HttpServlet {
 	}
 	
 	
-	private Collection<PizzaVO> recuperarTodasAsPizzas(HttpServletRequest request, HttpServletResponse response) {
+	static Collection<PizzaVO> recuperarTodasAsPizzas(HttpServletRequest request, HttpServletResponse response) {
 		Collection<PizzaVO> pizzasVO = null;
 		
 		try {

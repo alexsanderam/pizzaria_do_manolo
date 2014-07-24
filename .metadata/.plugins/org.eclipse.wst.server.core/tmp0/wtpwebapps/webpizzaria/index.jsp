@@ -1,84 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<style rel="stylesheet" type="text/css">
-.erro {
-	color: red;
-	display: table-caption;
-	font-size: 12px;
-}
-
-.conteudo-div {
-	display: table;
-	clear: both;
-}
-
-.esquerda {
-	position: absolute;
-	left: 0;
-	top: 0;
-	margin: 20px;
-	margin-left: 10%;
-	width: 70%;
-}
-
-.direita {
-	position: absolute;
-	right: 0;
-	top: 0;
-	margin: 20px;
-	width: 30%;
-}
-
-#itens-cardapio {
-	display: table;
-}
-
-.pizza {
-	display: block;
-	margin: 10px;
-}
-
-.pizza-nome {
-	font-size: 22px;
-	font-decoration: bold;
-	align: left;
-	display: inline;
-}
-
-.pizza-preco {
-	font-size: 22px;
-	font-decoration: bold;
-	align: right;
-	display: inline;
-	margin-left: 10px;
-	font-weight: bolder;
-}
-
-#form-login {
-	border: 1px;
-	border-style: solid;
-	padding: 10px;
-	display: table;
-}
-
-.form-line {
-	display: table-row;
-}
-
-.form-cell {
-    float:left;
-	display: table-cell;
-}
-
-</style>
-
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<link rel="stylesheet" type="text/css" href="pizza.css" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home - Pizzaria do Manolo</title>
@@ -89,7 +19,7 @@
 			<div id="cardapio">
 				<h2>Cardápio</h2>
 
-				<div id=itens-cardapio">
+				<div id="itens-cardapio">
 					<c:forEach items="${pizzas}" var="pizza">
 						<div class="pizza">
 							<div class="pizza-nome">
@@ -109,7 +39,6 @@
 
 		</div>
 		<div class="direita">
-			<table>
 				<div id="form-login">
 					<form method="post" action="Login">
 						<div class="form-line">
@@ -141,7 +70,7 @@
 
 					</form>
 				</div>
-				</div>
-				</div>
+			</div>
+		</div>
 </body>
 </html>

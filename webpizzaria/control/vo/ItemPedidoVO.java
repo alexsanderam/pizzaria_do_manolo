@@ -4,6 +4,7 @@ public class ItemPedidoVO {
 
 	private PizzaVO pizza;
 	private Integer quantidade;
+	private Double subtotal;
 	
 	public ItemPedidoVO(){
 		
@@ -29,6 +30,15 @@ public class ItemPedidoVO {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	public Double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(Double subtotal) {
+		this.subtotal = subtotal;
+	}
+	
 	
 		
 	
