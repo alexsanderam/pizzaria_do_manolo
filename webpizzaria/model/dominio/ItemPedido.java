@@ -53,7 +53,7 @@ public class ItemPedido {
 	}
 	
 	private static void validarQuantidade(Integer quantidade) throws ExcecaoDeItemPedido{
-		if(quantidade == null)
+		if(quantidade == null || quantidade < 1)
 			throw new ExcecaoDeItemPedido("itempedido.quantidade.invalida");
 	}
 	

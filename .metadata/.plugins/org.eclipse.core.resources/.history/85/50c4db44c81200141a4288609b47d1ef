@@ -1,0 +1,69 @@
+package unitarios;
+
+import java.sql.Timestamp;
+import java.util.Collection;
+
+import org.junit.AfterClass;
+
+import dominio.Cliente;
+import dominio.ItemPedido;
+import dominio.Pagamento;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePedido;
+import excecoes.ExcecaoDePizza;
+
+public class PedidoTest {
+
+	private static Timestamp dataHora;
+	private static Collection<ItemPedido> itens;
+	private static Pagamento pagamento;
+	private static Float valor;
+	
+	private static Pizza pizza;
+	private static Cliente cliente;
+	
+	@AfterClass
+	public static void inicializarDados(){
+		try {
+			cliente = Cliente.criarCliente("2653 7788", "Jose", "jose@jose.com", "12345", "Rua 10");
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+		
+		dataHora = new Timestamp(0);
+			
+		try {
+			pizza = Pizza.criarPizza("X-tudo", "Bacon, ovo, presunto, queijo", 25f);
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			
+			try {
+				
+				ItemPedido item = ItemPedido.criarItemPedido(pedido, pizza, 2);
+				itens.add(item);
+				
+				item = ItemPedido.criarItemPedido(pedido, pizza, 1);
+				itens.add(item);
+				
+				item = ItemPedido.criarItemPedido(pedido, pizza, 3);
+				itens.add(item);
+				
+			} catch (ExcecaoDeItemPedido e) {
+				e.printStackTrace();
+			}
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+		
+		pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido)
+	}
+	
+}

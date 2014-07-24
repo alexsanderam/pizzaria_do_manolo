@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PedidoTest" project="webpizzaria" tests="17" started="17" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.PedidoTest" time="0.0">
+    <testcase name="testDefinirDataHoraInvalida" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testObterValorTotal" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testIncluirPizzaJaExistente" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirCliente" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirId" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirPagamento" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirPagamentoInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testNovoPedidoClienteInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirDataHora" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirItensInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirIdInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirClienteInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testObterValorDeTroco" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testRemoverPizza" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirItens" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testIncluirPizza" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testNovoPedido" classname="unitarios.PedidoTest" time="0.0"/>
+  </testsuite>
+</testrun>

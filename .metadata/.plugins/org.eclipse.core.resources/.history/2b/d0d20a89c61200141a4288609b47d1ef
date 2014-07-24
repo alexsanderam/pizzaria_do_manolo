@@ -1,0 +1,81 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import dominio.Cliente;
+import dominio.ItemPedido;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePedido;
+import excecoes.ExcecaoDePizza;
+
+public class ItemPedidoTest {
+	
+	private static Cliente cliente;
+	private static Pedido pedido;
+	private static Pizza pizza;
+	private static Integer quantidade;
+
+	@AfterClass
+	public static void inicializarDados(){
+		try {
+			cliente = Cliente.criarCliente("2653 7788", "Jose", "jose@jose.com", "12345", "Rua 10");
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			pizza = Pizza.criarPizza("X-tudo", "Bacon, ovo, presunto, queijo", 25f);
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+		
+		quantidade = 3;
+	}
+	
+	@Test
+	public void testCriarItemPedido(){
+		try {
+			inicializarDados();
+			
+			ItemPedido itemPedido = ItemPedido.criarItemPedido(pedido, pizza, quantidade);
+			assertNotNull(itemPedido);
+			
+			assertEquals(pedido, itemPedido.obterPedido());
+			assertEquals(pizza, itemPedido.obterPizza());
+			assertEquals(quantidade, itemPedido.obterQuantidade());
+		} catch (ExcecaoDeItemPedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected = ExcecaoDeItemPedido.class)
+	public void testCriarItemPedidoPedidoInvalido() throws ExcecaoDeItemPedido{
+		inicializarDados();
+		
+		Pedido pedido = null;
+		
+		ItemPedido.criarItemPedido(pedido, pizza, quantidade);
+	}
+	
+	
+	@Test(expected = ExcecaoDeItemPedido.class)
+	public void testCriarItemPedidoPizzaInvalida() throws ExcecaoDeItemPedido{
+		inicializarDados();
+		
+		Pizza pizza = null;
+		
+		ItemPedido.criarItemPedido(pedido, pizza, quantidade);
+	}
+}

@@ -1,0 +1,48 @@
+package unitarios;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import dominio.Cliente;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDePedido;
+import excecoes.ExcecaoDePizza;
+
+public class ItemPedidoTest {
+	
+	private Cliente cliente;
+	private Pedido pedido;
+	private Pizza pizza;
+	Integer quantidade;
+
+	@AfterClass
+	public void inicializarDados(){
+		try {
+			cliente = Cliente.criarCliente("22", "oi", "oi", "1234", "11");
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			pizza = Pizza.criarPizza("as", "ashu", 25f);
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+		quantidade = 3;
+	}
+	
+	@Test
+	public void testCriarItemPedido(){
+		
+	}
+	
+	
+}

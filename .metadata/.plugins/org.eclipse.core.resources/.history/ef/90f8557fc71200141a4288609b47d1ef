@@ -1,0 +1,32 @@
+package unitarios;
+
+import java.sql.Timestamp;
+import java.util.Collection;
+
+import org.junit.AfterClass;
+
+import dominio.Cliente;
+import dominio.ItemPedido;
+import dominio.Pagamento;
+import excecoes.ExcecaoDeCliente;
+
+public class PedidoTest {
+
+	private static Cliente cliente;
+	private static Timestamp dataHora;
+	private static Collection<ItemPedido> itens;
+	private static Pagamento pagamento;
+	private static Float valor;
+	
+	@AfterClass
+	public static void inicializarDados(){
+		try {
+			cliente = Cliente.criarCliente("2653 7788", "Jose", "jose@jose.com", "12345", "Rua 10");
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+}

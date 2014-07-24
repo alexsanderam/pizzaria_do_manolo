@@ -33,7 +33,8 @@ public class Pedido {
 		return new Pedido(cliente);
 	}
 	
-	public void incluirPizza(Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido{
+	public void incluirPizza(Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido, ExcecaoDePedido{
+		validarPizzaComoUnicaNoPedido(pizza);
 		ItemPedido novoItem = ItemPedido.criarItemPedido(this, pizza, quantidade);
 		adicionarNovoItem(novoItem);
 	}
@@ -55,6 +56,15 @@ public class Pedido {
 		
 		if(pizzaLocalizada == false)
 			throw new ExcecaoDePedido("pedido.remover_item.pizza_nao_localizada");
+	}
+	
+	private void validarPizzaComoUnicaNoPedido(Pizza pizza) throws ExcecaoDePedido{
+		for (ItemPedido itemPedido : itens) {
+			Pizza pizzaDoItem = itemPedido.obterPizza();
+			
+			if(pizzaDoItem.obterId().equals(pizza.obterId()))
+				throw new ExcecaoDePedido("pedido.incluir_pizza.pizza_ja_inclusa_no_pedido");
+		}
 	}
 	
 	public void definirPagamento(Pagamento pagamento) throws ExcecaoDePedido{
@@ -106,6 +116,11 @@ public class Pedido {
 			throw new ExcecaoDePedido("pedido.id.invalido");
 	}
 	
+	private static void validarItens(Collection<ItemPedido> itensDoPedido) throws ExcecaoDePedido{
+		if(itensDoPedido == null)
+			throw new ExcecaoDePedido("pedido.itens.invalido");
+	}
+	
 	private void validarPagamento(Pagamento pagamento) throws ExcecaoDePedido{
 		if(pagamento == null)
 			throw new ExcecaoDePedido("pedido.pagamento.invalido");
@@ -143,7 +158,9 @@ public class Pedido {
 		this.dataHora = dataHora;
 	}
 	
-	public void definirItens(Collection<ItemPedido> itensDoPedido){
+	public void definirItens(Collection<ItemPedido> itensDoPedido) throws ExcecaoDePedido{
+		validarItens(itensDoPedido);
+		
 		for (ItemPedido itemPedido : itensDoPedido) {
 			adicionarNovoItem(itemPedido);
 		}
@@ -151,6 +168,10 @@ public class Pedido {
 	
 	public Collection<ItemPedido> obterItens(){
 		return itens;
+	}
+	
+	public Integer obterQuantidadeTotalDeItens(){
+		return itens.size();
 	}
 	
 	/*public Boolean pedidoFechado(){

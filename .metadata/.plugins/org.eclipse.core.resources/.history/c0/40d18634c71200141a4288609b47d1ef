@@ -1,0 +1,18 @@
+package unitarios;
+
+import java.sql.Timestamp;
+import java.util.Collection;
+
+import dominio.Cliente;
+import dominio.ItemPedido;
+import dominio.Pagamento;
+
+public class PedidoTest {
+
+	private Cliente cliente;
+	private Timestamp dataHora;
+	private Collection<ItemPedido> itens;
+	private Pagamento pagamento;
+	private Float valor;
+	
+}

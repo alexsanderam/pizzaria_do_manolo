@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ItemPedidoTest" project="webpizzaria" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.ItemPedidoTest" time="0.0">
+    <testcase name="testCriarItemPedidoPedidoInvalido" classname="unitarios.ItemPedidoTest" time="0.0"/>
+    <testcase name="testCriarItemPedidoPizzaInvalida" classname="unitarios.ItemPedidoTest" time="0.0"/>
+    <testcase name="testCriarItemPedido" classname="unitarios.ItemPedidoTest" time="0.0"/>
+    <testcase name="testCriarItemPedidoQuantidadeInvalida" classname="unitarios.ItemPedidoTest" time="0.0"/>
+  </testsuite>
+</testrun>

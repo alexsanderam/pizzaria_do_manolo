@@ -1,0 +1,26 @@
+package unitarios;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import dominio.Cliente;
+import dominio.Pedido;
+import dominio.Pizza;
+
+public class ItemPedidoTest {
+	
+	private Cliente cliente = Cliente.criarCliente("22", "oi", "oi", "1234", "11");
+	private Pedido pedido = Pedido.novoPedido(cliente);
+	private Pizza pizza = Pizza.criarPizza("as", "ashu", 25f);
+	Integer quantidade = 3;
+
+	@AfterClass
+	
+	
+	@Test
+	public void testCriarItemPedido(){
+		
+	}
+	
+	
+}

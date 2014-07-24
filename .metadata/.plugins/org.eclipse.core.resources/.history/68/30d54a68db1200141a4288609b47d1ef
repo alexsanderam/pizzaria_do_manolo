@@ -1,0 +1,398 @@
+package unitarios;
+
+import static org.junit.Assert.*;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+
+import dominio.Cliente;
+import dominio.EnumFormaDePagamento;
+import dominio.ItemPedido;
+import dominio.Pagamento;
+import dominio.Pedido;
+import dominio.Pizza;
+import excecoes.ExcecaoDeCliente;
+import excecoes.ExcecaoDeItemPedido;
+import excecoes.ExcecaoDePagamento;
+import excecoes.ExcecaoDePedido;
+import excecoes.ExcecaoDePizza;
+
+public class PedidoTest {
+
+	private static Timestamp dataHora;
+	private static Collection<ItemPedido> itens;
+	private static Pagamento pagamento;
+	
+	private static EnumFormaDePagamento formaDePagamento;
+	private static Float valorRecebido;
+	private static Pizza pizza;
+	private static Cliente cliente;
+	
+	@AfterClass
+	public static void inicializarDados(){
+		try {
+			cliente = Cliente.criarCliente("2653 7788", "Jose", "jose@jose.com", "12345", "Rua 10");
+		} catch (ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+			
+		try {
+			pizza = Pizza.criarPizza("X-tudo", "Bacon, ovo, presunto, queijo", 25f);
+		} catch (ExcecaoDePizza e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			
+			try {
+				
+				itens = new ArrayList<ItemPedido>();
+				
+				ItemPedido item = ItemPedido.criarItemPedido(pedido, pizza, 2);
+				itens.add(item);
+				
+				item = ItemPedido.criarItemPedido(pedido, pizza, 1);
+				itens.add(item);
+				
+				item = ItemPedido.criarItemPedido(pedido, pizza, 3);
+				itens.add(item);
+				
+				
+			} catch (ExcecaoDeItemPedido e) {
+				e.printStackTrace();
+			}
+			
+			valorRecebido = 150f;
+			formaDePagamento = EnumFormaDePagamento.DINHEIRO_COM_TROCO;
+			
+			try {
+				pagamento = Pagamento.novoPagamento(formaDePagamento, valorRecebido);
+			} catch (ExcecaoDePagamento e) {
+				e.printStackTrace();
+			}
+
+			pedido.definirPagamento(pagamento);
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}		
+	}
+	
+	
+	@Test
+	public void testNovoPedido(){
+		try {
+			inicializarDados();
+			
+			Pedido pedido = Pedido.novoPedido(cliente);
+			assertNotNull(pedido);
+			assertEquals(cliente, pedido.obterCliente());
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected = ExcecaoDePedido.class)
+	public void testNovoPedidoClienteInvalido() throws ExcecaoDePedido{
+		inicializarDados();
+		
+		Cliente cliente = null;
+		Pedido.novoPedido(cliente);
+	}
+	
+	@Test
+	public void testIncluirPizza() throws ExcecaoDePizza{
+		inicializarDados();
+		
+		Pizza pizza = Pizza.criarPizza("Bacon3", "Muito bacon", 30f);
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			try {
+				pedido.incluirPizza(pizza, 5);
+				Integer quatidadeDeItensEsperada = 1;
+				assertEquals(quatidadeDeItensEsperada, pedido.obterQuantidadeTotalDeItens());
+			} catch (ExcecaoDeItemPedido e) {
+				e.printStackTrace();
+			}
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected=ExcecaoDePedido.class)
+	public void testIncluirPizzaJaExistente() throws ExcecaoDePizza, ExcecaoDeItemPedido, ExcecaoDePedido{
+		inicializarDados();
+		
+		Pizza pizza = Pizza.criarPizza("Bacon3", "Muito bacon", 30f);
+		pizza.definirId(1l);
+		
+		Pedido pedido = null;
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+		} catch (ExcecaoDePedido e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			pedido.incluirPizza(pizza, 5);
+			Integer quatidadeDeItensEsperada = 1;
+			assertEquals(quatidadeDeItensEsperada, pedido.obterQuantidadeTotalDeItens());
+		} catch (ExcecaoDeItemPedido e) {
+			e.printStackTrace();
+		}
+		
+		pedido.incluirPizza(pizza, 3);
+	}
+	
+	@Test
+	public void testRemoverPizza() throws ExcecaoDePizza{
+		inicializarDados();
+		
+		Pizza pizza = Pizza.criarPizza("Bacon3", "Muito bacon", 30f);
+		pizza.definirId(1l);
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			try {
+				
+				pedido.incluirPizza(pizza, 5);
+				pedido.removerPizza(pizza);
+				
+				Integer quatidadeDeItensEsperada = 0;
+				assertEquals(quatidadeDeItensEsperada, pedido.obterQuantidadeTotalDeItens());
+			} catch (ExcecaoDeItemPedido e) {
+				e.printStackTrace();
+			}
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testDefinirPagamento(){
+		inicializarDados();
+		
+		Pedido pedido;
+		Pagamento pagamento = null;
+		
+		try {
+			pagamento = Pagamento.novoPagamento(formaDePagamento, 200f);
+		} catch (ExcecaoDePagamento e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+			pedido.definirPagamento(pagamento);
+			
+			assertEquals(pagamento, pedido.obterPagamento());
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected=ExcecaoDePedido.class)
+	public void testDefinirPagamentoInvalido() throws ExcecaoDePedido{
+		inicializarDados();
+		
+		Pedido pedido = null;
+		Pagamento pagamento = null;
+		
+		try {
+			pagamento = Pagamento.novoPagamento(formaDePagamento, 50f);
+		} catch (ExcecaoDePagamento e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			pedido = Pedido.novoPedido(cliente);
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+		
+		pedido.definirItens(itens);
+		pedido.definirPagamento(pagamento);
+	}
+	
+	@Test
+	public void testDefinirId(){
+		inicializarDados();
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			Long id = 1l;
+			
+			pedido.definirId(id);
+			assertEquals(id, pedido.obterId());
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test(expected=ExcecaoDePedido.class)
+	public void testDefinirIdInvalido() throws ExcecaoDePedido{
+		inicializarDados();
+		
+		Pedido pedido = Pedido.novoPedido(cliente);
+		Long id = -1l;
+		
+		pedido.definirId(id);
+	}
+	
+	@Test
+	public void testDefinirDataHora(){
+		inicializarDados();
+		
+		try {
+			Pedido pedido = Pedido.novoPedido(cliente);
+			Timestamp dataHora = new Timestamp(0);
+			pedido.definirDataHora(dataHora);
+			assertEquals(dataHora, pedido.obterDataHora());
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test(expected=ExcecaoDePedido.class)
+	public void testDefinirDataHoraInvalida() throws ExcecaoDePedido{
+		inicializarDados();
+	
+		Pedido pedido = null;
+		try {
+			pedido = Pedido.novoPedido(cliente);
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+		
+		Timestamp dataHora = null;
+		
+		pedido.definirDataHora(dataHora);
+		assertEquals(dataHora, pedido.obterDataHora());
+	}
+	
+	@Test
+	public void testDefinirCliente(){
+		inicializarDados();
+		
+		Pedido pedido = null;
+		try {
+			pedido = Pedido.novoPedido(cliente);
+			pedido.definirCliente(cliente);
+			assertEquals(cliente, pedido.obterCliente());
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test(expected=ExcecaoDePedido.class)
+	public void testDefinirClienteInvalido() throws ExcecaoDePedido{
+		inicializarDados();
+		
+		Pedido pedido = null;
+		Cliente cliente = null;
+		
+		try {
+			cliente = Cliente.criarCliente("2289 7000", "Cliente", "cliente@cliente.com", "cliete", "Rua 10");
+			pedido = Pedido.novoPedido(cliente);
+						
+		} catch (ExcecaoDePedido | ExcecaoDeCliente e) {
+			e.printStackTrace();
+		}
+		
+		cliente = null;
+		
+		pedido.definirCliente(cliente);
+	}
+	
+	@Test
+	public void testDefinirItens(){
+		inicializarDados();
+		
+		Pedido pedido = null;
+		try {
+			Integer quantidadeDeItens = itens.size();
+			pedido = Pedido.novoPedido(cliente);
+			pedido.definirItens(itens);
+			assertEquals(quantidadeDeItens, pedido.obterQuantidadeTotalDeItens());
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test(expected=ExcecaoDePedido.class)
+	public void testDefinirItensInvalido() throws ExcecaoDePedido{
+		inicializarDados();
+		
+		Pedido pedido = null;
+		Collection<ItemPedido> itens = null;
+		
+		pedido = Pedido.novoPedido(cliente);
+		pedido.definirItens(itens);
+	}
+	
+	@Test
+	public void testObterValorTotal(){
+		inicializarDados();
+		
+		Pedido pedido = null;
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+			
+			try {
+				Pizza pizza = Pizza.criarPizza("Bacon4", "Muito muito muito bacon", 30f);
+				pedido.incluirPizza(pizza, 2);
+				Float total = 60f;
+				
+				assertEquals(total, pedido.obterValorTotal());
+				
+			} catch (ExcecaoDePizza | ExcecaoDeItemPedido e) {
+				e.printStackTrace();
+			}
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testObterValorDeTroco(){
+		inicializarDados();
+		
+		Pedido pedido = null;
+		
+		try {
+			pedido = Pedido.novoPedido(cliente);
+			
+			try {
+				Pizza pizza = Pizza.criarPizza("Bacon4", "Muito muito muito bacon", 30f);
+				EnumFormaDePagamento formaDePagamento = EnumFormaDePagamento.DINHEIRO_COM_TROCO;
+				
+				Pagamento pagamento = Pagamento.novoPagamento(formaDePagamento, 70f);
+				
+				pedido.incluirPizza(pizza, 2);
+				pedido.definirPagamento(pagamento);
+				Float trocoEsperado = 10f;
+				
+				assertEquals(trocoEsperado, pedido.obterValorDeTroco());
+				
+			} catch (ExcecaoDePizza | ExcecaoDeItemPedido | ExcecaoDePagamento e) {
+				e.printStackTrace();
+			}
+			
+		} catch (ExcecaoDePedido e) {
+			e.printStackTrace();
+		}
+	}	
+}

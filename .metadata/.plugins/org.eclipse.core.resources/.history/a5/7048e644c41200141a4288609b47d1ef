@@ -1,0 +1,15 @@
+package unitarios;
+
+import org.junit.Test;
+
+public class ItemPedidoTest {
+	
+	
+
+	@Test
+	public void testCriarItemPedido(){
+		
+	}
+	
+	
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PedidoTest" project="webpizzaria" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="unitarios.PedidoTest" time="0.0">
+    <testcase name="testIncluirPizzaJaExistente" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirPagamento" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testDefinirPagamentoInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testNovoPedidoClienteInvalido" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testRemoverPizza" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testIncluirPizza" classname="unitarios.PedidoTest" time="0.0"/>
+    <testcase name="testNovoPedido" classname="unitarios.PedidoTest" time="0.0"/>
+  </testsuite>
+</testrun>

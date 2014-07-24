@@ -39,7 +39,7 @@ public class ControladorDominio {
 		return Pedido.novoPedido(cliente);
 	}
 	
-	public void incluirPizzaAoPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido {
+	public void incluirPizzaAoPedido(Pedido pedido, Pizza pizza, Integer quantidade) throws ExcecaoDeItemPedido, ExcecaoDePedido {
 		pedido.incluirPizza(pizza, quantidade);
 	}
 	
@@ -71,4 +71,7 @@ public class ControladorDominio {
 		cliente.realizarAutenticacao(senha);
 	}
 	
+	public void obterQuantidadeTotalDeItensDoPedido(Pedido pedido){
+		pedido.obterQuantidadeTotalDeItens();
+	}
 }
