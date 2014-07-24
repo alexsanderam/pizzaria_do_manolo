@@ -27,9 +27,9 @@
 		<item value="org.eclipse.jdt.ui.JavaSearchPage" key="PREVIOUS_PAGE"/>
 	</section>
 	<section name="DialogBounds_SearchDialog">
-		<item value="724" key="DIALOG_WIDTH"/>
+		<item value="730" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="491" key="DIALOG_HEIGHT"/>
+		<item value="492" key="DIALOG_HEIGHT"/>
 		<item value="278" key="DIALOG_X_ORIGIN"/>
 		<item value="75" key="DIALOG_Y_ORIGIN"/>
 	</section>

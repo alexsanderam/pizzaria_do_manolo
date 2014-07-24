@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import pizzariaDAO.ClienteDAO;
 import pizzariaDAO.ClienteDAOConcreto;
+import pizzariaDAO.PagamentoDAO;
+import pizzariaDAO.PagamentoDAOConcreto;
 import pizzariaDAO.PedidoDAO;
 import pizzariaDAO.PedidoDAOConcreto;
 import pizzariaDAO.PizzaDAO;
@@ -15,88 +17,109 @@ import excecoes.ExcecaoDAO;
 
 class MockMantenedorDeRegistro extends MantenedorDeRegistros {
 	    	
-	    	@Override
-	    	protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {
-	    		class MockClienteDAO extends ClienteDAOConcreto {
+@Override
+protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {
+	class MockClienteDAO extends ClienteDAOConcreto {
 
-	    			public MockClienteDAO() throws ExcecaoDAO {
-						super();
-					}
+		public MockClienteDAO() throws ExcecaoDAO {
+			super();
+		}
 
-					@Override
-	    			protected Connection criarConexao() {
-						try {
-							return MockConnectionFactory.obterInstancia().obterConexao();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						
-						return null;
-	    			}
-	    		}
-	    		
-	    		return new MockClienteDAO();
-	    	}
-	    	
-	    	@Override
-	    	protected PizzaDAO criarPizzaDAO() throws ExcecaoDAO {
-	    		class MockPizzaDAO extends PizzaDAOConcreto {
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactory.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockClienteDAO();
+}
 
-	    			public MockPizzaDAO() throws ExcecaoDAO {
-						super();
-					}
+@Override
+protected PizzaDAO criarPizzaDAO() throws ExcecaoDAO {
+	class MockPizzaDAO extends PizzaDAOConcreto {
 
-					@Override
-	    			protected Connection criarConexao() {
-						try {
-							return MockConnectionFactory.obterInstancia().obterConexao();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						
-						return null;
-	    			}
-	    		}
-	    		
-	    		return new MockPizzaDAO();
-	    	}
-	    	
-	    	@Override
-	    	protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
-	    		class MockPedidoDAO extends PedidoDAOConcreto {
+		public MockPizzaDAO() throws ExcecaoDAO {
+			super();
+		}
 
-	    			public MockPedidoDAO() throws ExcecaoDAO {
-						super();
-					}
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactory.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockPizzaDAO();
+}
 
-					@Override
-	    			protected Connection criarConexao() {
-						try {
-							return MockConnectionFactory.obterInstancia().obterConexao();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						
-						return null;
-	    			}
-	    		}
-	    		
-	    		return new MockPedidoDAO();
-	    	}
-	    	
-	    	public int contarRegistros(String nomeTabela){
-				try {
-					Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
-					PreparedStatement stmt = conexao.prepareStatement("select count(*) from " + nomeTabela);
-	    			
-	    		    ResultSet rs = stmt.executeQuery();
-	    		    if (rs.next()){
-	    		    	return rs.getInt(1);
-	    		    }
-				} catch (ExcecaoDAO | SQLException e1) {
-					e1.printStackTrace();
-				} 		
-	    	    
-	    	    return Integer.valueOf(-1);
-	    	}
-	    }
+@Override
+protected PedidoDAO criarPedidoDAO() throws ExcecaoDAO {
+	class MockPedidoDAO extends PedidoDAOConcreto {
+
+		public MockPedidoDAO() throws ExcecaoDAO {
+			super();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactory.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+	}
+	
+	return new MockPedidoDAO();
+}
+
+@Override
+protected PagamentoDAO criarPagamentoDAO() throws ExcecaoDAO {
+	class MockPagamentoDAO extends PagamentoDAOConcreto {
+
+		public MockPagamentoDAO() throws ExcecaoDAO {
+			super();
+		}
+
+		@Override
+		protected Connection criarConexao() {
+			try {
+				return MockConnectionFactory.obterInstancia().obterConexao();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		
+			return null;
+		}
+	}
+	return new MockPagamentoDAO();
+}
+
+public int contarRegistros(String nomeTabela){
+	try {
+		Connection conexao = MockConnectionFactory.obterInstancia().obterConexao();
+		PreparedStatement stmt = conexao.prepareStatement("select count(*) from " + nomeTabela);
+			
+		    ResultSet rs = stmt.executeQuery();
+		    if (rs.next()){
+		    	return rs.getInt(1);
+		    }
+		} catch (ExcecaoDAO | SQLException e1) {
+			e1.printStackTrace();
+		} 		
+	    
+	    return Integer.valueOf(-1);
+	}
+}

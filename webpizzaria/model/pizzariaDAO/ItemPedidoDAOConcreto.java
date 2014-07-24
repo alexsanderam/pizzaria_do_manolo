@@ -33,7 +33,7 @@ public class ItemPedidoDAOConcreto implements ItemPedidoDAO{
 	       if(conexao == null)
 	            throw new ExcecaoDAO("itempedido_dao.conexao_nao_estabelecida");
 	         
-	        String sql = "INSERT INTO pizzaria.ItemPedido(id_pedido_fk, id_pizza_fk, quantidade) values (?, ?, ?) RETURNING id;";
+	        String sql = "INSERT INTO webpizzaria.ItemPedido(id_pedido_fk, id_pizza_fk, quantidade) values (?, ?, ?) RETURNING id;";
 	        PreparedStatement stmt;
 	         
 	        try {

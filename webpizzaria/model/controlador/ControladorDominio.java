@@ -28,7 +28,7 @@ public class ControladorDominio {
 	}
 	
 	public Cliente novoCliente(String telefone, String email, String senha, String nome, String endereco) throws ExcecaoDeCliente{
-		return Cliente.criarCliente(telefone, email, senha, nome, endereco);
+		return Cliente.criarCliente(telefone, nome, email, senha, endereco);
 	}
 	
 	public Pizza novaPizza(String nomePizza, String ingredientes, Float preco) throws ExcecaoDePizza{

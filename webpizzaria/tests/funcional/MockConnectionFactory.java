@@ -20,7 +20,7 @@ public class MockConnectionFactory implements ConnectionFactory{
      
     public Connection obterConexao() throws ExcecaoDAO{
     	
-    	String url = "jdbc:postgresql://localhost:5432/testpizzaria?searchpath=pizzaria";
+    	String url = "jdbc:postgresql://localhost:5432/testpizzaria?searchpath=webpizzaria";
         String usr = "postgres";
         String pass = "postgres";
          

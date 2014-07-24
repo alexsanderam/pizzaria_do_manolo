@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CadastrarClienteTest" project="pizzaria" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="funcional.CadastrarClienteTest" time="0.808">
-    <testcase name="testCadastrarClienteComEnderecoInvalido" classname="funcional.CadastrarClienteTest" time="0.247"/>
-    <testcase name="testCadastrarClienteComTelefoneInvalido" classname="funcional.CadastrarClienteTest" time="0.151"/>
-    <testcase name="testCadastrarClienteComNomeInvalido" classname="funcional.CadastrarClienteTest" time="0.168"/>
-    <testcase name="testCadastrarCliente" classname="funcional.CadastrarClienteTest" time="0.242"/>
-  </testsuite>
-</testrun>

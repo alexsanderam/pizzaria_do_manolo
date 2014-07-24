@@ -30,7 +30,7 @@ public class PagamentoDAOConcreto implements PagamentoDAO {
 	       if(conexao == null)
 	            throw new ExcecaoDAO("pagamento_dao.conexao_nao_estabelecida");
 	         
-	        String sql = "INSERT INTO pizzaria.Pagamento(forma_de_pagamento, valor_recebido) values (?, ?) RETURNING id;";
+	        String sql = "INSERT INTO webpizzaria.Pagamento(forma_de_pagamento, valor_recebido) values (?, ?) RETURNING id;";
 	        PreparedStatement stmt;
 	        ResultSet rs;
 	         

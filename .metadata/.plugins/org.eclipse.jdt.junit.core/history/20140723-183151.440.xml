@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ClienteTest" project="webpizzaria" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="unitarios.ClienteTest" time="0.002">
-    <testcase name="testCriarCliente" classname="unitarios.ClienteTest" time="0.002"/>
-  </testsuite>
-</testrun>

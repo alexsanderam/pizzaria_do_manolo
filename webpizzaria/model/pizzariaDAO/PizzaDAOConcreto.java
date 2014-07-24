@@ -31,7 +31,7 @@ public class PizzaDAOConcreto implements PizzaDAO{
         if(conexao == null)
             throw new ExcecaoDAO("pizza_dao.conexao_nao_estabelecida");
          
-        String sql = "INSERT INTO pizzaria.Pizza(nome, ingredientes, preco) values (?, ?, ?) RETURNING id;";
+        String sql = "INSERT INTO webpizzaria.Pizza(nome, ingredientes, preco) values (?, ?, ?) RETURNING id;";
         PreparedStatement stmt;
         ResultSet rs;
          

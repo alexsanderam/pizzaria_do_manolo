@@ -48,8 +48,7 @@ public class ClienteDAOConcreto implements ClienteDAO{
             }
              
              
-        } catch (SQLException e) {
- 
+        } catch (SQLException e) { 
             throw new ExcecaoDAO("cliente_dao.nao_foi_possivel_incluir_o_cliente", e);
         }
     }

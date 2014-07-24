@@ -7,9 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-	CadastrarPizzaTest.class,
-	CadastrarClienteTest.class,
-	CadastrarPedidoTest.class
+	PizzaDAOTest.class,
+	ClienteDAOTest.class,
+	PedidoDAOTest.class
 })
 public class PizzariaTestSuite {
 

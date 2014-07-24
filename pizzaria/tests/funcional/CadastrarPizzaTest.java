@@ -31,6 +31,15 @@ public class CadastrarPizzaTest{
 	    assertEquals(1, mantenedor.contarRegistros("pizzaria.Pizza"));
 	}
 	
+	@Test(expected = ExcecaoDAO.class)
+	public void testCadastrarPizzaExistente() throws ExcecaoDAO, ExcecaoDePizza {
+	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    
+	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
+	    mantenedor.incluirPizza(pizza);
+	    mantenedor.incluirPizza(pizza);
+	}
+	
 	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaNomeInvalido() throws ExcecaoDePizza, ExcecaoDAO {
 	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
