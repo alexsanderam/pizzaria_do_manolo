@@ -8,6 +8,7 @@ public class PedidoVO {
 	private ClienteVO clienteVO;
 	private Collection<ItemPedidoVO> itensDoPedido;
 	private Timestamp dataHora;
+	private Float total;
 	
 	
 	public PedidoVO(){
@@ -43,5 +44,15 @@ public class PedidoVO {
 	public void setDataHora(Timestamp dataHora) {
 		this.dataHora = dataHora;
 	}
+
+	public Float getTotal() {
+		return total;
+	}
+
+	public void setTotal(Float total) {
+		this.total = total;
+	}
+	
+	
 
 }

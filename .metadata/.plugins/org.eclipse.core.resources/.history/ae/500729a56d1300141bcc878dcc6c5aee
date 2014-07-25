@@ -1,0 +1,66 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<style>
+.itens-cardapio-cell {
+	display: table-cell;
+}
+
+.itens-cardapio-linha {
+	display: table-row;
+}
+</style>
+<head>
+
+<link rel="stylesheet" type="text/css" href="pizza.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Adicionar Item ao Pedido</title>
+</head>
+<body>
+
+
+	<div class=conteudo-div>
+
+		<div id="cardapio">
+			<h2>Adicionar Item ao Pedido</h2>
+
+			<div id="itens-cardapio">
+				<c:forEach items="${pizzas}" var="pizza">
+					<div class="itens-cardapio-linha">
+						<form method="get" action="AdicionarItem">
+							<div itens-cardapio-cell>
+								<input type="submit" value="Adicionar">
+								<input type="hiddem" name="idPizza" value="${pizza.id}">
+							</div>
+
+							<div itens-cardapio-cell>
+								<input type="number" name="quantidade" value="1">
+							</div>
+
+							<div class="pizza itens-cardapio-cell">
+								<div class="pizza-nome">
+									<c:out value="${pizza.nomePizza}" />
+								</div>
+								<div class="pizza-preco">
+									R$
+									<c:out value="${pizza.preco}" />
+								</div>
+								<div class="pizza-ingredientes">
+									<c:out value="${pizza.ingredientes }" />
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</c:forEach>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+</html>

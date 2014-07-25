@@ -18,7 +18,9 @@
 		<div class="esquerda">
 			<div id="cardapio">
 				<h2>Cardápio</h2>
-
+				<c:if test="${erro}">
+					<div class="erro"><c:out value="${mensagem}" /></div>
+				</c:if>
 				<div id="itens-cardapio">
 					<c:forEach items="${pizzas}" var="pizza">
 						<div class="pizza">

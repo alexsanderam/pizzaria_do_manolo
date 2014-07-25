@@ -18,3 +18,5 @@
 1406222559721	Rename type 'MockConnectionFactory'
 1406222569445	Rename compilation unit 'MockMantenedorDeRegistros.java'
 1406225870355	Move 'home.css' to 'WEB-INF'
+1406236027606	Move 2 resources to 'WebContent'
+1406244263978	Rename type 'AdicionarItemServlet'

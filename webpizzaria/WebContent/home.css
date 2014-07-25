@@ -1,0 +1,94 @@
+.conteudo-div {
+	display: table;
+	clear: both;
+}
+
+.esquerda {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 20px;
+	margin-left: 3%;
+	width: 70%;
+}
+
+.direita {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 20px;
+	width: 30%;
+}
+
+#historico-pedidos {
+	display: block;
+}
+
+.pedido {
+	display: table;
+	margin: 30px;
+	margin-left: 15px;
+}
+
+.pedido-data {
+	font-size: 20px;
+	font-decoration: bold;
+	display: table-header-group;
+	margin: 10px;
+}
+
+.pedido-item {
+	display: table-row;
+	font-size: 16px;
+	paddin: 3px;
+}
+
+.nome-pizza {
+	display: table-cell;
+}
+
+.quantidade-pizza {
+	display: table-cell;
+	padding-left: 10px;
+}
+
+#dados-cliente {
+	border: 1px;
+	border-style: solid;
+	padding: 10px;
+	display: block;
+}
+
+#dados-cliente #nome {
+	font-size: 22px;
+	margin: 5px;
+}
+
+#dados-cliente .atributo {
+	font-size: 12px;
+	margin: 2px;
+	margin-left: 12px;
+}
+
+#novo-pedido {	
+	display: table;
+}
+
+.item-novo-pedido {
+	display: table-row;
+}
+.pizza-novo-pedido, .preco-novo-pedido, .quantidade-novo-pedido, .subtotal-novo-pedido {
+	display: table-cell;
+}
+
+.preco-novo-pedido, .quantidade-novo-pedido, .subtotal-novo-pedido {
+	font-size: 16px;
+	padding-left: 35px;
+	padding-right: 35px;
+	text-align: center;
+}
+
+.cabecalho-novo-pedido {
+	text-align: center;
+	display: table-cell;
+}

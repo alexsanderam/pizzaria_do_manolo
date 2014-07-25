@@ -1,0 +1,20 @@
+.itens-cardapio {
+	display: table;
+}
+.itens-cardapio-cell {
+	display: table-cell;
+	paddin-left: 25px;
+	padding-right: 25px;
+}
+
+.itens-cardapio-linha {
+	display: table-row;
+}
+
+#inputQuantidade {
+	width: 30px;
+}
+
+width: 760px;
+.margin:0 auto;         
+.text-align:left;  

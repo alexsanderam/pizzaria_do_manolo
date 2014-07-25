@@ -19,12 +19,13 @@ public class Pagamento {
 		validarDados(formaDePagamento, valorRecebido);
 		return new Pagamento(formaDePagamento, valorRecebido);
 	}
-	
+		
 	private static void validarDados(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
 		validarFormaDePagamento(formaDePagamento);
-		validarValorRecebido(valorRecebido);
+		
+		if(formaDePagamento == EnumFormaDePagamento.DINHEIRO_COM_TROCO)
+			validarValorRecebido(valorRecebido);
 	}
-	
 	
 	private static void validarFormaDePagamento(EnumFormaDePagamento formaDePagamento) throws ExcecaoDePagamento{
 		if(formaDePagamento == null)

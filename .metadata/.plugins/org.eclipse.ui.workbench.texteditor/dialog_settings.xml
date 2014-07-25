@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="MantenedorDeRegistroTest" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="MockMantenedorDeRegistro"/>
+			<item value="recuperarPagamentoPeloIdentificador"/>
+			<item value="criarItem"/>
+			<item value="id_pedido_fk"/>
+			<item value="ON "/>
+			<item value="ON"/>
 			<item value="definirCli"/>
 			<item value="definir"/>
-			<item value="obter"/>
-			<item value="o"/>
-			<item value="set"/>
-			<item value="get"/>
-			<item value="Exception"/>
-			<item value="pizza"/>
 		</list>
 		<list key="replacehistory">
+			<item value="MantenedorDeRegistroTest"/>
 			<item value="set"/>
 			<item value="get"/>
 			<item value="definir"/>
@@ -25,9 +26,9 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="263" key="DIALOG_WIDTH"/>
+		<item value="277" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="419" key="DIALOG_HEIGHT"/>
+		<item value="438" key="DIALOG_HEIGHT"/>
 		<item value="720" key="DIALOG_X_ORIGIN"/>
 		<item value="124" key="DIALOG_Y_ORIGIN"/>
 	</section>

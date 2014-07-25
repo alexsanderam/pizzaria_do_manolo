@@ -1,3 +1,9 @@
+.erro {
+	color: red;
+	display: table-caption;
+	font-size: 12px;
+}
+
 #itens-cardapio {
 	display: table;
 }

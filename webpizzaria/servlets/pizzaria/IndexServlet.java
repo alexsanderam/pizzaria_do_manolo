@@ -71,6 +71,7 @@ public class IndexServlet extends HttpServlet {
 			}
 		} catch (ExcecaoDAO | ExcecaoDePizza e) {
 			// TODO Auto-generated catch block
+			request.setAttribute("erro", true);
 			request.setAttribute("mensagem", e.getMessage());
 		}
 		

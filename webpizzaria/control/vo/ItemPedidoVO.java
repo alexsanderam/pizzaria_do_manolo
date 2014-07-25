@@ -4,7 +4,7 @@ public class ItemPedidoVO {
 
 	private PizzaVO pizza;
 	private Integer quantidade;
-	private Double subtotal;
+	private float subtotal;
 	
 	public ItemPedidoVO(){
 		
@@ -31,12 +31,12 @@ public class ItemPedidoVO {
 		this.quantidade = quantidade;
 	}
 
-	public Double getSubtotal() {
+	public float getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Double subtotal) {
-		this.subtotal = subtotal;
+	public void setSubtotal(float f) {
+		this.subtotal = f;
 	}
 	
 	
