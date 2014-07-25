@@ -9,7 +9,6 @@
 <fullyQualifiedTypeName name="org.junit.internal.ExactComparisonCriteria"/>
 <fullyQualifiedTypeName name="excecoes.ExcecaoDePagamento"/>
 <fullyQualifiedTypeName name="org.junit.Before"/>
-<fullyQualifiedTypeName name="dominio.Cliente"/>
 <fullyQualifiedTypeName name="org.junit.AfterClass"/>
 <fullyQualifiedTypeName name="junit.framework.TestCase"/>
 <fullyQualifiedTypeName name="org.junit.After"/>
@@ -25,20 +24,23 @@
 <fullyQualifiedTypeName name="pizzariaDAO.PagamentoDAOConcreto"/>
 <fullyQualifiedTypeName name="excecoes.ExcecaoDePizza"/>
 <fullyQualifiedTypeName name="excecoes.ExcecaoDAO"/>
-<fullyQualifiedTypeName name="dominio.EnumFormaDePagamento"/>
-<fullyQualifiedTypeName name="controlador.ControladorDominio"/>
-<fullyQualifiedTypeName name="dominio.Pagamento"/>
 <fullyQualifiedTypeName name="pizzariaDAO.ItemPedidoDAO"/>
 <fullyQualifiedTypeName name="pizzariaDAO.ItemPedidoDAOConcreto"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="dominio.Pedido"/>
 <fullyQualifiedTypeName name="dominio.ItemPedido"/>
 <fullyQualifiedTypeName name="pizzaria.IndexServlet"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="vo.PedidoVO"/>
 <fullyQualifiedTypeName name="vo.ItemPedidoVO"/>
-<fullyQualifiedTypeName name="controlador.MantenedorDeRegistros"/>
-<fullyQualifiedTypeName name="dominio.Pizza"/>
 <fullyQualifiedTypeName name="vo.PizzaVO"/>
+<fullyQualifiedTypeName name="java.lang.NumberFormatException"/>
+<fullyQualifiedTypeName name="pizzaria.HomeServlet"/>
+<fullyQualifiedTypeName name="dominio.Cliente"/>
+<fullyQualifiedTypeName name="dominio.Pedido"/>
+<fullyQualifiedTypeName name="dominio.Pizza"/>
+<fullyQualifiedTypeName name="controlador.MantenedorDeRegistros"/>
+<fullyQualifiedTypeName name="controlador.ControladorDominio"/>
+<fullyQualifiedTypeName name="dominio.EnumFormaDePagamento"/>
+<fullyQualifiedTypeName name="dominio.Pagamento"/>
 </qualifiedTypeNameHistroy>

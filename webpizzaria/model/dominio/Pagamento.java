@@ -22,9 +22,7 @@ public class Pagamento {
 		
 	private static void validarDados(EnumFormaDePagamento formaDePagamento, Float valorRecebido) throws ExcecaoDePagamento{
 		validarFormaDePagamento(formaDePagamento);
-		
-		if(formaDePagamento == EnumFormaDePagamento.DINHEIRO_COM_TROCO)
-			validarValorRecebido(valorRecebido);
+		validarValorRecebido(valorRecebido);
 	}
 	
 	private static void validarFormaDePagamento(EnumFormaDePagamento formaDePagamento) throws ExcecaoDePagamento{

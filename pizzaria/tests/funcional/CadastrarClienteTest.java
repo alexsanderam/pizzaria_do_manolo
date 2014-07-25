@@ -22,7 +22,7 @@ public class CadastrarClienteTest{
 
 	@Test
 	public void testCadastrarCliente() throws Exception {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    Cliente cliente = ControladorDominio.obterInstancia().novoCliente(telefone, nome, endereco);
 	    mantenedor.incluirCliente(cliente);
@@ -33,7 +33,7 @@ public class CadastrarClienteTest{
 	
 	@Test(expected = ExcecaoDeCliente.class)
 	public void testCadastrarClienteComNomeInvalido() throws ExcecaoDeCliente, ExcecaoDAO{
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    String nome = "";
 
@@ -45,7 +45,7 @@ public class CadastrarClienteTest{
 	
 	@Test(expected = ExcecaoDeCliente.class)
 	public void testCadastrarClienteComTelefoneInvalido() throws ExcecaoDeCliente, ExcecaoDAO {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    String telefone = "";
 
@@ -56,7 +56,7 @@ public class CadastrarClienteTest{
 	
 	@Test(expected = ExcecaoDeCliente.class)
 	public void testCadastrarClienteComEnderecoInvalido() throws ExcecaoDeCliente, ExcecaoDAO {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    String endereco = "";
 	    

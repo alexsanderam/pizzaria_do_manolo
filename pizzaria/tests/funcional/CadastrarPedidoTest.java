@@ -28,7 +28,7 @@ public class CadastrarPedidoTest{
 
 	@Test
 	public void testCadastrarPedido() throws Exception {  
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	 
 	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
@@ -47,7 +47,7 @@ public class CadastrarPedidoTest{
 	
 	@Test(expected = ExcecaoDAO.class)
 	public void testCadastrarPedidoPizzaNaoExistente() throws ExcecaoDePizza, ExcecaoDeCliente, ExcecaoDAO, ExcecaoDePedido{  
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);
 	    
@@ -62,7 +62,7 @@ public class CadastrarPedidoTest{
 	
 	@Test(expected = ExcecaoDAO.class)
 	public void testCadastrarPedidoClienteNaoExistente() throws ExcecaoDePedido, ExcecaoDePizza, ExcecaoDAO, ExcecaoDeCliente {  
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 
 	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nomePizza, ingredientes, preco);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PizzariaTestSuite" project="pizzaria" tests="12" started="12" failures="0" errors="0" ignored="0">
+  <testsuite name="funcional.PizzariaTestSuite" time="4.175">
+    <testsuite name="funcional.CadastrarPizzaTest" time="1.761">
+      <testcase name="testCadastrarPizzaPrecoInvalido" classname="funcional.CadastrarPizzaTest" time="0.934"/>
+      <testcase name="testCadastrarPizzaNomeInvalido" classname="funcional.CadastrarPizzaTest" time="0.195"/>
+      <testcase name="testCadastrarPizza" classname="funcional.CadastrarPizzaTest" time="0.256"/>
+      <testcase name="testCadastrarPizzaExistente" classname="funcional.CadastrarPizzaTest" time="0.221"/>
+      <testcase name="testCadastrarPizzaIngredientesInvalido" classname="funcional.CadastrarPizzaTest" time="0.155"/>
+    </testsuite>
+    <testsuite name="funcional.CadastrarClienteTest" time="0.835">
+      <testcase name="testCadastrarClienteComEnderecoInvalido" classname="funcional.CadastrarClienteTest" time="0.312"/>
+      <testcase name="testCadastrarClienteComTelefoneInvalido" classname="funcional.CadastrarClienteTest" time="0.155"/>
+      <testcase name="testCadastrarClienteComNomeInvalido" classname="funcional.CadastrarClienteTest" time="0.189"/>
+      <testcase name="testCadastrarCliente" classname="funcional.CadastrarClienteTest" time="0.179"/>
+    </testsuite>
+    <testsuite name="funcional.CadastrarPedidoTest" time="1.579">
+      <testcase name="testCadastrarPedidoPizzaNaoExistente" classname="funcional.CadastrarPedidoTest" time="0.632"/>
+      <testcase name="testCadastrarPedidoClienteNaoExistente" classname="funcional.CadastrarPedidoTest" time="0.412"/>
+      <testcase name="testCadastrarPedido" classname="funcional.CadastrarPedidoTest" time="0.535"/>
+    </testsuite>
+  </testsuite>
+</testrun>

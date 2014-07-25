@@ -22,7 +22,7 @@ public class CadastrarPizzaTest{
 
 	@Test
 	public void testCadastrarPizza() throws Exception {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 
 	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
@@ -33,7 +33,7 @@ public class CadastrarPizzaTest{
 	
 	@Test(expected = ExcecaoDAO.class)
 	public void testCadastrarPizzaExistente() throws ExcecaoDAO, ExcecaoDePizza {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    Pizza pizza = ControladorDominio.obterInstancia().novaPizza(nome, ingredientes, preco);
 	    mantenedor.incluirPizza(pizza);
@@ -42,7 +42,7 @@ public class CadastrarPizzaTest{
 	
 	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaNomeInvalido() throws ExcecaoDePizza, ExcecaoDAO {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    String nome = "";
 	    
@@ -55,7 +55,7 @@ public class CadastrarPizzaTest{
 
 	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaIngredientesInvalido() throws ExcecaoDePizza, ExcecaoDAO {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 
 	    String ingredientes = "";
 
@@ -68,7 +68,7 @@ public class CadastrarPizzaTest{
 	
 	@Test(expected = ExcecaoDePizza.class)
 	public void testCadastrarPizzaPrecoInvalido() throws ExcecaoDePizza, ExcecaoDAO {
-	    MockMantenedorDeRegistro mantenedor =  new MockMantenedorDeRegistro();
+	    MantenedorDeRegistroTest mantenedor =  new MantenedorDeRegistroTest();
 	    
 	    Float preco = (float) -1.0;
 	    

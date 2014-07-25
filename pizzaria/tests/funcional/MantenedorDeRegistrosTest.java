@@ -13,7 +13,7 @@ import pizzariaDAO.PizzaDAOConcreto;
 import controlador.MantenedorDeRegistros;
 import excecoes.ExcecaoDAO;
 
-class MockMantenedorDeRegistro extends MantenedorDeRegistros {
+class MantenedorDeRegistroTest extends MantenedorDeRegistros {
 	    	
 	@Override
 	protected ClienteDAO criarClienteDAO() throws ExcecaoDAO {

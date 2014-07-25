@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PizzariaTestSuite (2)" project="webpizzaria" tests="30" started="30" failures="0" errors="0" ignored="0">
+  <testsuite name="funcional.PizzariaTestSuite" time="10.959">
+    <testsuite name="funcional.ManterPizzaTest" time="2.123">
+      <testcase name="testIncluirPizzaIngredientesInvalido" classname="funcional.ManterPizzaTest" time="0.31"/>
+      <testcase name="testObterPizzaPorNome" classname="funcional.ManterPizzaTest" time="0.2"/>
+      <testcase name="testIncluirPizzaPrecoInvalido" classname="funcional.ManterPizzaTest" time="0.179"/>
+      <testcase name="testIncluirPizzaExistente" classname="funcional.ManterPizzaTest" time="0.233"/>
+      <testcase name="testObterPizzaPorId" classname="funcional.ManterPizzaTest" time="0.221"/>
+      <testcase name="testIncluirPizza" classname="funcional.ManterPizzaTest" time="0.2"/>
+      <testcase name="testObterTodasAsPizza" classname="funcional.ManterPizzaTest" time="0.233"/>
+      <testcase name="testIncluirPizzaNomeInvalido" classname="funcional.ManterPizzaTest" time="0.189"/>
+      <testcase name="testObterPizzaNaoExistentePorId" classname="funcional.ManterPizzaTest" time="0.177"/>
+      <testcase name="testObterPizzaNaoExistentePorNome" classname="funcional.ManterPizzaTest" time="0.18"/>
+    </testsuite>
+    <testsuite name="funcional.ManterClienteTest" time="2.62">
+      <testcase name="testCadastrarClienteComEmailInvalido" classname="funcional.ManterClienteTest" time="0.22"/>
+      <testcase name="testCadastrarClienteComSenhaInvalida" classname="funcional.ManterClienteTest" time="0.224"/>
+      <testcase name="testCadastrarClienteComEnderecoInvalido" classname="funcional.ManterClienteTest" time="0.221"/>
+      <testcase name="testIncluirCliente" classname="funcional.ManterClienteTest" time="0.233"/>
+      <testcase name="testCadastrarClienteComTelefoneInvalido" classname="funcional.ManterClienteTest" time="0.233"/>
+      <testcase name="testObterClientePeloIdentificador" classname="funcional.ManterClienteTest" time="0.267"/>
+      <testcase name="testObterClientePeloEmail" classname="funcional.ManterClienteTest" time="0.266"/>
+      <testcase name="testCadastrarClienteComNomeInvalido" classname="funcional.ManterClienteTest" time="0.191"/>
+      <testcase name="testObterClienteNaoExistentePeloEmail" classname="funcional.ManterClienteTest" time="0.276"/>
+      <testcase name="testIncluirClienteExistente" classname="funcional.ManterClienteTest" time="0.233"/>
+      <testcase name="testObterClienteNaoExistentePeloIdentificador" classname="funcional.ManterClienteTest" time="0.255"/>
+    </testsuite>
+    <testsuite name="funcional.ManterPedidoTest" time="6.216">
+      <testcase name="testBuscarTodosPedidosDeClienteInvalido" classname="funcional.ManterPedidoTest" time="0.556"/>
+      <testcase name="testBuscarTodosPedidosDoCliente" classname="funcional.ManterPedidoTest" time="1.102"/>
+      <testcase name="testIncluirPedido" classname="funcional.ManterPedidoTest" time="0.678"/>
+      <testcase name="testIncluirPedidoClienteInvalido" classname="funcional.ManterPedidoTest" time="0.676"/>
+      <testcase name="testIncluirPedidoPizzaInvalida" classname="funcional.ManterPedidoTest" time="0.5"/>
+      <testcase name="testBuscarPedidoPeloId" classname="funcional.ManterPedidoTest" time="0.735"/>
+      <testcase name="testBuscarTodosPedidosDoClienteSemPedido" classname="funcional.ManterPedidoTest" time="0.577"/>
+      <testcase name="testIncluirPedidoPagamentoInvalido" classname="funcional.ManterPedidoTest" time="0.649"/>
+      <testcase name="testBuscarPedidoPeloIdInvalidos" classname="funcional.ManterPedidoTest" time="0.743"/>
+    </testsuite>
+  </testsuite>
+</testrun>
